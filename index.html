@@ -1,0 +1,1391 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d171d">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BreathTrainer">
+
+<title>Breath Trainer Pro 4.2</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0d171d;
+  --panel: #15242b;
+  --panel-border: #243842;
+  --muted: #8fa5ae;
+  --text: #eef6f5;
+  --in: #3ec9a7;
+  --out: #9297e0;
+  --hold-in: #38bdf8;
+  --hold: #eab308;
+  --accent: #55c7b0;
+  --track: #263842;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 10%, #1b323c 0%, var(--bg) 75%);
+  color: var(--text);
+  font: 15px/1.4 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 12px 10px 30px;
+}
+
+main { width: min(100%, 540px); }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0 12px;
+  padding: 0 4px;
+}
+.header-titles h1 { font-size: 22px; font-weight: 700; letter-spacing: .02em; }
+.header-titles .sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+.btn-guide-trigger {
+  background: #1b2e38;
+  border: 1px solid var(--panel-border);
+  color: var(--in);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.btn-guide-trigger:hover { background: #243d4a; border-color: var(--in); }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 14px 14px 16px;
+  margin: 10px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 4 режима */
+.mode-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.mode-btn {
+  background: #182730;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  padding: 8px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.25;
+}
+.mode-btn span { display: block; font-size: 13px; margin-bottom: 2px; }
+.mode-btn.active {
+  background: #233c47;
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(62, 201, 167, 0.2);
+}
+
+/* Визуальный блок */
+.visual-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 275px;
+}
+
+svg#flowerSvg {
+  width: min(74vw, 290px);
+  height: auto;
+  overflow: visible;
+  transition: transform 0.3s ease;
+}
+
+svg#flowerSvg.pulse-holding {
+  animation: subtleHoldPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes subtleHoldPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.2));
+  }
+  50% {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 16px rgba(234, 179, 8, 0.5));
+  }
+}
+
+.petal-outline {
+  fill: rgba(22, 38, 46, 0.35);
+  stroke: var(--track);
+  stroke-width: 1.4;
+  transition: stroke 0.2s ease;
+}
+
+.petal-fill {
+  stroke-width: 2.2;
+  transition: opacity 0.08s linear;
+  transform-origin: 150px 150px;
+}
+
+/* Увеличенная тёмная сердцевина и контрастные подложки для надписей */
+.core-bg {
+  fill: #101c23;
+  stroke: var(--panel-border);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
+}
+.core-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 1;
+}
+
+/* Текстовые элементы внутри круга с круговой защитной тенью/обводкой */
+.kicker {
+  font-size: 10px;
+  fill: #a2bac5;
+  text-anchor: middle;
+  letter-spacing: .08em;
+  font-weight: 700;
+  text-transform: uppercase;
+  paint-order: stroke fill;
+  stroke: #101c23;
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+.digits {
+  font-size: 38px;
+  fill: #ffffff;
+  font-weight: 700;
+  text-anchor: middle;
+  font-variant-numeric: tabular-nums;
+  paint-order: stroke fill;
+  stroke: #101c23;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.phase-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-anchor: middle;
+  paint-order: stroke fill;
+  stroke: #101c23;
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+
+/* Статус и метрики */
+.status { text-align: center; color: var(--muted); font-size: 13px; min-height: 20px; margin-top: 4px; }
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.metric {
+  background: #1b2d36;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+.metric small { display: block; color: var(--muted); font-size: 11px; }
+.metric strong { font-size: 22px; font-variant-numeric: tabular-nums; color: #fff; }
+
+/* Кнопки */
+button {
+  font: inherit;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  background: #223742;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.15s ease;
+}
+button:active:not(:disabled) { transform: scale(0.97); }
+button:disabled { opacity: 0.32; cursor: not-allowed; }
+
+.controls {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+.btn-primary { background: #3ec9a7; color: #081a17; border-color: #3ec9a7; font-weight: 700; }
+.btn-pause { background: #2f4b57; font-weight: 600; }
+.btn-stop { background: #263842; font-weight: 600; }
+
+.settings-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.setting-box {
+  background: #1b2d36;
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 10px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.setting-box h3 { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 2px; text-transform: uppercase; }
+.setting-box .val { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; margin: 4px 0; color: #fff; }
+.adjust-btns { display: flex; gap: 4px; justify-content: center; }
+.adjust-btns button { flex: 1; font-size: 18px; padding: 4px 0; min-height: 36px; line-height: 1; }
+
+.test-step-pills {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin: 6px 0 12px;
+}
+.test-step-btn {
+  background: #1b2d36;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 8px 2px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: #cfdce0;
+}
+.test-step-btn.active {
+  background: #3ec9a7;
+  color: #081a17;
+  border-color: #3ec9a7;
+}
+
+.row-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid #1e333d;
+}
+.row-setting:last-child { border-bottom: none; }
+.row-setting label { font-size: 13px; color: #cfdce0; }
+
+.limit-ctrl { display: flex; align-items: center; gap: 8px; }
+.limit-ctrl button { width: 34px; height: 34px; font-size: 18px; padding: 0; }
+.limit-display { font-size: 15px; font-weight: 700; min-width: 58px; text-align: center; }
+
+.sound-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.sound-pills button { font-size: 11px; padding: 5px 9px; border-radius: 10px; }
+.sound-pills button.active { background: #d7ece8; color: #0d1b1d; border-color: #d7ece8; font-weight: 600; }
+
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.volume-row input[type="range"] { flex: 1; accent-color: var(--in); }
+
+/* Модальное окно (Фиксированный каркас, закрепленное меню) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 13, 17, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 14px;
+}
+.modal-backdrop.open { display: flex; }
+.modal-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  max-width: 520px;
+  width: 100%;
+  height: min(86vh, 670px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--panel-border);
+  flex-shrink: 0;
+}
+.modal-header h2 { font-size: 17px; color: var(--in); font-weight: 700; }
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+/* Меню навигации всегда зафиксировано сверху */
+.modal-nav {
+  display: flex;
+  background: #111e24;
+  border-bottom: 1px solid var(--panel-border);
+  overflow-x: auto;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.modal-nav-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 8px;
+  white-space: nowrap;
+}
+.modal-nav-btn.active {
+  color: var(--in);
+  border-bottom-color: var(--in);
+  background: #172830;
+}
+
+/* Прокручивается исключительно область контента */
+.modal-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 16px 18px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #cfdce0;
+}
+.modal-content h3 { font-size: 14px; color: #fff; margin: 12px 0 6px; }
+.modal-content h3:first-child { margin-top: 0; }
+.modal-content ul { padding-left: 18px; margin: 4px 0 10px; }
+.modal-content li { margin-bottom: 4px; }
+.badge-tag {
+  display: inline-block;
+  background: #203a45;
+  color: #55c7b0;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.app-box {
+  margin-bottom: 8px;
+  background: #1b2d36;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #243842;
+}
+.app-box b { color: #fff; font-size: 13px; }
+.app-box .tag { color: var(--muted); font-size: 11px; margin-left: 4px; }
+.app-box p { font-size: 12px; color: #cfdce0; margin-top: 2px; }
+
+.test-result-card {
+  background: #1b2e38;
+  border: 1px solid var(--in);
+  border-radius: 14px;
+  padding: 14px;
+  margin: 12px 0 6px;
+  display: none;
+}
+.test-result-card.show { display: block; }
+.test-result-card h4 { color: #fff; font-size: 15px; margin-bottom: 6px; }
+
+@media (max-width: 440px) {
+  body { padding: 8px 6px 20px; }
+  .controls { grid-template-columns: 1fr 1fr; }
+  .btn-primary { grid-column: span 2; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="header-titles">
+      <h1>Breath Trainer Pro</h1>
+      <div class="sub">Резонанс Бентова, Бутейко & Квадрат</div>
+    </div>
+    <button class="btn-guide-trigger" id="btnOpenGuide">📖 Справка</button>
+  </header>
+
+  <!-- Экран тренировки -->
+  <section class="panel">
+    <div class="mode-nav" id="modeNav">
+      <button class="mode-btn" data-mode="test"><span>🔬</span>Тест (3м)</button>
+      <button class="mode-btn active" data-mode="resonance"><span>🌊</span>Резонанс</button>
+      <button class="mode-btn" data-mode="triangle"><span>🔺</span>Треугольник</button>
+      <button class="mode-btn" data-mode="square"><span>⏹</span>Квадрат</button>
+    </div>
+
+    <div class="visual-container">
+      <svg id="flowerSvg" viewBox="0 0 300 300" role="img" aria-label="Цветок дыхания">
+        <g id="petalsGroup"></g>
+        <!-- Тёмный круг увеличен до r=62, чтобы длинные надписи НАПОЛНЕНИЕ и ОСВОБОЖДЕНИЕ не выступали на лепестки -->
+        <circle class="core-bg" cx="150" cy="150" r="62" />
+        <circle class="core-ring" cx="150" cy="150" r="57" />
+        <text class="kicker" id="phaseIndicator" x="150" y="122">ГОТОВ</text>
+        <text class="digits" id="centerTime" x="150" y="161">5.0</text>
+        <text class="phase-title" id="phaseName" x="150" y="185" fill="var(--in)">Вдох</text>
+      </svg>
+    </div>
+
+    <div class="status" id="statusMessage">Нажмите «Запуск» для начала занятия</div>
+
+    <!-- Карточка завершения 3-мин теста -->
+    <div class="test-result-card" id="testResultCard">
+      <h4>🎉 Тест 3 минуты завершён!</h4>
+      <p style="font-size:12px; margin-bottom:8px;">Оцените самочувствие: согрелись ли пальцы рук, дышалось ли без одышки, был ли максимален размах пульса на камере смартфона?</p>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-primary" style="flex:1; padding:8px;" id="btnApplyTestFreq">Применить для Резонанса</button>
+        <button class="btn-stop" style="padding:8px;" id="btnCloseTestCard">Закрыть</button>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <small>Прошло времени</small>
+        <strong id="timeElapsed">00:00</strong>
+      </div>
+      <div class="metric">
+        <small id="lblTimeTarget">Лимит занятия</small>
+        <strong id="timeTarget">20:00</strong>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary" id="btnStart">▶ Запуск</button>
+      <button class="btn-pause" id="btnPause" disabled>Ⅱ Пауза</button>
+      <button class="btn-stop" id="btnStop" disabled>■ Стоп</button>
+    </div>
+  </section>
+
+  <!-- Настройки параметров -->
+  <section class="panel" id="settingsPanel">
+    <!-- Панель для режима ТЕСТ -->
+    <div id="panelTestConfig" style="display:none;">
+      <div class="settings-section-title">
+        <span>Калибровка частоты (3 минуты на шаг)</span>
+        <span style="color:var(--in)">Лимит: 03:00</span>
+      </div>
+      <div class="test-step-pills" id="testStepPills">
+        <button class="test-step-btn" data-step="4.5">4.5 с</button>
+        <button class="test-step-btn active" data-step="5.0">5.0 с</button>
+        <button class="test-step-btn" data-step="5.5">5.5 с</button>
+        <button class="test-step-btn" data-step="6.0">6.0 с</button>
+        <button class="test-step-btn" data-step="6.5">6.5 с</button>
+      </div>
+    </div>
+
+    <!-- Панель для РЕЗОНАНСА, ТРЕУГОЛЬНИКА и КВАДРАТА -->
+    <div id="panelGeneralConfig">
+      <div class="settings-section-title">
+        <span id="settingsTitleText">Настройка фаз</span>
+        <button id="btnLinkSquare" style="display:none; font-size:11px; padding:3px 8px; border-radius:8px;">🔗 Все стороны равны</button>
+      </div>
+
+      <div class="settings-grid" id="dynamicSettingsGrid">
+        <!-- Блок Вдох -->
+        <div class="setting-box" id="boxInhale">
+          <h3 style="color:var(--in)">Вдох</h3>
+          <div class="val" id="valInhale">5.0 с</div>
+          <div class="adjust-btns">
+            <button id="inMinus" class="cfg-btn">−</button>
+            <button id="inPlus" class="cfg-btn">+</button>
+          </div>
+        </div>
+
+        <!-- Блок Задержка на вдохе (Квадрат) -->
+        <div class="setting-box" id="boxHoldIn" style="display:none;">
+          <h3 style="color:var(--hold-in)">Задержка (вдох)</h3>
+          <div class="val" id="valHoldIn">4.0 с</div>
+          <div class="adjust-btns">
+            <button id="holdInMinus" class="cfg-btn">−</button>
+            <button id="holdInPlus" class="cfg-btn">+</button>
+          </div>
+        </div>
+
+        <!-- Блок Выдох -->
+        <div class="setting-box" id="boxExhale">
+          <h3 style="color:var(--out)">Выдох</h3>
+          <div class="val" id="valExhale">5.0 с</div>
+          <div class="adjust-btns">
+            <button id="outMinus" class="cfg-btn">−</button>
+            <button id="outPlus" class="cfg-btn">+</button>
+          </div>
+        </div>
+
+        <!-- Блок Задержка на выдохе (Треугольник до 120с / Квадрат до 60с) -->
+        <div class="setting-box" id="boxHoldOut" style="display:none;">
+          <h3 style="color:var(--hold)" id="lblHoldOut">Пауза (выдох)</h3>
+          <div class="val" id="valHoldOut">5.0 с</div>
+          <div class="adjust-btns">
+            <button id="holdOutMinus" class="cfg-btn">−</button>
+            <button id="holdOutPlus" class="cfg-btn">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Общие настройки длительности занятия -->
+    <div class="row-setting" id="rowLimitSetting" style="margin-top:12px;">
+      <label>Длительность сессии (1–60 мин):</label>
+      <div class="limit-ctrl">
+        <button id="limitMinus" class="cfg-btn">−</button>
+        <div class="limit-display" id="limitDisplay">20 мин</div>
+        <button id="limitPlus" class="cfg-btn">+</button>
+      </div>
+    </div>
+
+    <!-- Звуки -->
+    <div class="row-setting" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <label>Звуковой сигнал при смене фаз:</label>
+      <div class="sound-pills" id="soundPills">
+        <button class="cfg-btn active" data-sound="bell">Колокольчик</button>
+        <button class="cfg-btn" data-sound="two">Два тона</button>
+        <button class="cfg-btn" data-sound="chime">Гармония</button>
+        <button class="cfg-btn" data-sound="tap">Щелчок</button>
+        <button class="cfg-btn" data-sound="off">Без звука</button>
+      </div>
+    </div>
+
+    <div class="volume-row">
+      <span>Громкость</span>
+      <input type="range" id="volumeSlider" min="0" max="100" value="40" class="cfg-btn">
+      <span id="volLabel" style="width:34px; text-align:right">40%</span>
+    </div>
+  </section>
+</main>
+
+<!-- Модальное окно Справки и Физиологии -->
+<div class="modal-backdrop" id="guideModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>📖 Инструкция & Физиология</h2>
+      <button class="modal-close" id="btnCloseGuide">&times;</button>
+    </div>
+
+    <div class="modal-nav" id="modalNav">
+      <button class="modal-nav-btn active" data-tab="general">Основы & Тело</button>
+      <button class="modal-nav-btn" data-tab="test">🔬 Тест 3 мин</button>
+      <button class="modal-nav-btn" data-tab="resonance">🌊 Резонанс</button>
+      <button class="modal-nav-btn" data-tab="triangle">🔺 Треугольник</button>
+      <button class="modal-nav-btn" data-tab="square">⏹ Квадрат</button>
+    </div>
+
+    <div class="modal-content" id="modalContent">
+      <!-- Вкладка: Основы & Тело -->
+      <div class="tab-pane" id="paneGeneral">
+        <span class="badge-tag">БАЗОВАЯ БИОМЕХАНИКА</span>
+        <h3>Почему живот (диафрагма), а не грудь?</h3>
+        <ul>
+          <li><b>Стимуляция блуждающего нерва (Nervus Vagus):</b> Диафрагма ходит на 4–8 см, механически массируя блуждающий нерв. Это мгновенно снижает кортизол и замедляет пульс. Грудное дыхание тело считывает как сигнал стресса «бей или беги».</li>
+          <li><b>Кровоснабжение нижних долей легких:</b> В нижних отделах сосредоточено в 3–4 раза больше капилляров. Диафрагма вентилирует их без нагрузки на сердце.</li>
+          <li><b>Венозный насос:</b> На вдохе диафрагма выдавливает венозную кровь из брюшной полости к сердцу, устраняя застой.</li>
+        </ul>
+
+        <h3>Как правильно сидеть:</h3>
+        <ul>
+          <li>Сядьте прямо на край стула или подушки, стопы всей поверхностью стоят на полу.</li>
+          <li>Шея вытянута вверх, подбородок чуть подобран к горлу (сглаживает шейный изгиб и открывает свободный путь волне крови к черепу).</li>
+          <li>Мышцы промежности, таза и живота <b>полностью расслаблены</b> — любой спазм внизу живота гасит отраженную волну аорты.</li>
+        </ul>
+      </div>
+
+      <!-- Вкладка: Тест 3 мин (С ПОДРОБНЫМИ ПРОГРАММАМИ И КАМЕРОЙ) -->
+      <div class="tab-pane" id="paneTest" style="display:none;">
+        <span class="badge-tag">КАЛИБРОВКА ЧАСТОТЫ</span>
+        <h3>Зачем нужен 3-минутный тест?</h3>
+        <p>У каждого человека своя длина аорты, эластичность сосудов и рост. Резонанс возникает на строгой индивидуальной частоте от 4.5 до 6.5 секунд на вдох и выдох. Тест за 3 минуты находит вашу идеальную точку.</p>
+        
+        <h3>Бесплатные приложения для замера камерой смартфона:</h3>
+        <div style="margin:8px 0 12px;">
+          <div class="app-box">
+            <b>📱 Heart Rate Plus (Пульсометр +)</b> <span class="tag">[iOS & Android]</span>
+            <p>Идеально подходит для теста: запускается сразу без регистрации, выводит график ударов сердца и пульс прямо во время дыхания.</p>
+          </div>
+          <div class="app-box">
+            <b>📱 Welltory</b> <span class="tag">[iOS & Android]</span>
+            <p>Проводит глубокий спектральный анализ вариабельности ритма (ВСР) и сразу оценивает когерентность нервной системы через камеру.</p>
+          </div>
+          <div class="app-box">
+            <b>📱 Instant Heart Rate (Azumio)</b> <span class="tag">[iOS & Android]</span>
+            <p>Классический проверенный пульсометр: наглядно показывает волну разгона сердца на вдохе и торможения на выдохе.</p>
+          </div>
+        </div>
+
+        <h3>Как провести тест за 4 простых шага:</h3>
+        <ol style="padding-left:18px; margin:6px 0 12px; line-height:1.6;">
+          <li><b>Дышите 2 минуты:</b> Выберите ступень (например, 5.0 с) и дышите под ритм цветка первые две минуты, чтобы сосуды вошли в ритм.</li>
+          <li><b>Включите замер:</b> На отметке около 02:15 откройте приложение-пульсометр на смартфоне и нажмите кнопку старта измерения.</li>
+          <li><b>Приложите палец к камере:</b> Мягко коснитесь подушечкой пальца глазка основной камеры и вспышки (не давите сильно, чтобы не сдавить капилляры).</li>
+          <li><b>Посмотрите на размах пульса:</b>
+            Зафиксируйте пульс на пике вдоха (например, 78) и в конце выдоха (например, 60). Та ступень таймера, где <b>размах наибольший</b> (в идеале 15–25 ударов), и есть ваша персональная норма!
+          </li>
+        </ol>
+
+        <p style="font-size:12px; color:var(--muted); background:#122026; padding:8px 10px; border-radius:8px; border:1px solid #1f333d;">
+          💡 <b>Если нет смартфона под рукой:</b> ориентируйтесь на ощущения тела. Ваша идеальная частота дает приятное тепло в ладонях к концу 3-й минуты, расслабление челюсти и ощущение, что «тело дышит само» без малейшей одышки.
+        </p>
+      </div>
+
+      <!-- Вкладка: Резонанс -->
+      <div class="tab-pane" id="paneResonance" style="display:none;">
+        <span class="badge-tag">МОДЕЛЬ ИЦХАКА БЕНТОВА (~7 ГЦ)</span>
+        <h3>В чём суть аортального резонанса:</h3>
+        <p>Ритмичное дыхание без задержек (1:1) на частоте около 0.1 Гц запускает стоячую акустическую волну: выброс крови отражается от разветвления аорты в тазу и возвращается к сердцу ровно в момент закрытия клапана.</p>
+        
+        <h3>Почему здесь ЗАПРЕЩЕНЫ задержки:</h3>
+        <ul>
+          <li>Любая остановка дыхания останавливает диафрагмальный гидротаран и срывает стоячую волну.</li>
+          <li>Дыхание должно быть непрерывным, как ход маятника: скорость плавно спадает до нуля в крайних точках и сразу начинается обратная фаза.</li>
+          <li><b>Рекомендуемое время:</b> 15–20 минут в день для глубокого вегетативного сброса и ясности ума.</li>
+        </ul>
+      </div>
+
+      <!-- Вкладка: Треугольник -->
+      <div class="tab-pane" id="paneTriangle" style="display:none;">
+        <span class="badge-tag">БУТЕЙКО & ЭФФЕКТ БОРА</span>
+        <h3>Схема: Вдох ➔ Выдох ➔ Пауза на пустых легких</h3>
+        <p>Диапазон задержки расширен <b>до 120 секунд (2 минут)</b> для опытных практиков.</p>
+        
+        <h3>Зачем нужна задержка на выдохе:</h3>
+        <ul>
+          <li><b>Эффект Бора:</b> Накопление углекислого газа ($CO_2$) заставляет гемоглобин активно отдавать связанный кислород в клетки мозга и мышц. Без $CO_2$ кислород «застревает» в крови.</li>
+          <li><b>Устранение спазмов:</b> $CO_2$ — самый мощный природный спазмолитик для гладкой мускулатуры артерий и бронхов.</li>
+          <li><b>Главное правило безопасности:</b> Задержка в цикле должна составлять не более 40–50% от вашего утреннего максимума. Вдох после задержки должен быть <i>тихим и незаметным</i>, без судорожного глотания воздуха ртом!</li>
+        </ul>
+      </div>
+
+      <!-- Вкладка: Квадрат -->
+      <div class="tab-pane" id="paneSquare" style="display:none;">
+        <span class="badge-tag">ТАКТИЧЕСКИЙ АНТИСТРЕСС (BOX BREATHING)</span>
+        <h3>Схема: Вдох ➔ Задержка ➔ Выдох ➔ Задержка</h3>
+        <p>Все 4 стороны регулируются независимо (от 1 до 60 секунд) либо синхронно кнопкой «🔗 Все стороны равны».</p>
+        
+        <h3>Что даёт практика:</h3>
+        <ul>
+          <li><b>Мгновенное центрирование:</b> Используется силами спецназначения и хирургами перед экстремальными нагрузками для устранения тремора и паники.</li>
+          <li><b>Баланс симпатики и парасимпатики:</b> Задержка на вдохе мягко мобилизует внимание, а задержка на выдохе включает глубокое торможение коры.</li>
+          <li><b>Как делать:</b> На задержках держите горло открытым, не зажимайте голосовую щель. Воздух удерживается пассивным состоянием диафрагмы.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(()=>{
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const STORAGE_KEY = 'breath_trainer_pro_v4';
+
+  const state = {
+    mode: 'resonance', // 'test' | 'resonance' | 'triangle' | 'square'
+    inhale: 5.0,
+    exhale: 5.0,
+    holdOut: 5.0,       // До 120с в Треугольнике, до 60с в Квадрате
+    holdIn: 4.0,        // До 60с в Квадрате
+    squareLinked: true,
+    squareSide: 4.0,
+    testStep: 5.0,
+    limitMin: 20,
+    sound: 'bell',
+    volume: 0.4,
+    running: false,
+    paused: false,
+    phase: 'in',
+    phaseStart: 0,
+    phaseLen: 5000,
+    elapsedTotal: 0,
+    startedAt: 0,
+    pausedAt: 0,
+    raf: 0
+  };
+
+  let audioCtx = null;
+
+  function loadSettings() {
+    try {
+      const s = localStorage.getItem(STORAGE_KEY);
+      if (s) {
+        const d = JSON.parse(s);
+        if (d.mode) state.mode = d.mode;
+        if (d.inhale) state.inhale = Number(d.inhale);
+        if (d.exhale) state.exhale = Number(d.exhale);
+        if (d.holdOut) state.holdOut = Number(d.holdOut);
+        if (d.holdIn) state.holdIn = Number(d.holdIn);
+        if (typeof d.squareLinked === 'boolean') state.squareLinked = d.squareLinked;
+        if (d.squareSide) state.squareSide = Number(d.squareSide);
+        if (d.testStep) state.testStep = Number(d.testStep);
+        if (d.limitMin) state.limitMin = Number(d.limitMin);
+        if (d.sound) state.sound = d.sound;
+        if (typeof d.volume === 'number') state.volume = d.volume;
+      }
+    } catch(e){}
+  }
+
+  function saveSettings() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        mode: state.mode,
+        inhale: state.inhale,
+        exhale: state.exhale,
+        holdOut: state.holdOut,
+        holdIn: state.holdIn,
+        squareLinked: state.squareLinked,
+        squareSide: state.squareSide,
+        testStep: state.testStep,
+        limitMin: state.limitMin,
+        sound: state.sound,
+        volume: state.volume
+      }));
+    } catch(e){}
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+  const fmtSec = v => (v >= 10 && v % 1 === 0) ? String(Math.round(v)) : v.toFixed(1);
+  const fmtTime = ms => {
+    const s = Math.floor(ms / 1000);
+    const m = Math.floor(s / 60);
+    return String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  };
+
+  const petalsGroup = $('petalsGroup');
+  let currentPetalElements = [];
+
+  function buildPetals(seconds, activeColor) {
+    petalsGroup.innerHTML = '';
+    currentPetalElements = [];
+
+    let count = Math.ceil(seconds);
+    let visualCount = count;
+    if (visualCount > 24) visualCount = 24;
+    if (visualCount < 4) visualCount = 4;
+
+    const angleStep = 360 / visualCount;
+
+    for (let i = 0; i < visualCount; i++) {
+      const angle = -90 + i * angleStep;
+      const g = document.createElementNS(svgNS, 'g');
+      g.setAttribute('transform', `rotate(${angle} 150 150)`);
+
+      const track = document.createElementNS(svgNS, 'path');
+      track.setAttribute('d', 'M 150 150 C 130 115, 126 65, 150 36 C 174 65, 170 115, 150 150 Z');
+      track.setAttribute('class', 'petal-outline');
+
+      const fill = document.createElementNS(svgNS, 'path');
+      fill.setAttribute('d', 'M 150 150 C 130 115, 126 65, 150 36 C 174 65, 170 115, 150 150 Z');
+      fill.setAttribute('class', 'petal-fill');
+      fill.setAttribute('fill', activeColor);
+      fill.setAttribute('stroke', activeColor);
+      fill.style.opacity = '0';
+
+      g.appendChild(track);
+      g.appendChild(fill);
+      petalsGroup.appendChild(g);
+
+      currentPetalElements.push(fill);
+    }
+  }
+
+  function updatePetalsProgress(passedSec, totalSec, phase) {
+    const totalPetals = currentPetalElements.length;
+    if (!totalPetals) return;
+
+    if (phase === 'hold_in' || phase === 'hold_out') {
+      for (let i = 0; i < totalPetals; i++) {
+        currentPetalElements[i].style.opacity = '0';
+      }
+      return;
+    }
+
+    const progress = clamp(passedSec / totalSec, 0, 1);
+
+    if (phase === 'in') {
+      for (let i = 0; i < totalPetals; i++) {
+        const threshold = (i + 1) / totalPetals;
+        const prevThreshold = i / totalPetals;
+        if (progress >= threshold) {
+          currentPetalElements[i].style.opacity = '1';
+        } else if (progress <= prevThreshold) {
+          currentPetalElements[i].style.opacity = '0';
+        } else {
+          currentPetalElements[i].style.opacity = ((progress - prevThreshold) / (threshold - prevThreshold)).toFixed(3);
+        }
+      }
+    } else if (phase === 'out') {
+      const remainingProgress = 1 - progress;
+      for (let i = 0; i < totalPetals; i++) {
+        const threshold = (i + 1) / totalPetals;
+        const prevThreshold = i / totalPetals;
+        if (remainingProgress >= threshold) {
+          currentPetalElements[i].style.opacity = '1';
+        } else if (remainingProgress <= prevThreshold) {
+          currentPetalElements[i].style.opacity = '0';
+        } else {
+          currentPetalElements[i].style.opacity = ((remainingProgress - prevThreshold) / (threshold - prevThreshold)).toFixed(3);
+        }
+      }
+    }
+  }
+
+  function initAudio() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  function playTone(freq, startTime, duration, type = 'sine', gainMult = 1) {
+    const ctx = initAudio();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    const peak = Math.max(0.0001, state.volume * 0.18 * gainMult);
+    gain.gain.setValueAtTime(0.0001, startTime);
+    gain.gain.exponentialRampToValueAtTime(peak, startTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(startTime);
+    osc.stop(startTime + duration + 0.03);
+  }
+
+  function triggerVibrate() {
+    if ('vibrate' in navigator) {
+      try { navigator.vibrate(35); } catch(e){}
+    }
+  }
+
+  function playPhaseSound(phaseType) {
+    triggerVibrate();
+    if (state.sound === 'off' || state.volume === 0) return;
+    try {
+      const ctx = initAudio();
+      const t = ctx.currentTime;
+
+      let baseFreq = 520;
+      if (phaseType === 'in') baseFreq = 659.25;
+      else if (phaseType === 'out') baseFreq = 440;
+      else if (phaseType === 'hold_in') baseFreq = 587.33;
+      else if (phaseType === 'hold_out') baseFreq = 392;
+
+      if (state.sound === 'bell') {
+        playTone(baseFreq, t, 0.45, 'sine', 1);
+        playTone(baseFreq * 2.02, t, 0.22, 'sine', 0.25);
+      } else if (state.sound === 'two') {
+        if (phaseType === 'in') {
+          playTone(523.25, t, 0.12, 'sine', 0.85);
+          playTone(659.25, t + 0.12, 0.20, 'sine', 0.95);
+        } else if (phaseType === 'out') {
+          playTone(659.25, t, 0.12, 'sine', 0.85);
+          playTone(523.25, t + 0.12, 0.20, 'sine', 0.95);
+        } else {
+          playTone(baseFreq, t, 0.12, 'sine', 0.85);
+          playTone(baseFreq * 1.12, t + 0.12, 0.18, 'sine', 0.85);
+        }
+      } else if (state.sound === 'chime') {
+        playTone(baseFreq, t, 0.18, 'sine', 0.7);
+        playTone(baseFreq * 1.25, t + 0.09, 0.22, 'sine', 0.7);
+        playTone(baseFreq * 1.5, t + 0.20, 0.32, 'sine', 0.85);
+      } else if (state.sound === 'tap') {
+        playTone(baseFreq * 0.8, t, 0.04, 'triangle', 0.8);
+      }
+    } catch(e){}
+  }
+
+  function switchPhase(newPhase, timestamp) {
+    state.phase = newPhase;
+    state.phaseStart = timestamp;
+
+    const flower = $('flowerSvg');
+    flower.classList.remove('pulse-holding');
+
+    if (newPhase === 'in') {
+      const dur = (state.mode === 'test') ? state.testStep : state.inhale;
+      state.phaseLen = dur * 1000;
+      $('phaseName').textContent = 'Вдох';
+      $('phaseName').setAttribute('fill', 'var(--in)');
+      $('phaseIndicator').textContent = 'НАПОЛНЕНИЕ';
+      buildPetals(dur, 'var(--in)');
+    } else if (newPhase === 'hold_in') {
+      state.phaseLen = state.holdIn * 1000;
+      $('phaseName').textContent = 'Задержка';
+      $('phaseName').setAttribute('fill', 'var(--hold-in)');
+      $('phaseIndicator').textContent = 'ПОЛНЫЙ ПОКОЙ';
+      flower.classList.add('pulse-holding');
+      buildPetals(state.holdIn, 'var(--hold-in)');
+    } else if (newPhase === 'out') {
+      const dur = (state.mode === 'test') ? state.testStep : state.exhale;
+      state.phaseLen = dur * 1000;
+      $('phaseName').textContent = 'Выдох';
+      $('phaseName').setAttribute('fill', 'var(--out)');
+      $('phaseIndicator').textContent = 'ОСВОБОЖДЕНИЕ';
+      buildPetals(dur, 'var(--out)');
+    } else if (newPhase === 'hold_out') {
+      state.phaseLen = state.holdOut * 1000;
+      $('phaseName').textContent = 'Пауза';
+      $('phaseName').setAttribute('fill', 'var(--hold)');
+      $('phaseIndicator').textContent = 'ПУСТОЙ ПОКОЙ';
+      flower.classList.add('pulse-holding');
+      buildPetals(state.holdOut, 'var(--hold)');
+    }
+
+    playPhaseSound(newPhase);
+  }
+
+  function getNextPhase(cur) {
+    if (state.mode === 'test' || state.mode === 'resonance') {
+      return (cur === 'in') ? 'out' : 'in';
+    } else if (state.mode === 'triangle') {
+      if (cur === 'in') return 'out';
+      if (cur === 'out') return 'hold_out';
+      return 'in';
+    } else if (state.mode === 'square') {
+      if (cur === 'in') return 'hold_in';
+      if (cur === 'hold_in') return 'out';
+      if (cur === 'out') return 'hold_out';
+      return 'in';
+    }
+    return 'in';
+  }
+
+  function loop(now) {
+    if (!state.running || state.paused) return;
+
+    const currentTotalElapsed = state.elapsedTotal + (now - state.startedAt);
+    const limitMs = (state.mode === 'test') ? (3 * 60 * 1000) : (state.limitMin * 60 * 1000);
+
+    $('timeElapsed').textContent = fmtTime(currentTotalElapsed);
+
+    if (currentTotalElapsed >= limitMs) {
+      if (state.mode === 'test') {
+        stopTraining('3-минутный тест успешно завершён!');
+        $('testResultCard').classList.add('show');
+      } else {
+        stopTraining('Сессия завершена!');
+      }
+      $('timeElapsed').textContent = fmtTime(limitMs);
+      return;
+    }
+
+    let passedInPhase = now - state.phaseStart;
+
+    while (passedInPhase >= state.phaseLen) {
+      const overflow = passedInPhase - state.phaseLen;
+      const nextP = getNextPhase(state.phase);
+      switchPhase(nextP, state.phaseStart + state.phaseLen);
+      passedInPhase = overflow;
+    }
+
+    if (state.phase === 'hold_in' || state.phase === 'hold_out') {
+      const curDur = (state.phase === 'hold_in') ? state.holdIn : state.holdOut;
+      const holdPassedSec = clamp(passedInPhase / 1000, 0, curDur);
+      $('centerTime').textContent = fmtSec(holdPassedSec);
+      updatePetalsProgress(holdPassedSec, curDur, state.phase);
+    } else {
+      const curTotalSec = (state.phase === 'in')
+        ? ((state.mode === 'test') ? state.testStep : state.inhale)
+        : ((state.mode === 'test') ? state.testStep : state.exhale);
+      const remainSec = clamp((state.phaseLen - passedInPhase) / 1000, 0, curTotalSec);
+      $('centerTime').textContent = fmtSec(remainSec);
+      updatePetalsProgress(passedInPhase / 1000, curTotalSec, state.phase);
+    }
+
+    state.raf = requestAnimationFrame(loop);
+  }
+
+  function startTraining() {
+    initAudio();
+    $('testResultCard').classList.remove('show');
+
+    if (state.running && state.paused) {
+      state.paused = false;
+      state.startedAt = performance.now();
+      state.phaseStart += (state.startedAt - state.pausedAt);
+      $('statusMessage').textContent = 'Тренировка продолжается';
+      updateUI();
+      state.raf = requestAnimationFrame(loop);
+      return;
+    }
+
+    if (state.running) return;
+
+    state.running = true;
+    state.paused = false;
+    state.elapsedTotal = 0;
+    state.startedAt = performance.now();
+
+    $('timeElapsed').textContent = '00:00';
+    $('statusMessage').textContent = 'Следуйте ритму цветка';
+
+    switchPhase('in', state.startedAt);
+    updateUI();
+    state.raf = requestAnimationFrame(loop);
+  }
+
+  function pauseTraining() {
+    if (!state.running) return;
+
+    if (!state.paused) {
+      const now = performance.now();
+      state.elapsedTotal += (now - state.startedAt);
+      state.pausedAt = now;
+      state.paused = true;
+      cancelAnimationFrame(state.raf);
+      $('statusMessage').textContent = 'Пауза (нажмите «Продолжить»)';
+      $('flowerSvg').classList.remove('pulse-holding');
+    } else {
+      state.paused = false;
+      state.startedAt = performance.now();
+      state.phaseStart += (state.startedAt - state.pausedAt);
+      $('statusMessage').textContent = 'Тренировка продолжается';
+      if (state.phase === 'hold_in' || state.phase === 'hold_out') {
+        $('flowerSvg').classList.add('pulse-holding');
+      }
+      state.raf = requestAnimationFrame(loop);
+    }
+    updateUI();
+  }
+
+  function stopTraining(msg = 'Тренировка остановлена') {
+    if (!state.running) return;
+
+    if (!state.paused) {
+      state.elapsedTotal += (performance.now() - state.startedAt);
+    }
+
+    state.running = false;
+    state.paused = false;
+    cancelAnimationFrame(state.raf);
+
+    $('statusMessage').textContent = msg;
+    $('phaseIndicator').textContent = 'ГОТОВ';
+    $('phaseName').textContent = 'Вдох';
+    $('phaseName').setAttribute('fill', 'var(--in)');
+    
+    const curInhale = (state.mode === 'test') ? state.testStep : state.inhale;
+    $('centerTime').textContent = fmtSec(curInhale);
+    $('flowerSvg').classList.remove('pulse-holding');
+
+    buildPetals(curInhale, 'var(--in)');
+    updateUI();
+  }
+
+  function updateUI() {
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === state.mode);
+      btn.disabled = state.running;
+    });
+
+    const isTest = (state.mode === 'test');
+    const isResonance = (state.mode === 'resonance');
+    const isTriangle = (state.mode === 'triangle');
+    const isSquare = (state.mode === 'square');
+
+    $('panelTestConfig').style.display = isTest ? 'block' : 'none';
+    $('panelGeneralConfig').style.display = isTest ? 'none' : 'block';
+    $('rowLimitSetting').style.display = isTest ? 'none' : 'flex';
+
+    if (isTest) {
+      $('lblTimeTarget').textContent = 'Лимит теста';
+      $('timeTarget').textContent = '03:00';
+      document.querySelectorAll('.test-step-btn').forEach(b => {
+        b.classList.toggle('active', Number(b.dataset.step) === state.testStep);
+        b.disabled = state.running;
+      });
+    } else {
+      $('lblTimeTarget').textContent = 'Лимит занятия';
+      $('timeTarget').textContent = String(state.limitMin).padStart(2, '0') + ':00';
+    }
+
+    $('boxHoldIn').style.display = isSquare ? 'flex' : 'none';
+    $('boxHoldOut').style.display = (isTriangle || isSquare) ? 'flex' : 'none';
+    $('btnLinkSquare').style.display = isSquare ? 'inline-block' : 'none';
+    $('btnLinkSquare').textContent = state.squareLinked ? '🔗 Стороны связаны' : '🔓 Раздельно';
+
+    if (isTriangle) {
+      $('lblHoldOut').textContent = 'Пауза (до 120 с)';
+    } else if (isSquare) {
+      $('lblHoldOut').textContent = 'Задержка (выдох)';
+    }
+
+    $('valInhale').textContent = fmtSec(state.inhale) + ' с';
+    $('valExhale').textContent = fmtSec(state.exhale) + ' с';
+    $('valHoldIn').textContent = fmtSec(state.holdIn) + ' с';
+    $('valHoldOut').textContent = fmtSec(state.holdOut) + ' с';
+    $('limitDisplay').textContent = state.limitMin + ' мин';
+
+    $('btnStart').disabled = state.running && !state.paused;
+    $('btnPause').disabled = !state.running;
+    $('btnStop').disabled = !state.running;
+    $('btnPause').textContent = state.paused ? '▶ Продолжить' : 'Ⅱ Пауза';
+
+    const lock = state.running;
+    document.querySelectorAll('.cfg-btn').forEach(b => b.disabled = lock);
+
+    if (!lock) {
+      if (isSquare) {
+        $('inMinus').disabled = state.inhale <= 1.0;
+        $('inPlus').disabled = state.inhale >= 60.0;
+        $('outMinus').disabled = state.exhale <= 1.0;
+        $('outPlus').disabled = state.exhale >= 60.0;
+        $('holdInMinus').disabled = state.holdIn <= 1.0;
+        $('holdInPlus').disabled = state.holdIn >= 60.0;
+        $('holdOutMinus').disabled = state.holdOut <= 1.0;
+        $('holdOutPlus').disabled = state.holdOut >= 60.0;
+      } else {
+        $('inMinus').disabled = state.inhale <= 3.0;
+        $('inPlus').disabled = state.inhale >= 15.0;
+        $('outMinus').disabled = state.exhale <= 3.0;
+        $('outPlus').disabled = state.exhale >= 15.0;
+        $('holdOutMinus').disabled = state.holdOut <= 1.0;
+        $('holdOutPlus').disabled = state.holdOut >= 120.0;
+      }
+      $('limitMinus').disabled = state.limitMin <= 1;
+      $('limitPlus').disabled = state.limitMin >= 60;
+    }
+  }
+
+  function adjustVal(key, delta, min, max) {
+    if (state.running) return;
+
+    if (state.mode === 'square' && state.squareLinked) {
+      const newV = clamp(Math.round((state.squareSide + delta) * 10) / 10, min, max);
+      state.squareSide = newV;
+      state.inhale = newV;
+      state.exhale = newV;
+      state.holdIn = newV;
+      state.holdOut = newV;
+    } else {
+      let step = delta;
+      if (Math.abs(delta) >= 1 && state[key] >= 20 && key === 'holdOut') {
+        step = (delta > 0) ? 5 : -5;
+      }
+      state[key] = clamp(Math.round((state[key] + step) * 10) / 10, min, max);
+    }
+
+    saveSettings();
+    updateUI();
+
+    if (key === 'inhale' || (state.mode === 'square' && state.squareLinked)) {
+      $('centerTime').textContent = fmtSec(state.inhale);
+      buildPetals(state.inhale, 'var(--in)');
+    }
+  }
+
+  $('inMinus').onclick = () => adjustVal('inhale', -0.5, (state.mode === 'square' ? 1.0 : 3.0), (state.mode === 'square' ? 60.0 : 15.0));
+  $('inPlus').onclick = () => adjustVal('inhale', 0.5, (state.mode === 'square' ? 1.0 : 3.0), (state.mode === 'square' ? 60.0 : 15.0));
+
+  $('outMinus').onclick = () => adjustVal('exhale', -0.5, (state.mode === 'square' ? 1.0 : 3.0), (state.mode === 'square' ? 60.0 : 15.0));
+  $('outPlus').onclick = () => adjustVal('exhale', 0.5, (state.mode === 'square' ? 1.0 : 3.0), (state.mode === 'square' ? 60.0 : 15.0));
+
+  $('holdInMinus').onclick = () => adjustVal('holdIn', -1.0, 1.0, 60.0);
+  $('holdInPlus').onclick = () => adjustVal('holdIn', 1.0, 1.0, 60.0);
+
+  $('holdOutMinus').onclick = () => {
+    const maxVal = (state.mode === 'triangle') ? 120.0 : 60.0;
+    adjustVal('holdOut', -1.0, 1.0, maxVal);
+  };
+  $('holdOutPlus').onclick = () => {
+    const maxVal = (state.mode === 'triangle') ? 120.0 : 60.0;
+    adjustVal('holdOut', 1.0, 1.0, maxVal);
+  };
+
+  $('btnLinkSquare').onclick = () => {
+    if (state.running) return;
+    state.squareLinked = !state.squareLinked;
+    if (state.squareLinked) {
+      state.squareSide = state.inhale;
+      state.exhale = state.squareSide;
+      state.holdIn = state.squareSide;
+      state.holdOut = state.squareSide;
+    }
+    saveSettings();
+    updateUI();
+  };
+
+  document.querySelectorAll('.test-step-btn').forEach(btn => {
+    btn.onclick = () => {
+      if (state.running) return;
+      state.testStep = Number(btn.dataset.step);
+      saveSettings();
+      updateUI();
+      $('centerTime').textContent = fmtSec(state.testStep);
+      buildPetals(state.testStep, 'var(--in)');
+    };
+  });
+
+  $('btnApplyTestFreq').onclick = () => {
+    state.inhale = state.testStep;
+    state.exhale = state.testStep;
+    state.mode = 'resonance';
+    $('testResultCard').classList.remove('show');
+    saveSettings();
+    updateUI();
+    $('centerTime').textContent = fmtSec(state.inhale);
+    buildPetals(state.inhale, 'var(--in)');
+  };
+  $('btnCloseTestCard').onclick = () => $('testResultCard').classList.remove('show');
+
+  $('limitMinus').onclick = () => {
+    if (state.running) return;
+    state.limitMin = clamp(state.limitMin - 1, 1, 60);
+    saveSettings();
+    updateUI();
+  };
+  $('limitPlus').onclick = () => {
+    if (state.running) return;
+    state.limitMin = clamp(state.limitMin + 1, 1, 60);
+    saveSettings();
+    updateUI();
+  };
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.onclick = () => {
+      if (state.running) return;
+      state.mode = btn.dataset.mode;
+      $('testResultCard').classList.remove('show');
+      
+      if (state.mode === 'square' && state.squareLinked) {
+        state.inhale = state.squareSide;
+        state.exhale = state.squareSide;
+        state.holdIn = state.squareSide;
+        state.holdOut = state.squareSide;
+      }
+
+      saveSettings();
+      updateUI();
+
+      const curIn = (state.mode === 'test') ? state.testStep : state.inhale;
+      $('centerTime').textContent = fmtSec(curIn);
+      buildPetals(curIn, 'var(--in)');
+    };
+  });
+
+  const soundBtns = $('soundPills').querySelectorAll('button');
+  soundBtns.forEach(btn => {
+    btn.onclick = () => {
+      if (state.running) return;
+      state.sound = btn.dataset.sound;
+      soundBtns.forEach(b => b.classList.toggle('active', b === btn));
+      saveSettings();
+      playPhaseSound('in');
+    };
+  });
+
+  $('volumeSlider').oninput = e => {
+    state.volume = Number(e.target.value) / 100;
+    $('volLabel').textContent = e.target.value + '%';
+    saveSettings();
+  };
+
+  $('btnStart').onclick = startTraining;
+  $('btnPause').onclick = pauseTraining;
+  $('btnStop').onclick = () => stopTraining('Занятие остановлено');
+
+  const guideModal = $('guideModal');
+  $('btnOpenGuide').onclick = () => {
+    const currentTab = (state.mode === 'resonance') ? 'resonance'
+                     : (state.mode === 'triangle') ? 'triangle'
+                     : (state.mode === 'square') ? 'square'
+                     : 'test';
+    switchGuideTab(currentTab);
+    guideModal.classList.add('open');
+  };
+  $('btnCloseGuide').onclick = () => guideModal.classList.remove('open');
+  guideModal.onclick = e => { if (e.target === guideModal) guideModal.classList.remove('open'); };
+
+  function switchGuideTab(tabId) {
+    document.querySelectorAll('.modal-nav-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === tabId);
+    });
+    document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+    if (tabId === 'general') $('paneGeneral').style.display = 'block';
+    else if (tabId === 'test') $('paneTest').style.display = 'block';
+    else if (tabId === 'resonance') $('paneResonance').style.display = 'block';
+    else if (tabId === 'triangle') $('paneTriangle').style.display = 'block';
+    else if (tabId === 'square') $('paneSquare').style.display = 'block';
+    
+    // Сбрасываем вертикальную прокрутку контента к началу при смене вкладки
+    $('modalContent').scrollTop = 0;
+  }
+
+  document.querySelectorAll('.modal-nav-btn').forEach(btn => {
+    btn.onclick = () => switchGuideTab(btn.dataset.tab);
+  });
+
+  loadSettings();
+  $('volumeSlider').value = Math.round(state.volume * 100);
+  $('volLabel').textContent = $('volumeSlider').value + '%';
+  soundBtns.forEach(b => b.classList.toggle('active', b.dataset.sound === state.sound));
+
+  const initialIn = (state.mode === 'test') ? state.testStep : state.inhale;
+  buildPetals(initialIn, 'var(--in)');
+  $('centerTime').textContent = fmtSec(initialIn);
+  updateUI();
+})();
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('PWA ServiceWorker registered:', reg.scope))
+        .catch(err => console.log('PWA ServiceWorker registration failed:', err));
+    });
+  }
+</script>
+</body>
+
+</html>

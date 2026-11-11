@@ -1,0 +1,30 @@
+{
+  "name": "Breath Trainer Pro",
+  "short_name": "BreathTrainer",
+  "description": "Дыхательный тренажёр: Резонанс 0.1 Гц, Метод Бутейко и Box Breathing",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d171d",
+  "theme_color": "#0d171d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
