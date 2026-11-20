@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0d171d"/>
+  <circle cx="256" cy="256" r="196" fill="none" stroke="#243842" stroke-width="6"/>
+  <g transform="translate(256,256)">
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.9" transform="rotate(0)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.75" transform="rotate(45)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.9" transform="rotate(90)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.75" transform="rotate(135)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.9" transform="rotate(180)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.75" transform="rotate(225)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.9" transform="rotate(270)"/>
+    <path d="M0,0 C-34,-62 -40,-136 0,-182 C40,-136 34,-62 0,0 Z" fill="#3ec9a7" opacity="0.75" transform="rotate(315)"/>
+  </g>
+  <circle cx="256" cy="256" r="78" fill="#101c23" stroke="#3ec9a7" stroke-width="6"/>
+  <circle cx="256" cy="256" r="18" fill="#3ec9a7"/>
+</svg>
