@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" translate="no" class="notranslate">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d171d">
 <link rel="manifest" href="manifest.json">
@@ -61,7 +62,6 @@ header {
 }
 .header-titles .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-/* Бейдж PRO рядом с названием — в Базе светимость 40%, в Pro 100% */
 .pro-badge {
   display: inline-flex;
   align-items: center;
@@ -87,7 +87,6 @@ body.pro-active .pro-badge {
   box-shadow: 0 0 14px rgba(62, 201, 167, 0.42);
 }
 
-/* Все Pro-элементы в базовой версии имеют светимость 40% */
 .pro-feature {
   opacity: 0.4;
   transition: opacity 0.25s ease, border-color 0.2s ease, background 0.2s ease;
@@ -119,7 +118,6 @@ body.pro-active .pro-tag {
   position: relative;
 }
 
-/* Выпадающее меню языков */
 .lang-wrapper { position: relative; }
 .btn-lang {
   background: #182730;
@@ -141,7 +139,7 @@ body.pro-active .pro-tag {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  min-width: 158px;
+  min-width: 146px;
   background: #132229;
   border: 1px solid #2b4450;
   border-radius: 14px;
@@ -207,7 +205,6 @@ body.pro-active .pro-tag {
   box-shadow: 0 10px 30px rgba(0,0,0,0.32);
 }
 
-/* Две главные ветки */
 .branch-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -237,7 +234,6 @@ body.pro-active .pro-tag {
 }
 .branch-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* Подрежимы */
 .submode-nav {
   display: flex;
   gap: 6px;
@@ -266,7 +262,6 @@ body.pro-active .pro-tag {
 }
 .mode-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* Визуализатор цветка */
 .visual-container {
   position: relative;
   display: flex;
@@ -429,7 +424,6 @@ body.pro-active .pro-tag {
 }
 button:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* Настройки */
 .settings-section-title {
   display: flex;
   justify-content: space-between;
@@ -472,7 +466,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   border-color: var(--in);
 }
 
-/* Встроенный оптический пульсометр (Pro) */
 .ppg-box {
   margin-top: 12px;
   background: #101c23;
@@ -635,13 +628,124 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   cursor: pointer;
 }
 
-.binaural-note {
-  font-size: 11px;
-  color: var(--hold-in);
-  margin-top: 4px;
+/* Расширенный блок бинауральных ритмов и рамп (Pro) */
+.binaural-drawer {
+  width: 100%;
+  background: #101c23;
+  border: 1px solid #263f4c;
+  border-radius: 13px;
+  padding: 10px 11px;
+  margin-top: 6px;
   display: none;
+  flex-direction: column;
+  gap: 8px;
 }
-.binaural-note.show { display: block; }
+.binaural-drawer.show { display: flex; }
+
+.bin-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--hold-in);
+}
+.bin-live-badge {
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #7dd3fc;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bin-mode-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  background: #0b1419;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid #1f333d;
+}
+.bin-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 6px 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.bin-tab-btn.active {
+  background: #19313a;
+  color: var(--in);
+  border-color: rgba(62, 201, 167, 0.45);
+}
+
+.bin-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.bin-preset-btn {
+  background: #15242b;
+  border: 1px solid #243842;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  flex: 1 1 auto;
+  text-align: center;
+}
+.bin-preset-btn.active {
+  background: #19313a;
+  color: var(--in);
+  border-color: var(--in);
+}
+
+.bin-ramp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bin-ramp-card {
+  background: #15242b;
+  border: 1px solid #243842;
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.bin-ramp-card.active {
+  background: #18323c;
+  border-color: var(--in);
+}
+.bin-ramp-card strong {
+  display: block;
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.bin-ramp-card.active strong { color: var(--in); }
+.bin-ramp-card span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.bin-stretch-hint {
+  font-size: 10.5px;
+  color: var(--muted);
+  text-align: right;
+}
 
 .music-row {
   display: flex;
@@ -680,7 +784,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   white-space: nowrap;
 }
 
-/* Ночной экран (AMOLED чёрная шторка) */
 .night-overlay {
   position: fixed;
   inset: 0;
@@ -708,7 +811,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   color: rgba(255, 255, 255, 0.22);
 }
 
-/* Модальные окна */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -801,7 +903,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 .guide-block ul, .guide-block ol { padding-left: 18px; }
 .guide-block li { margin-bottom: 5px; }
 
-/* Выделенная карточка автономности и приватности */
 .autonomy-card {
   background: linear-gradient(155deg, rgba(62, 201, 167, 0.14) 0%, rgba(56, 189, 248, 0.08) 100%);
   border: 1px solid rgba(62, 201, 167, 0.45);
@@ -829,7 +930,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   color: var(--muted);
 }
 
-/* Pro-активация внутри модалки */
 .pro-modal-body {
   padding: 15px 16px 20px;
   overflow-y: auto;
@@ -908,7 +1008,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-reset-base.show { display: block; }
 .btn-reset-base:hover { color: var(--text); border-color: var(--muted); }
 
-/* Тост-уведомление */
 .toast {
   position: fixed;
   bottom: 18px;
@@ -932,7 +1031,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
-<body>
+<body class="notranslate">
 <main>
   <header>
     <div class="header-titles">
@@ -951,7 +1050,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     </div>
   </header>
 
-  <!-- Рабочий экран тренировки (чистый, без медицинского текста) -->
   <section class="panel">
     <div class="branch-nav" id="branchNav">
       <button class="branch-btn active" data-branch="wave" id="btnBranchWave" type="button">🌊 Волна (Резонанс)</button>
@@ -1011,9 +1109,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     </div>
   </section>
 
-  <!-- Настройки параметров -->
   <section class="panel" id="settingsPanel">
-    <!-- Панель для ТЕСТА 3 мин + Оптический пульсометр (Pro) -->
     <div id="panelTestConfig" style="display:none;">
       <div class="settings-section-title">
         <span id="lblTestCalib">Калибровка частоты (3 мин на шаг)</span>
@@ -1027,7 +1123,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
         <button class="test-step-btn" data-step="6.5" type="button">6.5 s</button>
       </div>
 
-      <!-- Оптический пульсометр по камере (Pro) -->
       <div class="ppg-box pro-feature" id="ppgBox">
         <div class="ppg-head">
           <strong id="lblPpgTitle">📷 Оптический пульсометр по камере</strong>
@@ -1049,7 +1144,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       </div>
     </div>
 
-    <!-- Панель для режима ТАКТ (Pro) -->
     <div id="panelBeatConfig" style="display:none;">
       <div class="settings-section-title">
         <span id="lblBeatTitle">Интервал такта (секундомер)</span>
@@ -1062,7 +1156,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       </div>
     </div>
 
-    <!-- Панель для РЕЗОНАНСА, ТРЕУГОЛЬНИКА и КВАДРАТА -->
     <div id="panelGeneralConfig">
       <div class="settings-section-title">
         <span id="settingsTitleText">Настройка фаз</span>
@@ -1108,7 +1201,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       </div>
     </div>
 
-    <!-- Длительность сессии -->
     <div class="row-setting" id="rowLimitSetting">
       <label id="lblSessionDuration">Длительность сессии (1–60 мин):</label>
       <div class="limit-ctrl">
@@ -1118,7 +1210,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       </div>
     </div>
 
-    <!-- Виброотклик (без процентов: Выкл / Мягко — база, Сильно — Pro) -->
     <div class="row-setting" style="flex-direction:column; align-items:flex-start; gap:6px;">
       <div>
         <label style="display:block;" id="lblVibeTitle">Виброотклик (с закрытыми глазами):</label>
@@ -1131,7 +1222,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       </div>
     </div>
 
-    <!-- Звуки смены фаз (База: Колокольчик, Щелчок, Без звука | Pro: Два тона, Гармония) -->
     <div class="row-setting" style="flex-direction:column; align-items:flex-start; gap:6px;">
       <label id="lblSoundTitle">Сигнал смены фаз:</label>
       <div class="sound-pills" id="soundPills">
@@ -1149,7 +1239,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       <span id="volLabel" style="width:36px; text-align:right">70%</span>
     </div>
 
-    <!-- Тональный секундомер (Pro) -->
     <div class="row-setting pro-feature" id="rowTickSetting" style="flex-direction:column; align-items:flex-start; gap:6px;">
       <label><span id="lblTickTitle">Тональный секундомер (такт каждой секунды):</span><span class="pro-tag">PRO</span></label>
       <div class="sound-pills" id="tickPills">
@@ -1160,20 +1249,65 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       </div>
     </div>
 
-    <!-- Фоновый синтез звука (Pro) -->
     <div class="row-setting pro-feature" id="rowBgSetting" style="flex-direction:column; align-items:flex-start; gap:6px;">
       <label><span id="lblBgTitle">Фоновый синтез звука (Web Audio):</span><span class="pro-tag">PRO</span></label>
       <div class="sound-pills" id="bgPills">
         <button data-bg="off" id="bgOffBtn" class="active" type="button">Выкл</button>
-        <button data-bg="binaural" id="bgBinauralBtn" type="button">🎧 Бинаурал 7.83 Гц</button>
+        <button data-bg="binaural" id="bgBinauralBtn" type="button">🎧 Бинауральные</button>
         <button data-bg="drone" id="bgDroneBtn" type="button">Дрон 432 Гц</button>
         <button data-bg="ocean" id="bgOceanBtn" type="button">Прибой</button>
         <button data-bg="brown" id="bgBrownBtn" type="button">Коричн. шум</button>
       </div>
-      <div class="binaural-note" id="binauralNote"></div>
+
+      <!-- Панель настройки бинауральных частот и рамп (Pro) -->
+      <div class="binaural-drawer" id="binauralDrawer">
+        <div class="bin-head-row">
+          <span id="binauralNote">Бинауральные ритмы работают только в стереонаушниках.</span>
+          <span class="bin-live-badge" id="binLiveBadge">Δ 7.83 Hz</span>
+        </div>
+
+        <div class="bin-mode-tabs">
+          <button type="button" class="bin-tab-btn active" data-binmode="fixed" id="btnBinModeFixed">Фиксированная частота</button>
+          <button type="button" class="bin-tab-btn" data-binmode="ramp" id="btnBinModeRamp">Плавный сценарий (рампа)</button>
+        </div>
+
+        <!-- Фиксированные частоты + ползунок -->
+        <div id="binFixedPane">
+          <div class="bin-presets" id="binPresets">
+            <button type="button" class="bin-preset-btn" data-hz="2.5" id="binPrDelta">Дельта 2.5 Гц</button>
+            <button type="button" class="bin-preset-btn" data-hz="5.0" id="binPrTheta">Тета 5.0 Гц</button>
+            <button type="button" class="bin-preset-btn active" data-hz="7.83" id="binPrSchumann">Шуман 7.83 Гц</button>
+            <button type="button" class="bin-preset-btn" data-hz="10.0" id="binPrAlpha">Альфа 10 Гц</button>
+            <button type="button" class="bin-preset-btn" data-hz="15.0" id="binPrFocus">Фокус 15 Гц</button>
+          </div>
+          <div class="volume-row" style="margin-top:8px;">
+            <span id="lblBinSlider">Частота биений (Δ):</span>
+            <input type="range" id="binFreqSlider" min="2.0" max="18.0" step="0.1" value="7.83">
+            <span id="binFreqLabel" style="width:52px; text-align:right; font-variant-numeric:tabular-nums;">7.8 Hz</span>
+          </div>
+        </div>
+
+        <!-- Плавные сценарии-рампы -->
+        <div id="binRampPane" style="display:none;">
+          <div class="bin-ramp-list" id="binRampList">
+            <button type="button" class="bin-ramp-card active" data-ramp="reset" id="rampCardReset">
+              <strong id="lblRampReset">U-профиль: Дневная перезагрузка</strong>
+              <span id="descRampReset"></span>
+            </button>
+            <button type="button" class="bin-ramp-card" data-ramp="sleep" id="rampCardSleep">
+              <strong id="lblRampSleep">Вечерний спуск ко сну</strong>
+              <span id="descRampSleep"></span>
+            </button>
+            <button type="button" class="bin-ramp-card" data-ramp="morning" id="rampCardMorning">
+              <strong id="lblRampMorning">Утренний подъём и ясность</strong>
+              <span id="descRampMorning"></span>
+            </button>
+          </div>
+          <div class="bin-stretch-hint" id="lblBinAutoStretch" style="margin-top:5px;"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Своя музыка с устройства (Pro) -->
     <div class="row-setting pro-feature" id="rowMusicSetting" style="flex-direction:column; align-items:flex-start; gap:6px;">
       <label><span id="lblMusicTitle">Своя музыка с устройства:</span><span class="pro-tag">PRO</span></label>
       <div class="music-row">
@@ -1191,13 +1325,11 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   </section>
 </main>
 
-<!-- Ночной экран (чёрный OLED-слой) -->
 <div class="night-overlay" id="nightOverlay">
   <div class="night-phase" id="nightPhaseText">...</div>
   <div class="night-hint" id="nightTapHint">Нажмите в любом месте, чтобы вернуть экран</div>
 </div>
 
-<!-- Модальное окно Справки -->
 <div class="modal-backdrop" id="guideModal">
   <div class="modal-card">
     <div class="modal-header">
@@ -1223,7 +1355,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   </div>
 </div>
 
-<!-- Модальное окно активации Pro -->
 <div class="modal-backdrop" id="proModal">
   <div class="modal-card">
     <div class="modal-header">
@@ -1261,11 +1392,10 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     });
   }
 
-  const I18N = {"ru": {"langName": "Русский", "subtitle": "Волна 0.1 Гц & Пранаяма", "guideBtn": "Справка", "proBadgeTitle": "Статус Pro — нажмите для активации", "branchWave": "🌊 Волна (Резонанс)", "branchPrana": "🔺 Пранаяма & Такт", "modeTest": "Тест (3 мин)", "modeResonance": "Резонанс 0.1 Гц", "modeTriangle": "Треугольник", "modeSquare": "Квадрат", "modeBeat": "Такт", "kickerReady": "ГОТОВ", "kickerIn": "ВДОХ", "kickerOut": "ВЫДОХ", "kickerHoldIn": "ЗАДЕРЖКА", "kickerHoldOut": "ПАУЗА", "kickerBeat": "ТАКТ", "phaseIn": "Вдох", "phaseOut": "Выдох", "phaseHoldIn": "Задержка", "phaseHoldOut": "Пауза", "phaseBeat": "Ритм", "statusIdle": "Нажмите «Запуск» для начала занятия", "statusRunning": "Идёт практика — дышите мягко через нос", "statusRunningBeat": "Идёт ровный отсчёт такта", "statusPaused": "Пауза", "statusStopped": "Занятие остановлено", "statusFinished": "Сессия завершена. Посидите спокойно 20–30 секунд", "statusTestDone": "Тест 3 минуты завершён!", "wakeActive": "☀️ Экран активен", "btnNightScreen": "🌙 Ночной экран", "nightTapHint": "Нажмите в любом месте, чтобы вернуть экран", "trTitle": "🎉 Тест 3 минуты завершён!", "trDesc": "Оцените ощущения: согрелись ли ладони, дышалось ли легко без одышки, был ли максимальным размах пульса?", "trApply": "Применить в Резонанс", "trClose": "Закрыть", "timeElapsed": "Прошло времени", "timeTarget": "Лимит занятия", "timeTestTarget": "Длительность теста", "btnStart": "▶ Запуск", "btnPause": "Ⅱ Пауза", "btnResume": "▶ Продолжить", "btnStop": "■ Стоп", "testCalib": "Калибровка частоты (3 мин на шаг)", "testLimitBadge": "Лимит: 03:00", "ppgTitle": "📷 Оптический пульсометр по камере", "ppgHint": "Мягко приложите палец к задней камере и вспышке на 3-й минуте теста (не давите сильно). Измеряется пульс и размах ритма (ВСР), не давление.", "ppgStart": "▶ Измерить пульс", "ppgStop": "■ Остановить датчик", "ppgBpm": "Пульс", "ppgAmp": "Размах Δ", "ppgHrv": "ВСР (RMSSD)", "ppgWait": "Держите палец неподвижно...", "ppgErr": "Нет доступа к камере. Проверьте разрешения браузера.", "ppgAutoOff": "Датчик остановлен через 60 с для защиты от нагрева вспышки.", "settingsTitle": "Настройка фаз", "beatSettingsTitle": "Интервал такта (секундомер)", "beatIntervalLabel": "Шаг такта", "linkAll": "🔗 Все стороны равны", "linkSep": "🔓 Стороны раздельно", "boxInhale": "Вдох", "boxHoldIn": "Задержка (вдох)", "boxExhale": "Выдох", "boxHoldOutTri": "Пауза (выдох)", "boxHoldOutSq": "Пауза (выдох)", "secUnit": "с", "minUnit": "мин", "sessionDur": "Длительность сессии (1–60 мин):", "vibeTitle": "Виброотклик (с закрытыми глазами):", "vibeHint": "1 толчок — вдох, 2 — выдох, 3 — пауза", "vibeOff": "Выкл", "vibeLow": "📳 Мягко", "vibeHigh": "📳 Сильно", "soundTitle": "Сигнал смены фаз:", "sndBell": "Колокольчик", "sndTap": "Щелчок", "sndTwo": "Два тона", "sndChime": "Гармония", "sndOff": "Без звука", "volume": "Громкость сигналов", "tickTitle": "Тональный секундомер (такт каждой секунды):", "tickOff": "Выкл", "tickClick": "Щелчок", "tickTone": "Тон", "tickHarm": "Гармония", "bgTitle": "Фоновый синтез звука (Web Audio):", "bgOff": "Выкл", "bgBinaural": "🎧 Бинаурал 7.83 Гц", "bgDrone": "Дрон 432 Гц", "bgOcean": "Прибой", "bgBrown": "Коричн. шум", "bgBinauralHint": "Бинауральные ритмы работают только в стереонаушниках.", "bgVolume": "Громкость фона / музыки", "musicTitle": "Своя музыка с устройства:", "musicPick": "🎵 Выбрать аудиофайл", "musicClear": "✕ Убрать", "musicNone": "Файл не выбран (воспроизводится локально)", "modalTitle": "📖 Инструкция & Научная база", "tabPractice": "🧭 Практика", "tabWave": "🌊 Волна 0.1 Гц", "tabPranayama": "🔺 Пранаяма", "tabScience": "🔬 Статьи", "tabTech": "⚙️ Техника & Pro", "proModalTitle": "✨ Расширенная версия Pro", "proModalDesc": "В базовой версии все возможности Pro отображаются приглушёнными (40% яркости). После ввода ключа активации все кнопки мгновенно подсвечиваются и начинают работать.", "proFeatureHint": "Эта функция доступна в версии Pro:", "proKeyPlaceholder": "Введите ключ активации...", "proActivateBtn": "Активировать Pro", "proActiveBadge": "✅ Версия Pro активна на этом устройстве", "proWrongKey": "Неверный ключ. Проверьте раскладку и попробуйте снова.", "proSuccess": "Pro активирована! Все функции и языки разблокированы.", "proDeactivateBtn": "Вернуться в базовый вид (для проверки)", "proListHtml": "<ul><li><b>Вибрация «Сильно»</b> — усиленный импульс для глубокого погружения;</li><li><b>Звуковые полотна:</b> бинауральные ритмы 7.83 Гц (в наушниках), дрон 432 Гц, дышащий прибой и коричневый шум;</li><li><b>Тональный секундомер</b> и самостоятельный режим <b>«Такт»</b>;</li><li><b>Своя музыка</b> из памяти телефона;</li><li><b>Оптический пульсометр по камере</b> в 3-минутном тесте;</li><li><b>Расширенные диапазоны</b> фаз (Квадрат до 60 с и раздельные стороны, пауза до 120 с);</li><li><b>Дополнительные языки:</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Отказ от медицинской ответственности:</strong> Приложение Breath Trainer является персональным инструментом для релаксации, концентрации внимания и тренировки контроля дыхания. Оно не является медицинским изделием, не предназначено для диагностики, лечения или профилактики заболеваний и не заменяет консультацию врача. При сердечно-сосудистых заболеваниях, гипертонии, бронхиальной астме, эпилепсии или беременности проконсультируйтесь со специалистом перед практикой задержек дыхания. При головокружении или дискомфорте немедленно прекратите занятие и вернитесь к обычному дыханию.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Подготовка и положение телефона</h4>\n        <ul>\n          <li><b>Включите режим «Не беспокоить»</b> (если не используете виброотклик, либо отключите только звук уведомлений): внезапный звонок вызывает выброс адреналина и обнуляет расслабление.</li>\n          <li><b>Не держите смартфон в руках:</b> напряжение пальцев и кистей рефлекторно зажимает плечи и диафрагму.</li>\n          <li><b>С открытыми глазами:</b> поставьте телефон на опору на уровне груди или глаз.</li>\n          <li><b>С закрытыми глазами:</b> положите телефон на нижнюю часть живота или бедро, чтобы чувствовать виброотклик, либо включите <b>«🌙 Ночной экран»</b>, чтобы дисплей оставался чёрным, а вибрация и звук не прерывались.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Посадка и правило «невидимого дыхания»</h4>\n        <ul>\n          <li><b>Прямая спина, мягкий живот:</b> сядьте на край стула, стопы на полу, макушка мягко тянется вверх. На вдохе живот свободно подаётся вперёд, на выдохе плавно возвращается.</li>\n          <li><b>Разжатые челюсти:</b> расслабьте жевательные мышцы и положите кончик языка на нёбо сразу за верхними зубами — это рефлекторно снимает зажим с гортани и диафрагмы.</li>\n          <li><b>Только носом и без «передышивания»:</b> главная ошибка новичков — вдохнуть слишком глубоко. Дышите тихо, словно на 10–15% меньше обычного, плавно растягивая поток на заданные секунды.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Телесные ориентиры и выход</h4>\n        <ul>\n          <li><b>Маркеры покоя:</b> через 3–5 минут в пальцах рук и стопах появляется приятное тепло (раскрываются капилляры), возможна лёгкая зевота или усиление слюноотделения.</li>\n          <li><b>Если закружилась голова:</b> вы дышите слишком глубоко и вымываете углекислый газ. Сделайте вдох ещё тише и меньше по объёму.</li>\n          <li><b>Выход из практики:</b> после завершения 15–20-минутной сессии не вскакивайте резко — посидите спокойно 20–30 секунд с открытыми глазами.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Режим «Резонанс 0.1 Гц»</h4>\n        <p>Базовая настройка (<b>5.0 с вдох + 5.0 с выдох = 6 циклов в минуту</b>) согласует дыхание с естественными волнами артериального давления. Задержек здесь нет: вдох без рывка перетекает в выдох, как движение маятника.</p>\n        <ul>\n          <li><b>Базовый диапазон:</b> 4.5 – 6.5 с (покрывает личный резонанс большинства людей). В расширенной версии <b>(Pro)</b> доступен диапазон 3.0 – 15.0 с.</li>\n          <li><b>Оптимальная длительность:</b> 15–20 минут в день для глубокого вегетативного восстановления.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Режим «Тест (3 мин)» — подбор личной частоты</h4>\n        <p>Из-за различий в росте и эластичности сосудов индивидуальная точка резонанса лежит между 4.5 и 6.5 с:</p>\n        <ol>\n          <li>Выберите шаг (по умолчанию 5.0 с), запустите таймер и спокойно дышите первые 2 минуты.</li>\n          <li>На 3-й минуте оцените тепло в ладонях и лёгкость дыхания, либо запустите встроенный <b>Оптический пульсометр по камере (Pro)</b>, мягко приложив палец к задней камере и вспышке.</li>\n          <li>Шаг с максимальным размахом пульса (Δ между вдохом и выдохом) без малейшей одышки — ваша личная частота. Нажмите <b>«Применить в Резонанс»</b>.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Треугольник (Вдох → Выдох → Пауза)</h4>\n        <p>Трёхфазный цикл с паузой на пустых лёгких. В базовой версии пауза регулируется до 30 с, в версии <b>(Pro)</b> — до 120 с.</p>\n        <ul>\n          <li><b>Золотое правило:</b> рабочая пауза составляет 40–50% от вашей предельной задержки.</li>\n          <li><b>Критерий правильности:</b> после окончания паузы следующий вдох должен быть таким же тихим и спокойным. Если хочется судорожно схватить воздух ртом — сократите паузу.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Квадрат (Вдох → Задержка → Выдох → Пауза)</h4>\n        <p>Четырёхфазный цикл (<i>Box Breathing / Самавритти</i>) для быстрого выравнивания эмоций и фокусировки. В базовой версии стороны синхронно настраиваются от 2 до 5 с; в версии <b>(Pro)</b> открываются диапазон до 60 с и <b>раздельная настройка каждой стороны</b>.</p>\n        <p>Во время задержек не пережимайте горло — удерживайте воздух мягким расправленным положением грудной клетки.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Режим «Такт» и Тональный секундомер (Pro)</h4>\n        <p>Режим <b>«Такт» (Pro)</b> работает как чистый акустический секундомер без привязки к фазам дыхания — отбивает ровный ритм (0.5 – 2.0 с) щелчком, тоном или гармоническим созвучием. А опция <b>Тональный секундомер (Pro)</b> в настройках добавляет деликатный посекундный отсчёт внутри длинных дыхательных фаз.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Дыхание — единственный «ручной пульт» нервной системы</h4>\n        <p>Большинство жизненно важных систем работают автоматически: нельзя усилием воли приказать сердцу замедлиться или спазмированным сосудам раскрыться. Этим управляет вегетативная нервная система, разделённая на симпатический (стресс, мобилизация) и парасимпатический (покой, восстановление) контуры.</p>\n        <p>Дыхание — единственная функция с двойным управлением. Замедляя ритм, мы воздействуем на барорецепторы крупных сосудов и стимулируем блуждающий нерв (<i>Nervus Vagus</i>), отправляя в ствол мозга прямой физиологический сигнал безопасности.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Космическая кардиология и вегетативный резонанс 0.1 Гц</h4>\n        <p>В 1960–1990-х годах в ИМБП профессор <b>Роман Баевский</b>, изучая резервы космонавтов, показал, что идеально ровный пульс — признак истощения, тогда как здоровое сердце гибко ускоряется на вдохе и замедляется на выдохе (<b>вариабельность сердечного ритма, ВСР</b>).</p>\n        <p>Физиологи <b>Евгений Ващилло</b> и <b>Пол Лерер</b> доказали, что при частоте дыхания около 6 циклов в минуту (0.1 Гц) дыхательная аритмия входит в фазовый резонанс с собственными 10-секундными колебаниями артериального давления — <b>волнами Майера</b>, максимально раскачивая восстановительный барорефлекс.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. Биохимический парадокс: Эффект Бора и роль CO₂</h4>\n        <p>Вопреки бытовому мифу, слишком глубокое дыхание ухудшает питание клеток кислородом. В 1904 году датский физиолог <b>Кристиан Бор</b> открыл закон: гемоглобин отдаёт кислород тканям только при достаточном уровне углекислого газа (CO₂) в крови. Избыточное вымывание CO₂ вызывает спазм капилляров и «кислородное голодание» при 99% насыщении крови.</p>\n        <p>В 1950-х годах врач <b>Константин Бутейко</b> систематизировал практику уменьшения глубины дыхания и мягких пауз после выдоха для восстановления естественного тонуса сосудов.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Сосудистое эхо (~7 Гц) и проект «Gateway»</h4>\n        <p>В 1977 году биоинженер <b>Ицхак Бентов</b> (<i>Stalking the Wild Pendulum</i>) описал ритмичные микроколебания тела (~7 Гц), порождённые выбросом крови из левого желудочка и отражением пульсовой волны от разветвления аорты. В 1983 году эта схема рассматривалась в рассекреченном отчёте проекта <b>Gateway Process</b>.</p>\n        <p>Современная наука разделяет клинически подтверждённый барорефлекторный резонанс <b>0.1 Гц</b> и теоретическую биомеханическую модель Бентова (~7 Гц), которая остаётся выразительной инженерной метафорой согласованной работы сердца и дыхания.</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ Полная автономность и нулевой сбор данных</h4>\n        <ul>\n          <li><b>Никаких аккаунтов и e-mail:</b> приложению не нужны ваша почта, имя, номер телефона или регистрация.</li>\n          <li><b>100% офлайн на вашем смартфоне:</b> после установки работает без интернета — в самолёте, в горах или в авиарежиме. Вся графика и звуки создаются локально внутри устройства.</li>\n          <li><b>Ноль слежки и рекламы:</b> нет аналитических трекеров, скрытых отправок данных и рекламных сетей. Ваши настройки, музыка и замеры остаются только в памяти телефона.</li>\n          <li><b>Честная модель без подписок:</b> базовая версия работает бессрочно, а Pro открывается один раз и навсегда.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Базовая версия и активация Pro</h4>\n        <p>В базовой версии все расширенные кнопки и опции с пометкой <b>(Pro)</b> видны на экране, но отображаются приглушёнными (светимость около 40%), чтобы вы заранее видели все возможности инструмента. <b>Сразу после активации Pro все кнопки подсвечиваются в полную яркость и становятся активными</b> без повторной установки приложения.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Технические особенности звука, вибрации и датчика</h4>\n        <ul>\n          <li><b>Синтез звука (Web Audio API):</b> все сигналы, бинауральные ритмы 7.83 Гц <b>(Pro)</b>, дрон 432 Гц <b>(Pro)</b>, прибой <b>(Pro)</b> и коричневый шум <b>(Pro)</b> генерируются математически в реальном времени без загрузки аудиофайлов.</li>\n          <li><b>Бинауральные ритмы (Pro):</b> в левое и правое ухо подаются две близкие частоты (216 Гц и 223.83 Гц). Эффект работает <b>только в стереонаушниках</b>.</li>\n          <li><b>Оптический пульсометр (Pro):</b> считывает микроизменения яркости капилляров пальца через камеру. Видео никуда не сохраняется и не передаётся. Измеряются пульс и ВСР-амплитуда, <b>но не артериальное давление</b>.</li>\n          <li><b>Вибрация на Android:</b> если на смартфоне не чувствуется виброотклик, отключите режим «Экономия энергии» и проверьте включённый «Тактильный отклик» в настройках телефона.</li>\n        </ul>\n      </div>\n    "}, "en": {"langName": "English", "subtitle": "0.1 Hz Resonance & Pranayama", "guideBtn": "Guide", "proBadgeTitle": "Pro status — tap to unlock", "branchWave": "🌊 Wave (Resonance)", "branchPrana": "🔺 Pranayama & Beat", "modeTest": "Test (3 min)", "modeResonance": "Resonance 0.1 Hz", "modeTriangle": "Triangle", "modeSquare": "Box (Square)", "modeBeat": "Beat", "kickerReady": "READY", "kickerIn": "INHALE", "kickerOut": "EXHALE", "kickerHoldIn": "HOLD", "kickerHoldOut": "PAUSE", "kickerBeat": "BEAT", "phaseIn": "Inhale", "phaseOut": "Exhale", "phaseHoldIn": "Hold", "phaseHoldOut": "Pause", "phaseBeat": "Pulse", "statusIdle": "Tap Start to begin your session", "statusRunning": "In session — breathe gently through your nose", "statusRunningBeat": "Steady beat stopwatch active", "statusPaused": "Paused", "statusStopped": "Session stopped", "statusFinished": "Session complete. Rest calmly for 20–30 seconds", "statusTestDone": "3-minute calibration complete!", "wakeActive": "☀️ Screen awake", "btnNightScreen": "🌙 Night Screen", "nightTapHint": "Tap anywhere to restore screen", "trTitle": "🎉 3-Minute Test Complete!", "trDesc": "Notice how you feel: did your hands warm up, was your breath effortless, and did your heart-rate swing peak?", "trApply": "Apply to Resonance", "trClose": "Close", "timeElapsed": "Elapsed", "timeTarget": "Session Limit", "timeTestTarget": "Test Duration", "btnStart": "▶ Start", "btnPause": "Ⅱ Pause", "btnResume": "▶ Resume", "btnStop": "■ Stop", "testCalib": "Frequency Calibration (3 min per step)", "testLimitBadge": "Limit: 03:00", "ppgTitle": "📷 Camera Optical Pulse Sensor", "ppgHint": "Rest your fingertip gently over the rear camera and flash during minute 3 (do not press hard). Measures pulse and HRV swing, not blood pressure.", "ppgStart": "▶ Measure Pulse", "ppgStop": "■ Stop Sensor", "ppgBpm": "Heart Rate", "ppgAmp": "Swing Δ", "ppgHrv": "HRV (RMSSD)", "ppgWait": "Hold finger steady...", "ppgErr": "Camera access denied. Check browser permissions.", "ppgAutoOff": "Sensor auto-stopped after 60 s to keep the flash cool.", "settingsTitle": "Phase Timing", "beatSettingsTitle": "Beat Interval (Stopwatch)", "beatIntervalLabel": "Beat step", "linkAll": "🔗 Equal sides", "linkSep": "🔓 Custom sides", "boxInhale": "Inhale", "boxHoldIn": "Hold (in)", "boxExhale": "Exhale", "boxHoldOutTri": "Pause (out)", "boxHoldOutSq": "Pause (out)", "secUnit": "s", "minUnit": "min", "sessionDur": "Session duration (1–60 min):", "vibeTitle": "Haptic cues (eyes-closed practice):", "vibeHint": "1 pulse — inhale, 2 — exhale, 3 — pause", "vibeOff": "Off", "vibeLow": "📳 Soft", "vibeHigh": "📳 Strong", "soundTitle": "Phase transition sound:", "sndBell": "Bell", "sndTap": "Click", "sndTwo": "Two Tones", "sndChime": "Harmony", "sndOff": "Silent", "volume": "Cue volume", "tickTitle": "Tonal Stopwatch (per-second tick):", "tickOff": "Off", "tickClick": "Click", "tickTone": "Tone", "tickHarm": "Harmony", "bgTitle": "Synthesized Ambient Audio (Web Audio):", "bgOff": "Off", "bgBinaural": "🎧 Binaural 7.83 Hz", "bgDrone": "432 Hz Drone", "bgOcean": "Breathing Surf", "bgBrown": "Brown Noise", "bgBinauralHint": "Binaural beats require stereo headphones.", "bgVolume": "Ambient / Music volume", "musicTitle": "Your own audio from device:", "musicPick": "🎵 Choose Audio File", "musicClear": "✕ Clear", "musicNone": "No file selected (plays 100% locally)", "modalTitle": "📖 Practice Guide & Science", "tabPractice": "🧭 Practice", "tabWave": "🌊 0.1 Hz Wave", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Articles", "tabTech": "⚙️ Tech & Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "In the free base version, Pro controls remain visible at 40% brightness so you can explore the full toolkit. Entering an activation key instantly illuminates and unlocks every Pro button.", "proFeatureHint": "This feature unlocks in Pro:", "proKeyPlaceholder": "Enter activation key...", "proActivateBtn": "Activate Pro", "proActiveBadge": "✅ Pro is active on this device", "proWrongKey": "Invalid key. Please check spelling and try again.", "proSuccess": "Pro unlocked! All soundscapes, sensors, and languages are now active.", "proDeactivateBtn": "Switch back to Base preview", "proListHtml": "<ul><li><b>Strong Haptics</b> — deeper tactile cue for eyes-closed sessions;</li><li><b>Ambient Generators:</b> 7.83 Hz Binaural Beats (headphones), 432 Hz Drone, Breathing Surf, and Brown Noise;</li><li><b>Tonal Stopwatch</b> and standalone <b>Beat</b> metronome mode;</li><li><b>Personal Audio</b> directly from your phone storage;</li><li><b>Camera PPG Pulse & HRV Sensor</b> inside the 3-minute test;</li><li><b>Extended Ranges:</b> Box up to 60 s with independent sides, pauses up to 120 s;</li><li><b>Additional Languages:</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Medical Disclaimer:</strong> Breath Trainer is a personal tool for relaxation, focus, and breath pacing. It is not a medical device, does not diagnose, treat, or prevent any condition, and does not replace professional medical advice. If you have cardiovascular disease, hypertension, asthma, epilepsy, or are pregnant, consult a physician before practicing breath holds. Stop immediately and breathe normally if you feel dizzy or uncomfortable.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Setup & Phone Placement</h4>\n        <ul>\n          <li><b>Silence distractions:</b> mute notifications before starting so sudden alerts do not trigger an adrenaline spike.</li>\n          <li><b>Keep your hands free:</b> holding the phone creates subtle tension in the forearms, shoulders, and diaphragm.</li>\n          <li><b>Eyes open:</b> prop your phone at chest or eye level so your neck stays neutral.</li>\n          <li><b>Eyes closed:</b> rest the phone on your lower belly or thigh to feel haptic cues, or tap <b>🌙 Night Screen</b> to black out the display while keeping vibration and audio running.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Posture & \"Invisible Breathing\"</h4>\n        <ul>\n          <li><b>Tall spine, soft belly:</b> sit near the edge of a chair with feet grounded. Let your belly expand effortlessly on the inhale and soften back on the exhale.</li>\n          <li><b>Unclench your jaw:</b> relax your face and rest the tip of your tongue lightly behind your upper front teeth to release tension in the throat and diaphragm.</li>\n          <li><b>Nasal & light:</b> breathe solely through your nose. Avoid taking oversized gulps of air — keep the volume quiet and 10–15% lighter than usual, stretched smoothly across the timer.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Body Cues & Finishing</h4>\n        <ul>\n          <li><b>Signs of relaxation:</b> within 3–5 minutes, gentle warmth in your fingertips or mild yawning signals peripheral vasodilation and vagal activation.</li>\n          <li><b>If you feel lightheaded:</b> you are over-breathing and blowing off CO₂. Make each inhale quieter and shallower.</li>\n          <li><b>Smooth transition:</b> after a 15–20 minute session, sit calmly with eyes open for 20–30 seconds before standing up.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>0.1 Hz Resonance Breathing</h4>\n        <p>The baseline rhythm (<b>5.0 s inhale + 5.0 s exhale = 6 breaths/min</b>) synchronizes breathing with natural blood-pressure waves. There are no breath holds — inhale flows seamlessly into exhale like a pendulum.</p>\n        <ul>\n          <li><b>Base range:</b> 4.5 – 6.5 s (covers the resonance point of most adults). <b>Pro</b> unlocks 3.0 – 15.0 s custom pacing.</li>\n          <li><b>Sweet spot:</b> 15–20 minutes daily for deep autonomic recovery and calm focus.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>3-Minute Resonance Test</h4>\n        <p>Because height and vascular elasticity vary, personal resonance falls between 4.5 and 6.5 seconds per phase:</p>\n        <ol>\n          <li>Pick a step (default 5.0 s), press Start, and breathe effortlessly for the first 2 minutes.</li>\n          <li>During minute 3, notice hand warmth and ease — or launch the built-in <b>Camera Pulse Sensor (Pro)</b> by gently resting your fingertip on the rear camera and flash.</li>\n          <li>The pace that produces the widest heart-rate swing (Δ BPM) with zero air hunger is your personal resonance frequency. Tap <b>Apply to Resonance</b>.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Triangle (Inhale → Exhale → Pause)</h4>\n        <p>A three-part cycle with a calm pause after exhalation. Base supports pauses up to 30 s; <b>Pro</b> extends up to 120 s.</p>\n        <ul>\n          <li><b>Pacing rule:</b> train at 40–50% of your maximum comfortable breath-hold time.</li>\n          <li><b>Quality check:</b> the inhale following the pause must remain silent and controlled. If you feel compelled to gasp, shorten the pause.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Box Breathing (Inhale → Hold → Exhale → Pause)</h4>\n        <p>Four-phase rhythmic breathing (<i>Samavritti</i>) used to stabilize focus under pressure. Base offers equal sides from 2 to 5 s; <b>Pro</b> unlocks up to 60 s and <b>independent side lengths</b>.</p>\n        <p>Keep your throat open and relaxed during holds rather than clamping the glottis shut.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Standalone Beat & Tonal Stopwatch (Pro)</h4>\n        <p><b>Beat mode (Pro)</b> works as a clean acoustic metronome (0.5 – 2.0 s interval) without breathing phases. The <b>Tonal Stopwatch (Pro)</b> setting adds a gentle second-by-second tick inside long breathing phases.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Breath: The Only Manual Remote for Your Nervous System</h4>\n        <p>Heart rate, cortisol release, and blood-vessel tone run automatically under the autonomic nervous system — balancing sympathetic mobilization with parasympathetic restoration.</p>\n        <p>Breathing is the sole autonomic function with a manual override. Slowing your cadence engages arterial baroreceptors and mechanically stimulates the vagus nerve, sending an immediate physiological safety signal straight to the brainstem.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Space Cardiology & 0.1 Hz Autonomic Resonance</h4>\n        <p>Pioneering aerospace cardiologist <b>Roman Baevsky</b> discovered while monitoring cosmonauts that a rigidly metronomic pulse signals exhaustion, whereas a resilient heart constantly speeds up on inhale and slows on exhale — known as <b>Heart Rate Variability (HRV)</b>.</p>\n        <p>Later, physiologists <b>Evgeny Vaschillo</b> and <b>Paul Lehrer</b> demonstrated that breathing near 6 cycles/min (0.1 Hz) phase-locks respiratory sinus arrhythmia with natural 10-second blood-pressure oscillations (<b>Mayer waves</b>), amplifying baroreflex recovery.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. The Bohr Effect & Why CO₂ Matters</h4>\n        <p>Contrary to popular myth, heavy over-breathing actually reduces oxygen delivery to tissues. In 1904, Danish physiologist <b>Christian Bohr</b> showed that hemoglobin requires adequate carbon dioxide (CO₂) in the blood to release bound oxygen to brain and muscle cells. Blowing off too much CO₂ constricts arterioles and locks oxygen onto hemoglobin.</p>\n        <p>In the 1950s, physician <b>Konstantin Buteyko</b> systematized light nasal breathing and gentle post-exhale pauses to restore healthy CO₂ tolerance and microcirculation.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Vascular Echo (~7 Hz) & the Gateway Project</h4>\n        <p>In 1977, biomedical inventor <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) modeled rhythmic ~7 Hz micromotions of the body driven by left-ventricular ejection and pulse waves reflecting off the aortic bifurcation. His mechanical model later appeared in the declassified 1983 <b>Gateway Process</b> report.</p>\n        <p>Modern physiology clearly distinguishes the clinically proven <b>0.1 Hz baroreflex resonance</b> from Bentov's theoretical <b>~7 Hz standing-wave model</b>, which remains an illuminating biomechanical illustration of heart-breath harmony.</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ 100% Offline & Zero Data Collection</h4>\n        <ul>\n          <li><b>No accounts, no email:</b> never asks for your email address, name, phone number, or login.</li>\n          <li><b>Truly autonomous offline app:</b> runs completely on your device — in airplane mode, on flights, or off the grid. Every tone and visual is generated locally.</li>\n          <li><b>Zero tracking or ads:</b> no telemetry, no analytics SDKs, no cloud uploads. Your settings, local audio files, and pulse readings never leave your phone.</li>\n          <li><b>No subscriptions:</b> the base toolkit stays free forever; Pro is a single one-time unlock.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Base Preview & Pro Unlock</h4>\n        <p>In Base mode, all <b>(Pro)</b> controls stay visible at 40% brightness so nothing is hidden. <b>The moment Pro is activated, every dimmed button illuminates to full brightness and becomes interactive</b> — no reinstall required.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Audio Engine, Haptics & Optical Sensor</h4>\n        <ul>\n          <li><b>Zero-file Web Audio synthesis:</b> cues, 7.83 Hz Binaural Beats <b>(Pro)</b>, 432 Hz Drone <b>(Pro)</b>, Breathing Surf <b>(Pro)</b>, and Brown Noise <b>(Pro)</b> are synthesized live in code.</li>\n          <li><b>Binaural Beats (Pro):</b> sends 216 Hz left and 223.83 Hz right — requires <b>stereo headphones</b>.</li>\n          <li><b>Optical PPG Sensor (Pro):</b> analyzes subtle fingertip brightness changes via camera RAM only (never recorded or uploaded). Measures pulse & HRV swing, <b>not blood pressure</b>.</li>\n          <li><b>Android Haptics:</b> if vibration feels silent, disable Battery Saver and verify Touch Vibration / Haptic Feedback is enabled in system settings.</li>\n        </ul>\n      </div>\n    "}, "es": {"langName": "Español", "subtitle": "Resonancia 0.1 Hz y Pranayama", "guideBtn": "Guía", "proBadgeTitle": "Estado Pro — pulsa para activar", "branchWave": "🌊 Onda (Resonancia)", "branchPrana": "🔺 Pranayama y Pulso", "modeTest": "Test (3 min)", "modeResonance": "Resonancia 0.1 Hz", "modeTriangle": "Triángulo", "modeSquare": "Cuadrado", "modeBeat": "Compás", "kickerReady": "LISTO", "kickerIn": "INHALA", "kickerOut": "EXHALA", "kickerHoldIn": "RETÉN", "kickerHoldOut": "PAUSA", "kickerBeat": "COMPÁS", "phaseIn": "Inhala", "phaseOut": "Exhala", "phaseHoldIn": "Retención", "phaseHoldOut": "Pausa", "phaseBeat": "Ritmo", "statusIdle": "Pulsa «Iniciar» para comenzar la sesión", "statusRunning": "Práctica en curso — respira suave por la nariz", "statusRunningBeat": "Cronómetro de compás activo", "statusPaused": "En pausa", "statusStopped": "Sesión detenida", "statusFinished": "Sesión completada. Descansa 20–30 segundos en calma", "statusTestDone": "¡Test de 3 minutos completado!", "wakeActive": "☀️ Pantalla activa", "btnNightScreen": "🌙 Pantalla nocturna", "nightTapHint": "Toca en cualquier lugar para volver", "trTitle": "🎉 ¡Test de 3 minutos completado!", "trDesc": "Observa tu cuerpo: ¿se entibiaron tus manos, respiraste sin esfuerzo y alcanzó su máximo la oscilación del pulso?", "trApply": "Aplicar a Resonancia", "trClose": "Cerrar", "timeElapsed": "Transcurrido", "timeTarget": "Límite de sesión", "timeTestTarget": "Duración del test", "btnStart": "▶ Iniciar", "btnPause": "Ⅱ Pausa", "btnResume": "▶ Seguir", "btnStop": "■ Detener", "testCalib": "Calibración de frecuencia (3 min por paso)", "testLimitBadge": "Límite: 03:00", "ppgTitle": "📷 Pulsómetro óptico por cámara", "ppgHint": "Apoya suavemente la yema del dedo sobre la cámara trasera y el flash en el minuto 3 (sin presionar fuerte). Mide pulso y amplitud VFC, no tensión arterial.", "ppgStart": "▶ Medir pulso", "ppgStop": "■ Detener sensor", "ppgBpm": "Pulso", "ppgAmp": "Amplitud Δ", "ppgHrv": "VFC (RMSSD)", "ppgWait": "Mantén el dedo quieto...", "ppgErr": "Sin acceso a la cámara. Revisa los permisos del navegador.", "ppgAutoOff": "Sensor detenido tras 60 s para evitar el calentamiento del flash.", "settingsTitle": "Ajuste de fases", "beatSettingsTitle": "Intervalo del compás", "beatIntervalLabel": "Paso del compás", "linkAll": "🔗 Lados iguales", "linkSep": "🔓 Lados independientes", "boxInhale": "Inhalar", "boxHoldIn": "Retener (lleno)", "boxExhale": "Exhalar", "boxHoldOutTri": "Pausa (vacío)", "boxHoldOutSq": "Pausa (vacío)", "secUnit": "s", "minUnit": "min", "sessionDur": "Duración de la sesión (1–60 min):", "vibeTitle": "Vibración táctil (ojos cerrados):", "vibeHint": "1 pulso — inhala, 2 — exhala, 3 — pausa", "vibeOff": "Off", "vibeLow": "📳 Suave", "vibeHigh": "📳 Fuerte", "soundTitle": "Señal sonora de cambio de fase:", "sndBell": "Campana", "sndTap": "Clic", "sndTwo": "Dos tonos", "sndChime": "Armonía", "sndOff": "Silencio", "volume": "Volumen de señales", "tickTitle": "Cronómetro tonal (tic cada segundo):", "tickOff": "Off", "tickClick": "Clic", "tickTone": "Tono", "tickHarm": "Armonía", "bgTitle": "Paisaje sonoro sintetizado (Web Audio):", "bgOff": "Off", "bgBinaural": "🎧 Binaural 7.83 Hz", "bgDrone": "Dron 432 Hz", "bgOcean": "Oleaje", "bgBrown": "Ruido marrón", "bgBinauralHint": "Los tonos binaurales requieren auriculares estéreo.", "bgVolume": "Volumen de fondo / música", "musicTitle": "Tu propia música del teléfono:", "musicPick": "🎵 Elegir archivo de audio", "musicClear": "✕ Quitar", "musicNone": "Sin archivo (reproducción 100% local)", "modalTitle": "📖 Guía práctica y Ciencia", "tabPractice": "🧭 Práctica", "tabWave": "🌊 Onda 0.1 Hz", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Artículos", "tabTech": "⚙️ Técnica y Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "En la versión base, los botones Pro aparecen atenuados al 40% para mostrar todo el potencial de la herramienta. Al introducir la clave de activación, todas las funciones se iluminan y desbloquean al instante.", "proFeatureHint": "Esta función se desbloquea en Pro:", "proKeyPlaceholder": "Introduce tu clave de activación...", "proActivateBtn": "Activar Pro", "proActiveBadge": "✅ Versión Pro activa en este dispositivo", "proWrongKey": "Clave incorrecta. Revísala e inténtalo de nuevo.", "proSuccess": "¡Pro activada! Todos los sonidos, sensores e idiomas están disponibles.", "proDeactivateBtn": "Volver a vista Base (prueba)", "proListHtml": "<ul><li><b>Vibración «Fuerte»</b> — impulso táctil más definido;</li><li><b>Generadores sonoros:</b> binaural 7.83 Hz (con auriculares), dron 432 Hz, oleaje respiratorio y ruido marrón;</li><li><b>Cronómetro tonal</b> y modo autónomo <b>«Compás»</b>;</li><li><b>Tu propia música</b> desde el teléfono;</li><li><b>Pulsómetro óptico por cámara</b> integrado en el test de 3 minutos;</li><li><b>Rangos ampliados:</b> Cuadrado hasta 60 s con lados separados y pausas hasta 120 s;</li><li><b>Idiomas adicionales:</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Aviso médico:</strong> Breath Trainer es una herramienta personal de relajación, enfoque y ritmo respiratorio. No es un dispositivo médico, no diagnostica ni trata enfermedades y no sustituye el consejo de un profesional sanitario. Si padeces afecciones cardiovasculares, hipertensión, asma, epilepsia o embarazo, consulta a tu médico antes de practicar retenciones. Detén la sesión de inmediato ante mareos o malestar.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Preparación y colocación del teléfono</h4>\n        <ul>\n          <li><b>Evita interrupciones:</b> silencia las notificaciones antes de empezar para evitar sobresaltos y picos de adrenalina.</li>\n          <li><b>No sostengas el móvil en la mano:</b> la tensión de dedos y antebrazos bloquea de forma refleja hombros y diafragma.</li>\n          <li><b>Con ojos abiertos:</b> apoya el teléfono frente a ti a la altura del pecho o la vista.</li>\n          <li><b>Con ojos cerrados:</b> apóyalo sobre el abdomen bajo o el muslo para sentir la vibración, o activa <b>🌙 Pantalla nocturna</b> para oscurecer por completo la pantalla sin cortar el ritmo.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Postura y respiración «invisible»</h4>\n        <ul>\n          <li><b>Espalda erguida, abdomen blando:</b> siéntate con los pies firmes en el suelo. Deja que el abdomen avance suavemente al inhalar y regrese al exhalar.</li>\n          <li><b>Mandíbula suelta:</b> afloja el rostro y apoya la punta de la lengua en el paladar justo detrás de los dientes superiores para relajar garganta y diafragma.</li>\n          <li><b>Solo por la nariz y sin forzar:</b> no llenes los pulmones al máximo. Respira en silencio, un 10–15% más ligero de lo habitual, alargando suavemente el flujo.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Señales corporales y cierre</h4>\n        <ul>\n          <li><b>Señales de calma:</b> tras 3–5 minutos suele aparecer calor en las manos o un ligero bostezo por dilatación capilar y activación vagal.</li>\n          <li><b>Si notas mareo:</b> estás hiperventilando y reduciendo el CO₂. Haz cada inhalación más suave y discreta.</li>\n          <li><b>Salida tranquila:</b> al finalizar 15–20 minutos, permanece sentado 20–30 segundos con los ojos abiertos antes de levantarte.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Respiración en Resonancia 0.1 Hz</h4>\n        <p>El ritmo base (<b>5.0 s inhala + 5.0 s exhala = 6 ciclos/min</b>) sincroniza tu respiración con las ondas naturales de presión arterial, sin pausas ni cortes, como un péndulo suave.</p>\n        <ul>\n          <li><b>Rango base:</b> 4.5 – 6.5 s (cubre la frecuencia de resonancia de la mayoría de personas). En <b>(Pro)</b> se amplía a 3.0 – 15.0 s.</li>\n          <li><b>Duración ideal:</b> 15–20 minutos diarios para equilibrar el sistema nervioso autónomo.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Test de 3 minutos: tu frecuencia personal</h4>\n        <ol>\n          <li>Elige un paso entre 4.5 y 6.5 s (5.0 s por defecto) y respira con fluidez los primeros 2 minutos.</li>\n          <li>En el tercer minuto observa el calor en tus manos o activa el <b>Pulsómetro óptico por cámara (Pro)</b> apoyando suavemente el dedo sobre cámara y flash.</li>\n          <li>El ritmo con mayor amplitud del pulso (Δ lpm) y máxima comodidad es tu punto de resonancia. Pulsa <b>Aplicar a Resonancia</b>.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Triángulo (Inhala → Exhala → Pausa)</h4>\n        <p>Ciclo de tres tiempos con pausa en vacío. En base permite hasta 30 s; en <b>(Pro)</b> hasta 120 s.</p>\n        <ul>\n          <li><b>Regla práctica:</b> trabaja al 40–50% de tu pausa máxima cómoda.</li>\n          <li><b>Control de calidad:</b> la inhalación siguiente debe seguir siendo silenciosa y tranquila. Si necesitas boquear aire, reduce la pausa.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Cuadrado (Inhala → Retén → Exhala → Pausa)</h4>\n        <p>Respiración simétrica (<i>Box Breathing / Samavritti</i>) ideal para centrar la mente. La base ofrece lados iguales de 2 a 5 s; <b>(Pro)</b> desbloquea hasta 60 s y <b>lados independientes</b>.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Modo «Compás» y Cronómetro tonal (Pro)</h4>\n        <p>El modo <b>Compás (Pro)</b> actúa como un metrónomo acústico puro (0.5 – 2.0 s) sin fases fijas, y el <b>Cronómetro tonal (Pro)</b> marca discretamente cada segundo dentro de fases largas.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. La respiración: el único control manual del sistema nervioso</h4>\n        <p>El ritmo cardíaco, las hormonas del estrés y el tono vascular funcionan en piloto automático bajo el sistema nervioso autónomo. La respiración es la única función vital con doble control: al ralentizarla, activamos barorreceptores y el nervio vago, enviando una señal física directa de seguridad al tronco cerebral.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Cardiología espacial y resonancia de 0.1 Hz</h4>\n        <p>En la medicina espacial, el profesor <b>Roman Baevsky</b> comprobó que un pulso rígido indica agotamiento, mientras que un corazón sano acelera al inhalar y desacelera al exhalar (<b>variabilidad de la frecuencia cardíaca, VFC</b>). Posteriormente, <b>Evgeny Vaschillo</b> y <b>Paul Lehrer</b> demostraron que respirar a 6 ciclos/min (0.1 Hz) entra en resonancia exacta con las <b>ondas de Mayer</b> de presión arterial.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. El efecto Bohr y el papel clave del CO₂</h4>\n        <p>En 1904, el fisiólogo danés <b>Christian Bohr</b> demostró que la hemoglobina necesita suficiente CO₂ en sangre para liberar el oxígeno hacia los tejidos. Respirar demasiado profundo elimina CO₂ en exceso y contrae los capilares. En los años 50, el médico <b>Konstantin Buteyko</b> estructuró la respiración nasal ligera y las pausas suaves para recuperar el equilibrio vascular.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Eco vascular (~7 Hz) y el proyecto Gateway</h4>\n        <p>En 1977, el bioingeniero <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) describió microoscilaciones corporales cercanas a 7 Hz vinculadas a la onda de pulso aórtica, modelo recogido en el informe desclasificado <b>Gateway Process</b> (1983). La fisiología actual separa claramente la resonancia barorrefleja clínicamente probada de <b>0.1 Hz</b> del modelo biomecánico teórico de Bentov (~7 Hz).</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ Autonomía total y cero recopilación de datos</h4>\n        <ul>\n          <li><b>Sin cuentas ni correo electrónico:</b> nunca pedimos tu e-mail, nombre ni registro.</li>\n          <li><b>100% sin conexión (offline):</b> funciona en modo avión, en vuelos o en la montaña. Todo se calcula en tu propio móvil.</li>\n          <li><b>Sin rastreadores ni anuncios:</b> cero analítica oculta y cero envíos a servidores externos. Tus ajustes y tu música permanecen solo en tu dispositivo.</li>\n          <li><b>Sin suscripciones mensuales:</b> la base es gratuita para siempre y Pro se desbloquea una sola vez.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Versión Base y activación Pro</h4>\n        <p>En la versión base, todas las funciones <b>(Pro)</b> aparecen atenuadas al 40% para que conozcas todo el potencial de la app. <b>Al activar Pro, todos los botones se iluminan y quedan operativos al instante</b> sin reinstalar nada.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Motor de audio, vibración y pulsómetro</h4>\n        <ul>\n          <li><b>Síntesis en tiempo real (Web Audio):</b> todos los sonidos, binaurales 7.83 Hz <b>(Pro)</b>, dron 432 Hz <b>(Pro)</b>, oleaje <b>(Pro)</b> y ruido marrón <b>(Pro)</b> se generan sin archivos pesados.</li>\n          <li><b>Tonos binaurales (Pro):</b> requieren <b>auriculares estéreo</b> (216 Hz izquierda / 223.83 Hz derecha).</li>\n          <li><b>Pulsómetro óptico (Pro):</b> analiza la luz capilar localmente en memoria sin grabar vídeo; mide pulso y amplitud VFC, <b>no presión arterial</b>.</li>\n        </ul>\n      </div>\n    "}, "de": {"langName": "Deutsch", "subtitle": "Kohärenzatmung 0.1 Hz & Pranayama", "guideBtn": "Anleitung", "proBadgeTitle": "Pro-Status — zum Freischalten tippen", "branchWave": "🌊 Welle (Kohärenz)", "branchPrana": "🔺 Pranayama & Takt", "modeTest": "Test (3 Min)", "modeResonance": "Kohärenz 0.1 Hz", "modeTriangle": "Dreieck", "modeSquare": "Quadrat", "modeBeat": "Takt", "kickerReady": "BEREIT", "kickerIn": "EINATMEN", "kickerOut": "AUSATMEN", "kickerHoldIn": "HALTEN", "kickerHoldOut": "PAUSE", "kickerBeat": "TAKT", "phaseIn": "Einatmen", "phaseOut": "Ausatmen", "phaseHoldIn": "Halten", "phaseHoldOut": "Pause", "phaseBeat": "Impuls", "statusIdle": "Tippe auf «Start», um zu beginnen", "statusRunning": "Übung läuft — atme ruhig durch die Nase", "statusRunningBeat": "Gleichmäßiger Taktgeber aktiv", "statusPaused": "Pausiert", "statusStopped": "Übung beendet", "statusFinished": "Sitzung abgeschlossen. Bleibe 20–30 Sekunden ruhig sitzen", "statusTestDone": "3-Minuten-Kalibrierung abgeschlossen!", "wakeActive": "☀️ Display bleibt aktiv", "btnNightScreen": "🌙 Nachtbildschirm", "nightTapHint": "Zum Zurückkehren irgendwo tippen", "trTitle": "🎉 3-Minuten-Test abgeschlossen!", "trDesc": "Spüre kurz nach: Wurden deine Hände warm, floss der Atem mühelos und war die Puls-Amplitude maximal?", "trApply": "Für Kohärenz übernehmen", "trClose": "Schließen", "timeElapsed": "Vergangen", "timeTarget": "Sitzungsdauer", "timeTestTarget": "Testdauer", "btnStart": "▶ Start", "btnPause": "Ⅱ Pause", "btnResume": "▶ Weiter", "btnStop": "■ Stopp", "testCalib": "Frequenz-Kalibrierung (3 Min pro Stufe)", "testLimitBadge": "Limit: 03:00", "ppgTitle": "📷 Optischer Kamera-Pulssensor", "ppgHint": "Lege deine Fingerkuppe in Minute 3 sanft auf Rückkamera und Blitz (nicht fest drücken). Misst Puls und HRV-Amplitude, keinen Blutdruck.", "ppgStart": "▶ Puls messen", "ppgStop": "■ Sensor stoppen", "ppgBpm": "Puls", "ppgAmp": "Hub Δ", "ppgHrv": "HRV (RMSSD)", "ppgWait": "Finger ruhig halten...", "ppgErr": "Kamerazugriff verweigert. Bitte Browser-Berechtigung prüfen.", "ppgAutoOff": "Sensor nach 60 s gestoppt, damit der Blitz kühl bleibt.", "settingsTitle": "Phasen-Zeiten", "beatSettingsTitle": "Takt-Intervall (Stoppuhr)", "beatIntervalLabel": "Taktschritt", "linkAll": "🔗 Gleiche Seiten", "linkSep": "🔓 Seiten getrennt", "boxInhale": "Einatmen", "boxHoldIn": "Halten (voll)", "boxExhale": "Ausatmen", "boxHoldOutTri": "Pause (leer)", "boxHoldOutSq": "Pause (leer)", "secUnit": "s", "minUnit": "Min", "sessionDur": "Sitzungsdauer (1–60 Min):", "vibeTitle": "Haptisches Feedback (geschlossene Augen):", "vibeHint": "1 Impuls — Ein, 2 — Aus, 3 — Pause", "vibeOff": "Aus", "vibeLow": "📳 Sanft", "vibeHigh": "📳 Stark", "soundTitle": "Klangsignal beim Phasenwechsel:", "sndBell": "Klangschale", "sndTap": "Klick", "sndTwo": "Zweiklang", "sndChime": "Harmonie", "sndOff": "Stumm", "volume": "Signallautstärke", "tickTitle": "Tonaler Sekundentakt (pro Sekunde):", "tickOff": "Aus", "tickClick": "Klick", "tickTone": "Ton", "tickHarm": "Harmonie", "bgTitle": "Synthetisierte Klangwelten (Web Audio):", "bgOff": "Aus", "bgBinaural": "🎧 Binaural 7.83 Hz", "bgDrone": "432 Hz Drone", "bgOcean": "Atem-Brandung", "bgBrown": "Braunes Rauschen", "bgBinauralHint": "Binaurale Beats funktionieren nur mit Stereokopfhörern.", "bgVolume": "Hintergrund- / Musiklautstärke", "musicTitle": "Eigene Musik vom Gerät:", "musicPick": "🎵 Audiodatei wählen", "musicClear": "✕ Entfernen", "musicNone": "Keine Datei gewählt (100% lokal)", "modalTitle": "📖 Praxis-Leitfaden & Wissenschaft", "tabPractice": "🧭 Praxis", "tabWave": "🌊 0.1 Hz Welle", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Wissen", "tabTech": "⚙️ Technik & Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "In der kostenlosen Basisversion bleiben Pro-Funktionen bei 40% Helligkeit sichtbar, damit du alle Möglichkeiten vorab siehst. Nach Eingabe des Schlüssels leuchten alle Tasten sofort auf.", "proFeatureHint": "Diese Funktion ist Teil von Pro:", "proKeyPlaceholder": "Aktivierungsschlüssel eingeben...", "proActivateBtn": "Pro aktivieren", "proActiveBadge": "✅ Pro ist auf diesem Gerät aktiv", "proWrongKey": "Ungültiger Schlüssel. Bitte Schreibweise prüfen.", "proSuccess": "Pro freigeschaltet! Alle Klangwelten, Sensoren und Sprachen sind aktiv.", "proDeactivateBtn": "Zurück zur Basis-Ansicht (Test)", "proListHtml": "<ul><li><b>Starke Haptik</b> — spürbar kräftigerer Vibrationsimpuls;</li><li><b>Klang-Generatoren:</b> Binaural 7.83 Hz (Kopfhörer), 432 Hz Drone, Atem-Brandung und Braunes Rauschen;</li><li><b>Tonaler Sekundentakt</b> & eigenständiger Modus <b>«Takt»</b>;</li><li><b>Eigene Audiodateien</b> direkt aus dem Telefonspeicher;</li><li><b>Kamera-Pulssensor (PPG)</b> im 3-Minuten-Test;</li><li><b>Erweiterte Bereiche:</b> Quadrat bis 60 s mit getrennten Seiten, Pausen bis 120 s;</li><li><b>Weitere Sprachen:</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Medizinischer Hinweis:</strong> Breath Trainer ist ein persönliches Werkzeug für Entspannung, Fokus und Atemführung. Es ist kein Medizinprodukt, dient weder Diagnose noch Therapie und ersetzt keine ärztliche Beratung. Bei Herz-Kreislauf-Erkrankungen, Bluthochdruck, Asthma, Epilepsie oder Schwangerschaft konsultiere vor Atempausen bitte eine Ärztin oder einen Arzt. Bei Schwindel sofort beenden.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Vorbereitung & Smartphone-Position</h4>\n        <ul>\n          <li><b>Störungen stummschalten:</b> Benachrichtigungen vor dem Start deaktivieren, damit plötzliche Töne keine Stressreaktion auslösen.</li>\n          <li><b>Hände frei lassen:</b> Das Festhalten des Telefons verspannt unbewusst Schultern und Zwerchfell.</li>\n          <li><b>Mit offenen Augen:</b> Gerät auf Brust- oder Augenhöhe abstellen.</li>\n          <li><b>Mit geschlossenen Augen:</b> Lege das Handy für Haptik-Signale auf Unterbauch oder Oberschenkel — oder aktiviere den <b>🌙 Nachtbildschirm</b>, damit das Display schwarz bleibt, während Vibration und Ton weiterlaufen.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Haltung & «unsichtbares Atmen»</h4>\n        <ul>\n          <li><b>Aufrechte Wirbelsäule, weicher Bauch:</b> Füße flach am Boden, Bauch hebt sich beim Einatmen ganz ohne Zwang.</li>\n          <li><b>Lockerer Kiefer:</b> Zungenspitze sanft hinter die oberen Schneidezähne legen — das entspannt Kehlkopf und Zwerchfell reflektorisch.</li>\n          <li><b>Nur durch die Nase, nicht überatmen:</b> Atme leise und eher 10–15% leichter als gewohnt, sanft gedehnt auf die gewählten Sekunden.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Körpersignale & Abschluss</h4>\n        <ul>\n          <li><b>Entspannungszeichen:</b> Warme Finger nach 3–5 Minuten zeigen eine erweiterte Mikrozirkulation und Aktivierung des Vagusnervs an.</li>\n          <li><b>Bei leichtem Schwindel:</b> Du atmest zu tief und verlierst zu viel CO₂ — atme noch feiner und leiser.</li>\n          <li><b>Ruhiges Ausklingen:</b> Bleibe nach 15–20 Minuten noch 20–30 Sekunden ruhig sitzen, bevor du aufstehst.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Kohärenzatmung (0.1 Hz)</h4>\n        <p>Der Grundrhythmus (<b>5.0 s Ein + 5.0 s Aus = 6 Zyklen/Min</b>) synchronisiert den Atem mit den natürlichen Blutdruckwellen — völlig fließend ohne Pausen.</p>\n        <ul>\n          <li><b>Basisbereich:</b> 4.5 – 6.5 s (deckt den Resonanzpunkt fast aller Erwachsenen ab). <b>Pro</b> erweitert auf 3.0 – 15.0 s.</li>\n          <li><b>Empfehlung:</b> 15–20 Minuten täglich für spürbare vegetative Regeneration.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>3-Minuten-Resonanztest</h4>\n        <ol>\n          <li>Wähle eine Stufe zwischen 4.5 und 6.5 s und atme 2 Minuten ruhig ein.</li>\n          <li>Nutze in Minute 3 dein Körpergefühl oder den <b>Optischen Kamera-Pulssensor (Pro)</b>, indem du die Fingerkuppe leicht auf Kamera und Blitz legst.</li>\n          <li>Die Stufe mit dem größten Pulshub (Δ bpm) ohne Luftnot ist deine persönliche Resonanzfrequenz.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Dreieck (Ein → Aus → Pause)</h4>\n        <p>Dreiphasen-Zyklus mit sanfter Pause nach dem Ausatmen (Basis bis 30 s, <b>Pro</b> bis 120 s). Trainiere bei 40–50% deiner maximal angenehmen Pause — der nächste Atemzug muss leise und ruhig bleiben.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Quadrat (Box Breathing)</h4>\n        <p>Vier gleichmäßige Phasen zur schnellen mentalen Zentrierung. Basis: 2–5 s synchron; <b>Pro</b>: bis 60 s und <b>getrennt einstellbare Seiten</b>. Kehlkopf beim Halten stets entspannt lassen.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Modus «Takt» & Tonaler Sekundentakt (Pro)</h4>\n        <p><b>Takt (Pro)</b> arbeitet als reines akustisches Metronom (0.5 – 2.0 s) ohne feste Atemvorgabe; der <b>Tonale Sekundentakt (Pro)</b> gibt bei langen Phasen eine dezente Sekundenzählung.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Der Atem als einziges manuelles Stellrad des Nervensystems</h4>\n        <p>Herzschlag, Hormonausschüttung und Gefäßspannung laufen im autonomen Nervensystem automatisch ab. Nur die Atmung besitzt eine manuelle Brücke: Langsames, weiches Atmen stimuliert Barorezeptoren und den Vagusnerv und sendet ein klares physiologisches Sicherheitssignal an den Hirnstamm.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Raumfahrtmedizin & 0.1-Hz-Resonanz</h4>\n        <p>Der Raumfahrtkardiologe <b>Roman Baevsky</b> zeigte, dass ein starrer Metronom-Puls Erschöpfung bedeutet, während ein gesundes Herz mit dem Atem schwingt (<b>Herzratenvariabilität, HRV</b>). <b>Evgeny Vaschillo</b> und <b>Paul Lehrer</b> wiesen nach, dass 6 Atemzüge/Min (0.1 Hz) mit den 10-Sekunden-<b>Mayer-Wellen</b> des Blutdrucks in maximale Resonanz treten.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. Der Bohr-Effekt und die Schlüsselrolle von CO₂</h4>\n        <p>1904 bewies <b>Christian Bohr</b>, dass Hämoglobin Sauerstoff nur bei ausreichendem CO₂-Partialdruck an das Gewebe abgibt. Übermäßiges Tiefatmen senkt CO₂ und verengt Kapillaren. <b>Konstantin Buteyko</b> entwickelte daraus das sanfte, reduzierte Nasenatmen mit kurzen Pausen.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Gefäß-Echo (~7 Hz) & das Gateway-Projekt</h4>\n        <p>1977 beschrieb der Biomedizin-Ingenieur <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) feine ~7-Hz-Mikroschwingungen durch reflektierte Aorten-Pulswellen, später zitiert im <b>Gateway-Process</b>-Bericht (1983). Die moderne Forschung trennt klar die klinisch belegte <b>0.1-Hz-Baroreflex-Resonanz</b> von Bentovs theoretischem 7-Hz-Modell.</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ 100% Offline & Null Datensammlung</h4>\n        <ul>\n          <li><b>Kein Konto, keine E-Mail:</b> Keine Registrierung, kein Login, keine persönlichen Angaben.</li>\n          <li><b>Vollständig autonom & offline:</b> Läuft im Flugmodus, im Zug oder in den Bergen — alle Töne und Animationen entstehen lokal im Gerät.</li>\n          <li><b>Keine Tracker, keine Werbung:</b> Deine Einstellungen, eigene Musik und Messwerte verlassen niemals dein Smartphone.</li>\n          <li><b>Kein Abo-Modell:</b> Die Basis bleibt dauerhaft frei, Pro wird einmalig freigeschaltet.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Basis-Ansicht & Pro-Freischaltung</h4>\n        <p>Alle <b>(Pro)</b>-Tasten sind in der Basisversion bei 40% Helligkeit sichtbar, damit alles transparent bleibt. <b>Mit Aktivierung von Pro leuchten sofort alle Tasten voll auf und sind direkt einsatzbereit</b>.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Klangsynthese, Haptik & Kamerasensor</h4>\n        <ul>\n          <li><b>Web Audio Synthese:</b> Alle Signale, Binaural 7.83 Hz <b>(Pro)</b>, 432 Hz Drone <b>(Pro)</b>, Brandung <b>(Pro)</b> und Braunes Rauschen <b>(Pro)</b> werden ohne Audiodateien in Echtzeit berechnet.</li>\n          <li><b>Binaural 7.83 Hz (Pro):</b> Benötigt zwingend <b>Stereokopfhörer</b> (216 Hz links / 223.83 Hz rechts).</li>\n          <li><b>Optischer Pulssensor (Pro):</b> Arbeitet lokal im Arbeitsspeicher ohne Videoaufnahme. Misst Puls & HRV-Hub, <b>keinen Blutdruck</b>.</li>\n        </ul>\n      </div>\n    "}, "fr": {"langName": "Français", "subtitle": "Cohérence cardiaque 0.1 Hz & Pranayama", "guideBtn": "Guide", "proBadgeTitle": "Statut Pro — appuyer pour activer", "branchWave": "🌊 Onde (Cohérence)", "branchPrana": "🔺 Pranayama & Pulsation", "modeTest": "Test (3 min)", "modeResonance": "Cohérence 0.1 Hz", "modeTriangle": "Triangle", "modeSquare": "Carré", "modeBeat": "Cadence", "kickerReady": "PRÊT", "kickerIn": "INSPIRER", "kickerOut": "EXPIRER", "kickerHoldIn": "RETENIR", "kickerHoldOut": "PAUSE", "kickerBeat": "CADENCE", "phaseIn": "Inspiration", "phaseOut": "Expiration", "phaseHoldIn": "Rétention", "phaseHoldOut": "Pause", "phaseBeat": "Battement", "statusIdle": "Appuyez sur « Démarrer » pour commencer", "statusRunning": "Séance en cours — respirez doucement par le nez", "statusRunningBeat": "Métronome de cadence actif", "statusPaused": "En pause", "statusStopped": "Séance arrêtée", "statusFinished": "Séance terminée. Restez assis calmement 20–30 secondes", "statusTestDone": "Test de 3 minutes terminé !", "wakeActive": "☀️ Écran maintenu actif", "btnNightScreen": "🌙 Écran nuit", "nightTapHint": "Touchez n'importe où pour rallumer l'affichage", "trTitle": "🎉 Test de 3 minutes terminé !", "trDesc": "Observez vos sensations : mains plus chaudes, souffle fluide sans essoufflement et amplitude cardiaque maximale ?", "trApply": "Appliquer en Cohérence", "trClose": "Fermer", "timeElapsed": "Écoulé", "timeTarget": "Durée cible", "timeTestTarget": "Durée du test", "btnStart": "▶ Démarrer", "btnPause": "Ⅱ Pause", "btnResume": "▶ Reprendre", "btnStop": "■ Arrêter", "testCalib": "Calibrage de fréquence (3 min par palier)", "testLimitBadge": "Limite : 03:00", "ppgTitle": "📷 Capteur de pouls optique (caméra)", "ppgHint": "Posez délicatement le bout du doigt sur la caméra arrière et le flash à la 3e minute (sans appuyer fort). Mesure le pouls et la VFC, pas la tension artérielle.", "ppgStart": "▶ Mesurer le pouls", "ppgStop": "■ Arrêter le capteur", "ppgBpm": "Pouls", "ppgAmp": "Amplitude Δ", "ppgHrv": "VFC (RMSSD)", "ppgWait": "Gardez le doigt immobile...", "ppgErr": "Accès caméra refusé. Vérifiez les autorisations du navigateur.", "ppgAutoOff": "Capteur arrêté après 60 s pour éviter l'échauffement du flash.", "settingsTitle": "Réglage des phases", "beatSettingsTitle": "Intervalle de cadence", "beatIntervalLabel": "Pas de cadence", "linkAll": "🔗 Côtés égaux", "linkSep": "🔓 Côtés séparés", "boxInhale": "Inspiration", "boxHoldIn": "Rétention (plein)", "boxExhale": "Expiration", "boxHoldOutTri": "Pause (vide)", "boxHoldOutSq": "Pause (vide)", "secUnit": "s", "minUnit": "min", "sessionDur": "Durée de séance (1–60 min) :", "vibeTitle": "Retour haptique (yeux fermés) :", "vibeHint": "1 impulsion — inspir, 2 — expir, 3 — pause", "vibeOff": "Désact.", "vibeLow": "📳 Doux", "vibeHigh": "📳 Fort", "soundTitle": "Signal sonore de transition :", "sndBell": "Clochette", "sndTap": "Clic", "sndTwo": "Deux tons", "sndChime": "Harmonie", "sndOff": "Silencieux", "volume": "Volume des signaux", "tickTitle": "Chronomètre tonal (battement par seconde) :", "tickOff": "Désact.", "tickClick": "Clic", "tickTone": "Ton", "tickHarm": "Harmonie", "bgTitle": "Ambiances synthétisées (Web Audio) :", "bgOff": "Désact.", "bgBinaural": "🎧 Binaural 7.83 Hz", "bgDrone": "Bourdon 432 Hz", "bgOcean": "Ressac", "bgBrown": "Bruit brun", "bgBinauralHint": "Les sons binauraux nécessitent un casque stéréo.", "bgVolume": "Volume ambiance / musique", "musicTitle": "Votre propre musique locale :", "musicPick": "🎵 Choisir un fichier audio", "musicClear": "✕ Retirer", "musicNone": "Aucun fichier choisi (lecture 100% locale)", "modalTitle": "📖 Guide pratique & Sciences", "tabPractice": "🧭 Pratique", "tabWave": "🌊 Cohérence", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Articles", "tabTech": "⚙️ Technique & Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "En version de base, les boutons Pro restent visibles à 40% de luminosité pour vous présenter l'ensemble des possibilités. Dès l'activation de Pro, tous les boutons s'illuminent instantanément.", "proFeatureHint": "Cette option se débloque avec Pro :", "proKeyPlaceholder": "Saisissez votre clé d'activation...", "proActivateBtn": "Activer Pro", "proActiveBadge": "✅ Version Pro active sur cet appareil", "proWrongKey": "Clé invalide. Vérifiez la saisie et réessayez.", "proSuccess": "Pro activée ! Tous les sons, capteurs et langues sont débloqués.", "proDeactivateBtn": "Revenir à l'aperçu Base (test)", "proListHtml": "<ul><li><b>Vibration « Fort »</b> — repère tactile plus net ;</li><li><b>Paysages sonores :</b> Binaural 7.83 Hz (casque), Bourdon 432 Hz, Ressac respiratoire et Bruit brun ;</li><li><b>Chronomètre tonal</b> et mode autonome <b>« Cadence »</b> ;</li><li><b>Musique personnelle</b> depuis votre téléphone ;</li><li><b>Capteur de pouls caméra (PPG)</b> pour le test 3 minutes ;</li><li><b>Plages étendues :</b> Carré jusqu'à 60 s avec côtés séparés, pauses jusqu'à 120 s ;</li><li><b>Langues supplémentaires :</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Avertissement médical :</strong> Breath Trainer est un outil personnel de relaxation, de concentration et de guidage respiratoire. Ce n'est pas un dispositif médical ; il ne diagnostique ni ne traite aucune pathologie et ne remplace pas un avis médical. En cas de trouble cardiovasculaire, d'hypertension, d'asthme, d'épilepsie ou de grossesse, consultez un médecin avant toute apnée. Arrêtez immédiatement en cas de vertige.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Installation et placement du téléphone</h4>\n        <ul>\n          <li><b>Coupez les notifications :</b> une alerte soudaine suffit à déclencher un pic d'adrénaline qui rompt la détente.</li>\n          <li><b>Ne tenez pas le téléphone en main :</b> la crispation des doigts fige par réflexe les épaules et le diaphragme.</li>\n          <li><b>Yeux ouverts :</b> posez le smartphone face à vous, à hauteur du regard ou du buste.</li>\n          <li><b>Yeux fermés :</b> posez-le sur le bas-ventre ou la cuisse pour sentir les vibrations, ou activez l'<b>🌙 Écran nuit</b> pour un écran noir total sans couper la vibration.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Posture et souffle « silencieux »</h4>\n        <ul>\n          <li><b>Dos droit, ventre souple :</b> pieds à plat, laissez le ventre se gonfler librement à l'inspiration puis redescendre sans forcer.</li>\n          <li><b>Mâchoire détendue :</b> posez la pointe de la langue juste derrière les incisives supérieures pour relâcher la gorge et le diaphragme.</li>\n          <li><b>Uniquement par le nez :</b> évitez de trop remplir les poumons. Respirez en silence, environ 10–15% plus légèrement que d'habitude, en étirant le flux sur la durée choisie.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Repères corporels et sortie</h4>\n        <ul>\n          <li><b>Signes d'apaisement :</b> au bout de 3–5 minutes, une chaleur douce dans les mains ou un bâillement témoigne de l'activation vagale.</li>\n          <li><b>En cas d'étourdissement :</b> vous respirez trop profondément (baisse de CO₂). Rendez l'inspiration plus douce et plus fine.</li>\n          <li><b>Retour en douceur :</b> après 15–20 minutes, restez assis 20–30 secondes yeux ouverts avant de vous lever.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Cohérence cardiaque (0.1 Hz)</h4>\n        <p>Le rythme standard (<b>5.0 s inspir + 5.0 s expir = 6 cycles/min</b>) accorde le souffle aux oscillations naturelles de la pression artérielle, sans pause ni rupture, tel un pendule régulier.</p>\n        <ul>\n          <li><b>Plage de base :</b> 4.5 – 6.5 s (zone de résonance de la grande majorité des adultes). <b>Pro</b> ouvre de 3.0 à 15.0 s.</li>\n          <li><b>Pratique idéale :</b> 15–20 minutes par jour (ou 3 fois 5 minutes) pour un équilibre autonome durable.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Test 3 minutes : trouver votre fréquence propre</h4>\n        <ol>\n          <li>Choisissez un palier entre 4.5 et 6.5 s et respirez calmement durant les 2 premières minutes.</li>\n          <li>À la 3e minute, ressentez la chaleur des mains ou lancez le <b>Capteur de pouls caméra (Pro)</b> en posant doucement le doigt sur l'objectif et le flash.</li>\n          <li>Le palier offrant la plus grande amplitude cardiaque (Δ bpm) sans inconfort correspond à votre fréquence de résonance personnelle.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Triangle (Inspir → Expir → Pause)</h4>\n        <p>Cycle en trois temps avec pause poumons vides (jusqu'à 30 s en base, jusqu'à 120 s en <b>Pro</b>). Travaillez à 40–50% de votre apnée confortable : l'inspiration suivante doit rester calme et silencieuse.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Respiration carrée (Samavritti)</h4>\n        <p>Quatre temps égaux pour stabiliser rapidement l'attention. Base : 2 à 5 s synchronisés ; <b>Pro</b> : jusqu'à 60 s et <b>réglage indépendant de chaque côté</b>.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Mode « Cadence » et Chronomètre tonal (Pro)</h4>\n        <p><b>Cadence (Pro)</b> offre un métronome sonore pur (0.5 – 2.0 s) sans phases imposées ; le <b>Chronomètre tonal (Pro)</b> marque discrètement chaque seconde durant les longues phases.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Le souffle, seule commande manuelle du système nerveux</h4>\n        <p>Rythme cardiaque, cortisol et tonus vasculaire fonctionnent en mode automatique. La respiration est l'unique fonction autonome pilotable volontairement : ralentir le souffle active les barorécepteurs et le nerf vague, envoyant un signal biologique direct de sécurité au tronc cérébral.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Cardiologie spatiale et cohérence à 0.1 Hz</h4>\n        <p>En médecine spatiale, <b>Roman Baevsky</b> a montré qu'un pouls trop régulier trahit la fatigue, tandis qu'un cœur en bonne santé accélère à l'inspiration et ralentit à l'expiration (<b>variabilité de la fréquence cardiaque, VFC</b>). <b>Evgeny Vaschillo</b> et <b>Paul Lehrer</b> ont établi qu'à 6 cycles/min (0.1 Hz), le souffle entre en résonance directe avec les <b>ondes de Mayer</b>.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. L'effet Bohr et le rôle essentiel du CO₂</h4>\n        <p>En 1904, <b>Christian Bohr</b> a démontré que l'hémoglobine a besoin de CO₂ sanguin pour libérer son oxygène vers les tissus. Hyperventiler chasse trop de CO₂ et contracte les capillaires. <b>Konstantin Buteyko</b> a structuré la respiration nasale légère et les pauses douces pour préserver cet équilibre.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Écho vasculaire (~7 Hz) et projet Gateway</h4>\n        <p>En 1977, l'ingénieur biomédical <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) a modélisé des micro-oscillations corporelles autour de 7 Hz liées à l'onde pulsatile aortique, reprises dans le rapport <b>Gateway Process</b> (1983). La physiologie moderne distingue nettement la résonance baroréflexe cliniquement validée (<b>0.1 Hz</b>) de ce modèle théorique (~7 Hz).</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ Autonomie totale et zéro collecte de données</h4>\n        <ul>\n          <li><b>Sans compte ni e-mail :</b> aucune inscription, aucune adresse demandée.</li>\n          <li><b>100% hors ligne :</b> fonctionne en mode avion, en voyage ou sans réseau. Tous les sons et graphismes sont produits localement.</li>\n          <li><b>Zéro traceur, zéro publicité :</b> vos réglages, vos musiques et vos mesures restent exclusivement dans la mémoire de votre téléphone.</li>\n          <li><b>Sans abonnement :</b> la base est gratuite sans limite de temps ; Pro se débloque une seule fois.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Version Base et activation Pro</h4>\n        <p>En mode de base, les commandes <b>(Pro)</b> apparaissent atténuées à 40% pour une transparence complète. <b>Dès l'activation de Pro, tous les boutons s'éclairent et deviennent immédiatement actifs</b> sans réinstallation.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Synthèse audio, haptique et capteur optique</h4>\n        <ul>\n          <li><b>Web Audio en temps réel :</b> signaux, Binaural 7.83 Hz <b>(Pro)</b>, Bourdon 432 Hz <b>(Pro)</b>, Ressac <b>(Pro)</b> et Bruit brun <b>(Pro)</b> sans aucun fichier audio téléchargé.</li>\n          <li><b>Binaural 7.83 Hz (Pro) :</b> exige impérativement un <b>casque stéréo</b> (216 Hz gauche / 223.83 Hz droite).</li>\n          <li><b>Capteur optique (Pro) :</b> analyse la luminosité capillaire en mémoire vive sans enregistrer de vidéo ; mesure le pouls et la VFC, <b>jamais la tension artérielle</b>.</li>\n        </ul>\n      </div>\n    "}, "pt": {"langName": "Português", "subtitle": "Coerência 0.1 Hz & Pranayama", "guideBtn": "Guia", "proBadgeTitle": "Status Pro — toque para ativar", "branchWave": "🌊 Onda (Coerência)", "branchPrana": "🔺 Pranayama & Pulso", "modeTest": "Teste (3 min)", "modeResonance": "Coerência 0.1 Hz", "modeTriangle": "Triângulo", "modeSquare": "Quadrado", "modeBeat": "Compasso", "kickerReady": "PRONTO", "kickerIn": "INSPIRE", "kickerOut": "EXPIRE", "kickerHoldIn": "SEGURE", "kickerHoldOut": "PAUSA", "kickerBeat": "COMPASSO", "phaseIn": "Inspirar", "phaseOut": "Expirar", "phaseHoldIn": "Retenção", "phaseHoldOut": "Pausa", "phaseBeat": "Ritmo", "statusIdle": "Toque em «Iniciar» para começar", "statusRunning": "Sessão ativa — respire suavemente pelo nariz", "statusRunningBeat": "Metrônomo de compasso ativo", "statusPaused": "Pausado", "statusStopped": "Sessão encerrada", "statusFinished": "Sessão concluída. Fique em calma por 20–30 segundos", "statusTestDone": "Teste de 3 minutos concluído!", "wakeActive": "☀️ Tela mantida ativa", "btnNightScreen": "🌙 Tela noturna", "nightTapHint": "Toque em qualquer lugar para voltar", "trTitle": "🎉 Teste de 3 minutos concluído!", "trDesc": "Observe seu corpo: as mãos aqueceram, a respiração fluiu sem esforço e a oscilação do pulso atingiu o pico?", "trApply": "Aplicar na Coerência", "trClose": "Fechar", "timeElapsed": "Decorrido", "timeTarget": "Duração", "timeTestTarget": "Tempo do teste", "btnStart": "▶ Iniciar", "btnPause": "Ⅱ Pausar", "btnResume": "▶ Continuar", "btnStop": "■ Parar", "testCalib": "Calibração de frequência (3 min por passo)", "testLimitBadge": "Limite: 03:00", "ppgTitle": "📷 Sensor óptico de pulso (câmera)", "ppgHint": "Encoste suavemente a ponta do dedo na câmera traseira e no flash no 3º minuto (sem apertar). Mede pulso e amplitude VFC, não pressão arterial.", "ppgStart": "▶ Medir pulso", "ppgStop": "■ Parar sensor", "ppgBpm": "Pulso", "ppgAmp": "Amplitude Δ", "ppgHrv": "VFC (RMSSD)", "ppgWait": "Mantenha o dedo parado...", "ppgErr": "Acesso à câmera negado. Verifique as permissões do navegador.", "ppgAutoOff": "Sensor parado após 60 s para evitar aquecimento do flash.", "settingsTitle": "Ajuste das fases", "beatSettingsTitle": "Intervalo do compasso", "beatIntervalLabel": "Passo do compasso", "linkAll": "🔗 Lados iguais", "linkSep": "🔓 Lados independentes", "boxInhale": "Inspirar", "boxHoldIn": "Reter (cheio)", "boxExhale": "Expirar", "boxHoldOutTri": "Pausa (vazio)", "boxHoldOutSq": "Pausa (vazio)", "secUnit": "s", "minUnit": "min", "sessionDur": "Duração da sessão (1–60 min):", "vibeTitle": "Vibração tátil (olhos fechados):", "vibeHint": "1 pulso — inspira, 2 — expira, 3 — pausa", "vibeOff": "Off", "vibeLow": "📳 Suave", "vibeHigh": "📳 Forte", "soundTitle": "Sinal sonoro na troca de fase:", "sndBell": "Sino", "sndTap": "Clique", "sndTwo": "Dois tons", "sndChime": "Harmonia", "sndOff": "Silêncio", "volume": "Volume dos sinais", "tickTitle": "Cronômetro tonal (batida por segundo):", "tickOff": "Off", "tickClick": "Clique", "tickTone": "Tom", "tickHarm": "Harmonia", "bgTitle": "Paisagens sonoras (Web Audio):", "bgOff": "Off", "bgBinaural": "🎧 Binaural 7.83 Hz", "bgDrone": "Drone 432 Hz", "bgOcean": "Maré", "bgBrown": "Ruído marrom", "bgBinauralHint": "Batidas binaurais exigem fones de ouvido estéreo.", "bgVolume": "Volume do fundo / música", "musicTitle": "Sua música do celular:", "musicPick": "🎵 Escolher arquivo de áudio", "musicClear": "✕ Remover", "musicNone": "Nenhum arquivo escolhido (toca 100% local)", "modalTitle": "📖 Guia prático & Ciência", "tabPractice": "🧭 Prática", "tabWave": "🌊 Onda 0.1 Hz", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Artigos", "tabTech": "⚙️ Técnica & Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "Na versão gratuita, os controles Pro aparecem com 40% de brilho para mostrar todo o potencial do app. Ao inserir a chave de ativação, todos os botões acendem e são liberados na hora.", "proFeatureHint": "Este recurso é liberado no Pro:", "proKeyPlaceholder": "Digite a chave de ativação...", "proActivateBtn": "Ativar Pro", "proActiveBadge": "✅ Versão Pro ativa neste dispositivo", "proWrongKey": "Chave inválida. Verifique e tente novamente.", "proSuccess": "Pro ativado! Todos os sons, sensores e idiomas estão liberados.", "proDeactivateBtn": "Voltar à prévia Base (teste)", "proListHtml": "<ul><li><b>Vibração «Forte»</b> — pulso tátil reforçado;</li><li><b>Geradores sonoros:</b> Binaural 7.83 Hz (fones), Drone 432 Hz, Maré respiratória e Ruído marrom;</li><li><b>Cronômetro tonal</b> e modo independente <b>«Compasso»</b>;</li><li><b>Sua própria música</b> direto do aparelho;</li><li><b>Sensor de pulso pela câmera (PPG)</b> no teste de 3 minutos;</li><li><b>Faixas estendidas:</b> Quadrado até 60 s com lados separados e pausas até 120 s;</li><li><b>Idiomas extras:</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Aviso médico:</strong> Breath Trainer é uma ferramenta pessoal para relaxamento, foco e ritmo respiratório. Não é um dispositivo médico, não diagnostica nem trata doenças e não substitui orientação médica. Em caso de problemas cardíacos, hipertensão, asma, epilepsia ou gravidez, consulte um médico antes de praticar retenções. Interrompa imediatamente se sentir tontura.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Preparação e posição do celular</h4>\n        <ul>\n          <li><b>Silencie notificações:</b> alertas inesperados geram adrenalina e quebram o relaxamento.</li>\n          <li><b>Não segure o aparelho nas mãos:</b> a tensão dos dedos trava ombros e diafragma.</li>\n          <li><b>Olhos abertos:</b> apoie o celular à sua frente na altura do peito ou dos olhos.</li>\n          <li><b>Olhos fechados:</b> apoie no abdômen baixo ou na coxa para sentir a vibração, ou ative a <b>🌙 Tela noturna</b> para manter o visor totalmente preto sem pausar o ritmo.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Postura e respiração «silenciosa»</h4>\n        <ul>\n          <li><b>Coluna alinhada, abdômen solto:</b> pés apoiados no chão, deixando o abdômen expandir naturalmente ao inspirar.</li>\n          <li><b>Mandíbula relaxada:</b> repouse a ponta da língua atrás dos dentes superiores para soltar garganta e diafragma.</li>\n          <li><b>Só pelo nariz, sem exagerar:</b> respire leve e silencioso (10–15% menor que o normal), alongando o fluxo com suavidade.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Sinais do corpo e encerramento</h4>\n        <ul>\n          <li><b>Sinais de calma:</b> mãos aquecendo em 3–5 minutos ou leve bocejo indicam ativação do nervo vago.</li>\n          <li><b>Se sentir tontura:</b> você está respirando fundo demais e reduzindo o CO₂. Deixe a inspiração ainda mais suave.</li>\n          <li><b>Transição calma:</b> ao fim de 15–20 minutos, permaneça sentado 20–30 segundos antes de se levantar.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Respiração de Coerência (0.1 Hz)</h4>\n        <p>O ritmo padrão (<b>5.0 s inspira + 5.0 s expira = 6 ciclos/min</b>) sincroniza a respiração às ondas naturais de pressão arterial, fluindo sem pausas como um pêndulo.</p>\n        <ul>\n          <li><b>Faixa base:</b> 4.5 – 6.5 s (cobre o ponto de ressonância da maioria dos adultos). <b>Pro</b> libera 3.0 – 15.0 s.</li>\n          <li><b>Duração ideal:</b> 15–20 minutos por dia para recuperação autonômica profunda.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Teste de 3 minutos</h4>\n        <ol>\n          <li>Escolha um passo entre 4.5 e 6.5 s e respire suavemente nos primeiros 2 minutos.</li>\n          <li>No 3º minuto, observe o calor nas mãos ou use o <b>Sensor óptico de pulso (Pro)</b> encostando levemente o dedo na câmera e flash.</li>\n          <li>O passo com maior oscilação do pulso (Δ bpm) sem falta de ar é sua frequência pessoal.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Triângulo (Inspira → Expira → Pausa)</h4>\n        <p>Ciclo de três fases com pausa de pulmões vazios (até 30 s na base, até 120 s no <b>Pro</b>). Pratique a 40–50% da sua pausa máxima confortável — a inspiração seguinte deve ser silenciosa.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Respiração Quadrada (Box Breathing)</h4>\n        <p>Quatro tempos equilibrados para foco imediato. Base: 2–5 s iguais; <b>Pro</b>: até 60 s e <b>lados independentes</b>.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Modo «Compasso» e Cronômetro tonal (Pro)</h4>\n        <p><b>Compasso (Pro)</b> funciona como metrônomo puro (0.5 – 2.0 s) sem fases fixas, e o <b>Cronômetro tonal (Pro)</b> marca discretamente cada segundo dentro de fases longas.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. A respiração: o único controle manual do sistema nervoso</h4>\n        <p>Batimentos cardíacos e vasos operam no piloto automático. A respiração é a única ponte voluntária: desacelerar o ritmo aciona barorreceptores e o nervo vago, enviando um sinal biológico direto de segurança ao tronco cerebral.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Cardiologia espacial e ressonância de 0.1 Hz</h4>\n        <p>Na medicina espacial, <b>Roman Baevsky</b> mostrou que um pulso rígido indica esgotamento, enquanto um coração saudável acelera ao inspirar e desacelera ao expirar (<b>variabilidade da frequência cardíaca, VFC</b>). <b>Evgeny Vaschillo</b> e <b>Paul Lehrer</b> provaram que 6 ciclos/min (0.1 Hz) entram em ressonância direta com as <b>ondas de Mayer</b>.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. Efeito Bohr e a importância do CO₂</h4>\n        <p>Em 1904, <b>Christian Bohr</b> demonstrou que a hemoglobina precisa de CO₂ no sangue para liberar oxigênio às células. Respirar pesado demais reduz o CO₂ e contrai capilares. <b>Konstantin Buteyko</b> sistematizou a respiração nasal leve e pausas suaves para restaurar o fluxo sanguíneo.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Eco vascular (~7 Hz) e o projeto Gateway</h4>\n        <p>Em 1977, <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) descreveu micro-oscilações corporais de ~7 Hz ligadas à onda de pulso aórtica, analisadas no relatório <b>Gateway Process</b> (1983). A fisiologia atual distingue a ressonância barorreflexa comprovada (<b>0.1 Hz</b>) desse modelo biomecânico teórico (~7 Hz).</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ Autonomia total e zero coleta de dados</h4>\n        <ul>\n          <li><b>Sem conta nem e-mail:</b> nunca pedimos cadastro, nome ou endereço de e-mail.</li>\n          <li><b>100% offline no celular:</b> funciona no modo avião ou sem internet. Tudo é gerado no próprio aparelho.</li>\n          <li><b>Zero rastreadores e anúncios:</b> ajustes, músicas locais e leituras jamais saem do seu smartphone.</li>\n          <li><b>Sem mensalidades:</b> base gratuita para sempre; Pro com desbloqueio único.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Versão Base e desbloqueio Pro</h4>\n        <p>Na versão base, os recursos <b>(Pro)</b> ficam visíveis com 40% de brilho. <b>Ao ativar o Pro, todos os botões acendem e passam a funcionar imediatamente</b> sem reinstalar.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Áudio, vibração e sensor óptico</h4>\n        <ul>\n          <li><b>Síntese Web Audio:</b> sinais, Binaural 7.83 Hz <b>(Pro)</b>, Drone 432 Hz <b>(Pro)</b>, Maré <b>(Pro)</b> e Ruído marrom <b>(Pro)</b> são gerados ao vivo sem baixar arquivos.</li>\n          <li><b>Binaural 7.83 Hz (Pro):</b> exige <b>fones estéreo</b> (216 Hz esq. / 223.83 Hz dir.).</li>\n          <li><b>Sensor óptico (Pro):</b> analisa a luz capilar apenas na memória local sem gravar vídeo; mede pulso e VFC, <b>não pressão arterial</b>.</li>\n        </ul>\n      </div>\n    "}, "it": {"langName": "Italiano", "subtitle": "Coerenza cardiaca 0.1 Hz & Pranayama", "guideBtn": "Guida", "proBadgeTitle": "Stato Pro — tocca per attivare", "branchWave": "🌊 Onda (Coerenza)", "branchPrana": "🔺 Pranayama & Battito", "modeTest": "Test (3 min)", "modeResonance": "Coerenza 0.1 Hz", "modeTriangle": "Triangolo", "modeSquare": "Quadrato", "modeBeat": "Battito", "kickerReady": "PRONTO", "kickerIn": "INSPIRA", "kickerOut": "ESPIRA", "kickerHoldIn": "TRATTIENI", "kickerHoldOut": "PAUSA", "kickerBeat": "BATTITO", "phaseIn": "Inspira", "phaseOut": "Espira", "phaseHoldIn": "Apnea piena", "phaseHoldOut": "Pausa", "phaseBeat": "Ritmo", "statusIdle": "Tocca «Avvia» per iniziare la sessione", "statusRunning": "Pratica in corso — respira piano dal naso", "statusRunningBeat": "Metronomo di battito attivo", "statusPaused": "In pausa", "statusStopped": "Sessione interrotta", "statusFinished": "Sessione completata. Resta fermo in calma per 20–30 secondi", "statusTestDone": "Test di 3 minuti completato!", "wakeActive": "☀️ Schermo attivo", "btnNightScreen": "🌙 Schermo notte", "nightTapHint": "Tocca ovunque per ripristinare lo schermo", "trTitle": "🎉 Test di 3 minuti completato!", "trDesc": "Ascolta il corpo: le mani si sono scaldate, il respiro era leggero e l'escursione del polso era massima?", "trApply": "Applica a Coerenza", "trClose": "Chiudi", "timeElapsed": "Trascorso", "timeTarget": "Durata", "timeTestTarget": "Durata test", "btnStart": "▶ Avvia", "btnPause": "Ⅱ Pausa", "btnResume": "▶ Riprendi", "btnStop": "■ Stop", "testCalib": "Calibrazione frequenza (3 min per passo)", "testLimitBadge": "Limite: 03:00", "ppgTitle": "📷 Sensore ottico di polso (fotocamera)", "ppgHint": "Appoggia delicatamente il polpastrello su fotocamera posteriore e flash al 3° minuto (senza premere). Misura polso e ampiezza HRV, non la pressione.", "ppgStart": "▶ Misura polso", "ppgStop": "■ Ferma sensore", "ppgBpm": "Polso", "ppgAmp": "Escursione Δ", "ppgHrv": "HRV (RMSSD)", "ppgWait": "Tieni fermo il dito...", "ppgErr": "Accesso fotocamera negato. Controlla i permessi del browser.", "ppgAutoOff": "Sensore fermato dopo 60 s per mantenere freddo il flash.", "settingsTitle": "Tempi delle fasi", "beatSettingsTitle": "Intervallo di battito", "beatIntervalLabel": "Passo del battito", "linkAll": "🔗 Lati uguali", "linkSep": "🔓 Lati separati", "boxInhale": "Inspira", "boxHoldIn": "Trattieni", "boxExhale": "Espira", "boxHoldOutTri": "Pausa (vuoto)", "boxHoldOutSq": "Pausa (vuoto)", "secUnit": "s", "minUnit": "min", "sessionDur": "Durata sessione (1–60 min):", "vibeTitle": "Feedback tattile (occhi chiusi):", "vibeHint": "1 impulso — inspira, 2 — espira, 3 — pausa", "vibeOff": "Off", "vibeLow": "📳 Morbido", "vibeHigh": "📳 Forte", "soundTitle": "Segnale sonoro cambio fase:", "sndBell": "Campana", "sndTap": "Clic", "sndTwo": "Due toni", "sndChime": "Armonia", "sndOff": "Silenzioso", "volume": "Volume segnali", "tickTitle": "Cronometro tonale (battito al secondo):", "tickOff": "Off", "tickClick": "Clic", "tickTone": "Tono", "tickHarm": "Armonia", "bgTitle": "Paesaggi sonori (Web Audio):", "bgOff": "Off", "bgBinaural": "🎧 Binaurale 7.83 Hz", "bgDrone": "Bordone 432 Hz", "bgOcean": "Risacca", "bgBrown": "Rumore marrone", "bgBinauralHint": "I battiti binaurali richiedono cuffie stereo.", "bgVolume": "Volume sfondo / musica", "musicTitle": "La tua musica dal dispositivo:", "musicPick": "🎵 Scegli file audio", "musicClear": "✕ Rimuovi", "musicNone": "Nessun file selezionato (riproduzione locale)", "modalTitle": "📖 Guida pratica & Scienza", "tabPractice": "🧭 Pratica", "tabWave": "🌊 Onda 0.1 Hz", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Articoli", "tabTech": "⚙️ Tecnica & Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "Nella versione base, i pulsanti Pro sono visibili al 40% di luminosità per mostrare l'intero potenziale dell'app. Inserendo la chiave di attivazione, tutti i controlli si illuminano subito.", "proFeatureHint": "Questa funzione si sblocca in Pro:", "proKeyPlaceholder": "Inserisci chiave di attivazione...", "proActivateBtn": "Attiva Pro", "proActiveBadge": "✅ Versione Pro attiva su questo dispositivo", "proWrongKey": "Chiave non valida. Controlla e riprova.", "proSuccess": "Pro attivata! Tutti i suoni, sensori e lingue sono ora attivi.", "proDeactivateBtn": "Torna ad anteprima Base (test)", "proListHtml": "<ul><li><b>Vibrazione «Forte»</b> — impulso tattile più marcato;</li><li><b>Generatori sonori:</b> Binaurale 7.83 Hz (cuffie), Bordone 432 Hz, Risacca respiratoria e Rumore marrone;</li><li><b>Cronometro tonale</b> e modalità autonoma <b>«Battito»</b>;</li><li><b>Musica personale</b> dalla memoria del telefono;</li><li><b>Sensore polso fotocamera (PPG)</b> nel test da 3 minuti;</li><li><b>Intervalli estesi:</b> Quadrato fino a 60 s con lati separati e pause fino a 120 s;</li><li><b>Lingue aggiuntive:</b> Deutsch, Français, Português, Italiano.</li></ul>", "disclaimer": "<strong>Avvertenza medica:</strong> Breath Trainer è uno strumento personale per rilassamento, concentrazione e ritmo respiratorio. Non è un dispositivo medico, non diagnostica né cura patologie e non sostituisce il parere del medico. In caso di disturbi cardiovascolari, ipertensione, asma, epilessia o gravidanza, consulta il medico prima di praticare apnee. Sospendi subito in caso di capogiro.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Preparazione e posizione del telefono</h4>\n        <ul>\n          <li><b>Silenzia le notifiche:</b> un avviso improvviso rilascia adrenalina e interrompe la quiete.</li>\n          <li><b>Mani libere:</b> tenere il telefono in mano irrigidisce per riflesso spalle e diaframma.</li>\n          <li><b>Occhi aperti:</b> appoggia lo smartphone davanti a te all'altezza del petto o degli occhi.</li>\n          <li><b>Occhi chiusi:</b> appoggialo sull'addome basso o sulla coscia per sentire la vibrazione, oppure usa <b>🌙 Schermo notte</b> per oscurare completamente il display senza fermare il ritmo.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Postura e respiro «silenzioso»</h4>\n        <ul>\n          <li><b>Schiena dritta, addome morbido:</b> piedi ben posati a terra; lascia espandere l'addome senza sforzo in inspirazione.</li>\n          <li><b>Mandibola rilassata:</b> appoggia la punta della lingua dietro gli incisivi superiori per sciogliere gola e diaframma.</li>\n          <li><b>Solo dal naso e leggero:</b> evita respiri troppo pieni. Mantieni un flusso silenzioso, 10–15% più leggero del solito.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Segnali corporei e uscita</h4>\n        <ul>\n          <li><b>Segnali di calma:</b> calore alle dita dopo 3–5 minuti o lievi sbadigli segnalano l'attivazione vagale.</li>\n          <li><b>Se gira la testa:</b> stai iperventilando (calo di CO₂). Rendi il respiro più sottile e discreto.</li>\n          <li><b>Uscita graduale:</b> dopo 15–20 minuti resta seduto 20–30 secondi a occhi aperti prima di alzarti.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Coerenza cardiaca (0.1 Hz)</h4>\n        <p>Il ritmo base (<b>5.0 s inspira + 5.0 s espira = 6 cicli/min</b>) sincronizza il respiro con le onde naturali della pressione arteriosa, senza pause, come un pendolo continuo.</p>\n        <ul>\n          <li><b>Intervallo base:</b> 4.5 – 6.5 s (copre la frequenza di risonanza della maggior parte delle persone). <b>Pro</b> estende a 3.0 – 15.0 s.</li>\n          <li><b>Durata consigliata:</b> 15–20 minuti al giorno per un profondo recupero autonomico.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Test 3 minuti: la tua frequenza personale</h4>\n        <ol>\n          <li>Seleziona un passo tra 4.5 e 6.5 s e respira in scioltezza per i primi 2 minuti.</li>\n          <li>Nel 3° minuto ascolta il calore alle mani o avvia il <b>Sensore ottico di polso (Pro)</b> appoggiando delicatamente il dito su fotocamera e flash.</li>\n          <li>Il passo con la massima escursione del polso (Δ bpm) senza affanno è la tua frequenza personale.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Triangolo (Inspira → Espira → Pausa)</h4>\n        <p>Ciclo a tre tempi con pausa a polmoni vuoti (fino a 30 s in base, fino a 120 s in <b>Pro</b>). Lavora al 40–50% della tua apnea comoda: l'inspirazione successiva deve restare calma e silenziosa.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Respirazione Quadrata (Box Breathing)</h4>\n        <p>Quattro fasi simmetriche per centrare la mente. Base: 2–5 s uguali; <b>Pro</b>: fino a 60 s e <b>lati indipendenti</b>.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Modalità «Battito» e Cronometro tonale (Pro)</h4>\n        <p><b>Battito (Pro)</b> funge da metronomo acustico puro (0.5 – 2.0 s) senza fasi fisse; il <b>Cronometro tonale (Pro)</b> scandisce con discrezione ogni secondo nelle fasi lunghe.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Il respiro: l'unico comando manuale del sistema nervoso</h4>\n        <p>Battito cardiaco e tono vascolare operano in automatico. Il respiro è l'unica funzione autonoma con controllo volontario: rallentarlo attiva i barocettori e il nervo vago, inviando un segnale biologico immediato di sicurezza al tronco encefalico.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Cardiologia spaziale e risonanza a 0.1 Hz</h4>\n        <p>In medicina spaziale, <b>Roman Baevsky</b> dimostrò che un polso rigido indica esaurimento, mentre un cuore sano accelera in inspirazione e rallenta in espirazione (<b>variabilità della frequenza cardiaca, HRV</b>). <b>Evgeny Vaschillo</b> e <b>Paul Lehrer</b> provarono che 6 cicli/min (0.1 Hz) entrano in risonanza con le <b>onde di Mayer</b>.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. L'effetto Bohr e il ruolo chiave della CO₂</h4>\n        <p>Nel 1904 <b>Christian Bohr</b> dimostrò che l'emoglobina rilascia ossigeno ai tessuti solo in presenza di adeguata CO₂ nel sangue. Respirare troppo forte elimina troppa CO₂ e restringe i capillari. <b>Konstantin Buteyko</b> sistematizzò il respiro nasale leggero e le pause morbide per ristabilire l'equilibrio vascolare.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Eco vascolare (~7 Hz) e progetto Gateway</h4>\n        <p>Nel 1977 l'ingegnere biomedico <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) descrisse micro-oscillazioni corporee attorno a 7 Hz legate all'onda pulsatile aortica, poi citate nel rapporto <b>Gateway Process</b> (1983). La fisiologia moderna separa la risonanza baroriflessa clinicamente provata (<b>0.1 Hz</b>) da questo modello biomeccanico teorico (~7 Hz).</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ Autonomia totale e zero raccolta dati</h4>\n        <ul>\n          <li><b>Nessun account né e-mail:</b> nessuna registrazione, nessun indirizzo richiesto.</li>\n          <li><b>100% offline sul telefono:</b> funziona in modalità aereo o senza rete. Ogni suono e grafica nasce localmente sul dispositivo.</li>\n          <li><b>Zero traccianti, zero pubblicità:</b> impostazioni, audio locali e misure restano solo nella memoria del telefono.</li>\n          <li><b>Nessun abbonamento:</b> versione base gratuita per sempre; Pro con sblocco unico.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Versione Base e attivazione Pro</h4>\n        <p>Nella versione base tutti i controlli <b>(Pro)</b> restano visibili al 40% di luminosità. <b>Appena attivi Pro, tutti i pulsanti si illuminano e diventano subito operativi</b> senza reinstallare nulla.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Sintesi audio, vibrazione e sensore ottico</h4>\n        <ul>\n          <li><b>Web Audio in tempo reale:</b> segnali, Binaurale 7.83 Hz <b>(Pro)</b>, Bordone 432 Hz <b>(Pro)</b>, Risacca <b>(Pro)</b> e Rumore marrone <b>(Pro)</b> sintetizzati dal vivo senza file esterni.</li>\n          <li><b>Binaurale 7.83 Hz (Pro):</b> richiede <b>cuffie stereo</b> (216 Hz sin. / 223.83 Hz des.).</li>\n          <li><b>Sensore ottico (Pro):</b> analizza la luce capillare solo in memoria senza registrare video; misura polso e HRV, <b>non la pressione arteriosa</b>.</li>\n        </ul>\n      </div>\n    "}};
-  const BASE_LANGS = ['ru', 'en', 'es'];
-  const ALL_LANGS = ['ru', 'en', 'es', 'de', 'fr', 'pt', 'it'];
+  const I18N = {"ru": {"langName": "Русский", "subtitle": "Волна 0.1 Гц & Пранаяма", "guideBtn": "Справка", "proBadgeTitle": "Статус Pro — нажмите для активации", "branchWave": "🌊 Волна (Резонанс)", "branchPrana": "🔺 Пранаяма & Такт", "modeTest": "Тест (3 мин)", "modeResonance": "Резонанс 0.1 Гц", "modeTriangle": "Треугольник", "modeSquare": "Квадрат", "modeBeat": "Такт", "kickerReady": "ГОТОВ", "kickerIn": "ВДОХ", "kickerOut": "ВЫДОХ", "kickerHoldIn": "ЗАДЕРЖКА", "kickerHoldOut": "ПАУЗА", "kickerBeat": "ТАКТ", "phaseIn": "Вдох", "phaseOut": "Выдох", "phaseHoldIn": "Задержка", "phaseHoldOut": "Пауза", "phaseBeat": "Ритм", "statusIdle": "Нажмите «Запуск» для начала занятия", "statusRunning": "Идёт практика — дышите мягко через нос", "statusRunningBeat": "Идёт ровный отсчёт такта", "statusPaused": "Пауза", "statusStopped": "Занятие остановлено", "statusFinished": "Сессия завершена. Посидите спокойно 20–30 секунд", "statusTestDone": "Тест 3 минуты завершён!", "wakeActive": "☀️ Экран активен", "btnNightScreen": "🌙 Ночной экран", "nightTapHint": "Нажмите в любом месте, чтобы вернуть экран", "trTitle": "🎉 Тест 3 минуты завершён!", "trDesc": "Оцените ощущения: согрелись ли ладони, дышалось ли легко без одышки, был ли максимальным размах пульса?", "trApply": "Применить в Резонанс", "trClose": "Закрыть", "timeElapsed": "Прошло времени", "timeTarget": "Лимит занятия", "timeTestTarget": "Длительность теста", "btnStart": "▶ Запуск", "btnPause": "Ⅱ Пауза", "btnResume": "▶ Продолжить", "btnStop": "■ Стоп", "testCalib": "Калибровка частоты (3 мин на шаг)", "testLimitBadge": "Лимит: 03:00", "ppgTitle": "📷 Оптический пульсометр по камере", "ppgHint": "Мягко приложите палец к задней камере и вспышке на 3-й минуте теста (не давите сильно). Измеряется пульс и размах ритма (ВСР), не давление.", "ppgStart": "▶ Измерить пульс", "ppgStop": "■ Остановить датчик", "ppgBpm": "Пульс", "ppgAmp": "Размах Δ", "ppgHrv": "ВСР (RMSSD)", "ppgWait": "Держите палец неподвижно...", "ppgErr": "Нет доступа к камере. Проверьте разрешения браузера.", "ppgAutoOff": "Датчик остановлен через 60 с для защиты от нагрева вспышки.", "settingsTitle": "Настройка фаз", "beatSettingsTitle": "Интервал такта (секундомер)", "beatIntervalLabel": "Шаг такта", "linkAll": "🔗 Все стороны равны", "linkSep": "🔓 Стороны раздельно", "boxInhale": "Вдох", "boxHoldIn": "Задержка (вдох)", "boxExhale": "Выдох", "boxHoldOutTri": "Пауза (выдох)", "boxHoldOutSq": "Пауза (выдох)", "secUnit": "с", "minUnit": "мин", "sessionDur": "Длительность сессии (1–60 мин):", "vibeTitle": "Виброотклик (с закрытыми глазами):", "vibeHint": "1 толчок — вдох, 2 — выдох, 3 — пауза", "vibeOff": "Выкл", "vibeLow": "📳 Мягко", "vibeHigh": "📳 Сильно", "soundTitle": "Сигнал смены фаз:", "sndBell": "Колокольчик", "sndTap": "Щелчок", "sndTwo": "Два тона", "sndChime": "Гармония", "sndOff": "Без звука", "volume": "Громкость сигналов", "tickTitle": "Тональный секундомер (такт каждой секунды):", "tickOff": "Выкл", "tickClick": "Щелчок", "tickTone": "Тон", "tickHarm": "Гармония", "bgTitle": "Фоновый синтез звука (Web Audio):", "bgOff": "Выкл", "bgBinaural": "🎧 Бинауральные", "bgDrone": "Дрон 432 Гц", "bgOcean": "Прибой", "bgBrown": "Коричн. шум", "bgBinauralHint": "Бинауральные ритмы работают только в стереонаушниках.", "bgVolume": "Громкость фона / музыки", "musicTitle": "Своя музыка с устройства:", "musicPick": "🎵 Выбрать аудиофайл", "musicClear": "✕ Убрать", "musicNone": "Файл не выбран (воспроизводится локально)", "modalTitle": "📖 Инструкция & Научная база", "tabPractice": "🧭 Практика", "tabWave": "🌊 Волна 0.1 Гц", "tabPranayama": "🔺 Пранаяма", "tabScience": "🔬 Статьи", "tabTech": "⚙️ Техника & Pro", "proModalTitle": "✨ Расширенная версия Pro", "proModalDesc": "В базовой версии все возможности Pro отображаются приглушёнными (40% яркости). После ввода ключа активации все кнопки мгновенно подсвечиваются и начинают работать.", "proFeatureHint": "Эта функция доступна в версии Pro:", "proKeyPlaceholder": "Введите ключ активации...", "proActivateBtn": "Активировать Pro", "proActiveBadge": "✅ Версия Pro активна на этом устройстве", "proWrongKey": "Неверный ключ. Проверьте раскладку и попробуйте снова.", "proSuccess": "Pro активирована! Все функции и языки разблокированы.", "proDeactivateBtn": "Вернуться в базовый вид (для проверки)", "proListHtml": "<ul><li><b>Вибрация «Сильно»</b> — усиленный импульс для глубокого погружения;</li><li><b>Бинауральные ритмы (наушники):</b> фиксированные диапазоны (Дельта 2.5 Гц, Тета 5 Гц, Шуман 7.83 Гц, Альфа 10 Гц, Фокус 15 Гц + ручной ползунок) и 3 плавных сценария-рампы под длину сессии;</li><li><b>Звуковые полотна:</b> дрон 432 Гц, дышащий прибой и коричневый шум;</li><li><b>Тональный секундомер</b> и самостоятельный режим <b>«Такт»</b>;</li><li><b>Своя музыка</b> из памяти телефона;</li><li><b>Оптический пульсометр по камере</b> в 3-минутном тесте;</li><li><b>Расширенные диапазоны</b> фаз (Квадрат до 60 с и раздельные стороны, пауза до 120 с).</li></ul>", "disclaimer": "<strong>Отказ от медицинской ответственности:</strong> Приложение Breath Trainer является персональным инструментом для релаксации, концентрации внимания и тренировки контроля дыхания. Оно не является медицинским изделием, не предназначено для диагностики, лечения или профилактики заболеваний и не заменяет консультацию врача. При сердечно-сосудистых заболеваниях, гипертонии, бронхиальной астме, эпилепсии или беременности проконсультируйтесь со специалистом перед практикой задержек дыхания. При головокружении или дискомфорте немедленно прекратите занятие и вернитесь к обычному дыханию.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Подготовка и положение телефона</h4>\n        <ul>\n          <li><b>Включите режим «Не беспокоить»</b> (если не используете виброотклик, либо отключите только звук уведомлений): внезапный звонок вызывает выброс адреналина и обнуляет расслабление.</li>\n          <li><b>Не держите смартфон в руках:</b> напряжение пальцев и кистей рефлекторно зажимает плечи и диафрагму.</li>\n          <li><b>С открытыми глазами:</b> поставьте телефон на опору на уровне груди или глаз.</li>\n          <li><b>С закрытыми глазами:</b> положите телефон на нижнюю часть живота или бедро, чтобы чувствовать виброотклик, либо включите <b>«🌙 Ночной экран»</b>, чтобы дисплей оставался чёрным, а вибрация и звук не прерывались.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Посадка и правило «невидимого дыхания»</h4>\n        <ul>\n          <li><b>Прямая спина, мягкий живот:</b> сядьте на край стула, стопы на полу, макушка мягко тянется вверх. На вдохе живот свободно подаётся вперёд, на выдохе плавно возвращается.</li>\n          <li><b>Разжатые челюсти:</b> расслабьте жевательные мышцы и положите кончик языка на нёбо сразу за верхними зубами — это рефлекторно снимает зажим с гортани и диафрагмы.</li>\n          <li><b>Только носом и без «передышивания»:</b> главная ошибка новичков — вдохнуть слишком глубоко. Дышите тихо, словно на 10–15% меньше обычного, плавно растягивая поток на заданные секунды.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Телесные ориентиры и выход</h4>\n        <ul>\n          <li><b>Маркеры покоя:</b> через 3–5 минут в пальцах рук и стопах появляется приятное тепло (раскрываются капилляры), возможна лёгкая зевота или усиление слюноотделения.</li>\n          <li><b>Если закружилась голова:</b> вы дышите слишком глубоко и вымываете углекислый газ. Сделайте вдох ещё тише и меньше по объёму.</li>\n          <li><b>Выход из практики:</b> после завершения 15–20-минутной сессии не вскакивайте резко — посидите спокойно 20–30 секунд с открытыми глазами.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>Режим «Резонанс 0.1 Гц»</h4>\n        <p>Базовая настройка (<b>5.0 с вдох + 5.0 с выдох = 6 циклов в минуту</b>) согласует дыхание с естественными волнами артериального давления. Задержек здесь нет: вдох без рывка перетекает в выдох, как движение маятника.</p>\n        <ul>\n          <li><b>Базовый диапазон:</b> 4.5 – 6.5 с (покрывает личный резонанс большинства людей). В расширенной версии <b>(Pro)</b> доступен диапазон 3.0 – 15.0 с.</li>\n          <li><b>Оптимальная длительность:</b> 15–20 минут в день для глубокого вегетативного восстановления.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Режим «Тест (3 мин)» — подбор личной частоты</h4>\n        <p>Из-за различий в росте и эластичности сосудов индивидуальная точка резонанса лежит между 4.5 и 6.5 с:</p>\n        <ol>\n          <li>Выберите шаг (по умолчанию 5.0 с), запустите таймер и спокойно дышите первые 2 минуты.</li>\n          <li>На 3-й минуте оцените тепло в ладонях и лёгкость дыхания, либо запустите встроенный <b>Оптический пульсометр по камере (Pro)</b>, мягко приложив палец к задней камере и вспышке.</li>\n          <li>Шаг с максимальным размахом пульса (Δ между вдохом и выдохом) без малейшей одышки — ваша личная частота. Нажмите <b>«Применить в Резонанс»</b>.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Треугольник (Вдох → Выдох → Пауза)</h4>\n        <p>Трёхфазный цикл с паузой на пустых лёгких. В базовой версии пауза регулируется до 30 с, в версии <b>(Pro)</b> — до 120 с.</p>\n        <ul>\n          <li><b>Золотое правило:</b> рабочая пауза составляет 40–50% от вашей предельной задержки.</li>\n          <li><b>Критерий правильности:</b> после окончания паузы следующий вдох должен быть таким же тихим и спокойным. Если хочется судорожно схватить воздух ртом — сократите паузу.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Квадрат (Вдох → Задержка → Выдох → Пауза)</h4>\n        <p>Четырёхфазный цикл (<i>Box Breathing / Самавритти</i>) для быстрого выравнивания эмоций и фокусировки. В базовой версии стороны синхронно настраиваются от 2 до 5 с; в версии <b>(Pro)</b> открываются диапазон до 60 с и <b>раздельная настройка каждой стороны</b>.</p>\n        <p>Во время задержек не пережимайте горло — удерживайте воздух мягким расправленным положением грудной клетки.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Режим «Такт» и Тональный секундомер (Pro)</h4>\n        <p>Режим <b>«Такт» (Pro)</b> работает как чистый акустический секундомер без привязки к фазам дыхания — отбивает ровный ритм (0.5 – 2.0 с) щелчком, тоном или гармоническим созвучием. А опция <b>Тональный секундомер (Pro)</b> в настройках добавляет деликатный посекундный отсчёт внутри длинных дыхательных фаз.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Дыхание — единственный «ручной пульт» нервной системы</h4>\n        <p>Большинство жизненно важных систем работают автоматически: нельзя усилием воли приказать сердцу замедлиться или спазмированным сосудам раскрыться. Этим управляет вегетативная нервная система, разделённая на симпатический (стресс, мобилизация) и парасимпатический (покой, восстановление) контуры.</p>\n        <p>Дыхание — единственная функция с двойным управлением. Замедляя ритм, мы воздействуем на барорецепторы крупных сосудов и стимулируем блуждающий нерв (<i>Nervus Vagus</i>), отправляя в ствол мозга прямой физиологический сигнал безопасности.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Космическая кардиология и вегетативный резонанс 0.1 Гц</h4>\n        <p>В 1960–1990-х годах в ИМБП профессор <b>Роман Баевский</b>, изучая резервы космонавтов, показал, что идеально ровный пульс — признак истощения, тогда как здоровое сердце гибко ускоряется на вдохе и замедляется на выдохе (<b>вариабельность сердечного ритма, ВСР</b>).</p>\n        <p>Физиологи <b>Евгений Ващилло</b> и <b>Пол Лерер</b> доказали, что при частоте дыхания около 6 циклов в минуту (0.1 Гц) дыхательная аритмия входит в фазовый резонанс с собственными 10-секундными колебаниями артериального давления — <b>волнами Майера</b>, максимально раскачивая восстановительный барорефлекс.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. Биохимический парадокс: Эффект Бора и роль CO₂</h4>\n        <p>Вопреки бытовому мифу, слишком глубокое дыхание ухудшает питание клеток кислородом. В 1904 году датский физиолог <b>Кристиан Бор</b> открыл закон: гемоглобин отдаёт кислород тканям только при достаточном уровне углекислого газа (CO₂) в крови. Избыточное вымывание CO₂ вызывает спазм капилляров и «кислородное голодание» при 99% насыщении крови.</p>\n        <p>В 1950-х годах врач <b>Константин Бутейко</b> систематизировал практику уменьшения глубины дыхания и мягких пауз после выдоха для восстановления естественного тонуса сосудов.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Сосудистое эхо (~7 Гц) и проект «Gateway»</h4>\n        <p>В 1977 году биоинженер <b>Ицхак Бентов</b> (<i>Stalking the Wild Pendulum</i>) описал ритмичные микроколебания тела (~7 Гц), порождённые выбросом крови из левого желудочка и отражением пульсовой волны от разветвления аорты. В 1983 году эта схема рассматривалась в рассекреченном отчёте проекта <b>Gateway Process</b>.</p>\n        <p>Современная наука разделяет клинически подтверждённый барорефлекторный резонанс <b>0.1 Гц</b> и теоретическую биомеханическую модель Бентова (~7 Гц), которая остаётся выразительной инженерной метафорой согласованной работы сердца и дыхания.</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ Полная автономность и нулевой сбор данных</h4>\n        <ul>\n          <li><b>Никаких аккаунтов и e-mail:</b> приложению не нужны ваша почта, имя, номер телефона или регистрация.</li>\n          <li><b>100% офлайн на вашем смартфоне:</b> после установки работает без интернета — в самолёте, в горах или в авиарежиме. Вся графика и звуки создаются локально внутри устройства.</li>\n          <li><b>Ноль слежки и рекламы:</b> нет аналитических трекеров, скрытых отправок данных и рекламных сетей. Ваши настройки, музыка и замеры остаются только в памяти телефона.</li>\n          <li><b>Честная модель без подписок:</b> базовая версия работает бессрочно, а Pro открывается один раз и навсегда.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Базовая версия и активация Pro</h4>\n        <p>В базовой версии все расширенные кнопки и опции с пометкой <b>(Pro)</b> видны на экране, но отображаются приглушёнными (светимость около 40%), чтобы вы заранее видели все возможности инструмента. <b>Сразу после активации Pro все кнопки подсвечиваются в полную яркость и становятся активными</b> без повторной установки приложения.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Технические особенности звука, вибрации и датчика</h4>\n        <ul>\n          <li><b>Синтез звука (Web Audio API):</b> все сигналы, бинауральные ритмы <b>(Pro)</b>, дрон 432 Гц <b>(Pro)</b>, прибой <b>(Pro)</b> и коричневый шум <b>(Pro)</b> генерируются математически в реальном времени без загрузки аудиофайлов.</li>\n          <li><b>Бинауральные ритмы и рампы (Pro):</b> в левое и правое ухо подаются две близкие частоты (на базе несущей 216 Гц). Доступны фиксированные частоты от 2.0 до 18.0 Гц и динамические сценарии-рампы, автоматически растягиваемые под длительность сессии. Эффект работает <b>только в стереонаушниках</b>.</li>\n          <li><b>Оптический пульсометр (Pro):</b> считывает микроизменения яркости капилляров пальца через камеру. Видео никуда не сохраняется и не передаётся. Измеряются пульс и ВСР-амплитуда, <b>но не артериальное давление</b>.</li>\n          <li><b>Вибрация на Android:</b> если на смартфоне не чувствуется виброотклик, отключите режим «Экономия энергии» и проверьте включённый «Тактильный отклик» в настройках телефона.</li>\n        </ul>\n      </div>\n    ", "binModeLabel": "Режим бинауральных ритмов:", "binFixedTab": "Фиксированная частота", "binRampTab": "Плавный сценарий (рампа)", "binPresetDelta": "Дельта 2.5 Гц", "binPresetTheta": "Тета 5.0 Гц", "binPresetSchumann": "Шуман 7.83 Гц", "binPresetAlpha": "Альфа 10 Гц", "binPresetFocus": "Фокус 15 Гц", "binSliderLabel": "Частота биений (Δ):", "binRampReset": "U-профиль: Дневная перезагрузка", "binRampResetDesc": "Плавный спуск 14 → 7.83 Гц (20%), удержание плато (65%), бережный возврат к 12 Гц (15%).", "binRampSleep": "Вечерний спуск ко сну", "binRampSleepDesc": "Непрерывное замедление от 10 Гц до 2.5 Гц (дельта) с мягким затуханием в конце.", "binRampMorning": "Утренний подъём и ясность", "binRampMorningDesc": "Плавный подъём от 8 Гц (альфа) до 15 Гц (SMR) для собранности без перегрузки.", "binCurrentFreq": "Текущая частота Δ:", "binAutoStretch": "Автоподстройка под длительность сессии"}, "en": {"langName": "English", "subtitle": "0.1 Hz Resonance & Pranayama", "guideBtn": "Guide", "proBadgeTitle": "Pro status — tap to unlock", "branchWave": "🌊 Wave (Resonance)", "branchPrana": "🔺 Pranayama & Beat", "modeTest": "Test (3 min)", "modeResonance": "Resonance 0.1 Hz", "modeTriangle": "Triangle", "modeSquare": "Box (Square)", "modeBeat": "Beat", "kickerReady": "READY", "kickerIn": "INHALE", "kickerOut": "EXHALE", "kickerHoldIn": "HOLD", "kickerHoldOut": "PAUSE", "kickerBeat": "BEAT", "phaseIn": "Inhale", "phaseOut": "Exhale", "phaseHoldIn": "Hold", "phaseHoldOut": "Pause", "phaseBeat": "Pulse", "statusIdle": "Tap Start to begin your session", "statusRunning": "In session — breathe gently through your nose", "statusRunningBeat": "Steady beat stopwatch active", "statusPaused": "Paused", "statusStopped": "Session stopped", "statusFinished": "Session complete. Rest calmly for 20–30 seconds", "statusTestDone": "3-minute calibration complete!", "wakeActive": "☀️ Screen awake", "btnNightScreen": "🌙 Night Screen", "nightTapHint": "Tap anywhere to restore screen", "trTitle": "🎉 3-Minute Test Complete!", "trDesc": "Notice how you feel: did your hands warm up, was your breath effortless, and did your heart-rate swing peak?", "trApply": "Apply to Resonance", "trClose": "Close", "timeElapsed": "Elapsed", "timeTarget": "Session Limit", "timeTestTarget": "Test Duration", "btnStart": "▶ Start", "btnPause": "Ⅱ Pause", "btnResume": "▶ Resume", "btnStop": "■ Stop", "testCalib": "Frequency Calibration (3 min per step)", "testLimitBadge": "Limit: 03:00", "ppgTitle": "📷 Camera Optical Pulse Sensor", "ppgHint": "Rest your fingertip gently over the rear camera and flash during minute 3 (do not press hard). Measures pulse and HRV swing, not blood pressure.", "ppgStart": "▶ Measure Pulse", "ppgStop": "■ Stop Sensor", "ppgBpm": "Heart Rate", "ppgAmp": "Swing Δ", "ppgHrv": "HRV (RMSSD)", "ppgWait": "Hold finger steady...", "ppgErr": "Camera access denied. Check browser permissions.", "ppgAutoOff": "Sensor auto-stopped after 60 s to keep the flash cool.", "settingsTitle": "Phase Timing", "beatSettingsTitle": "Beat Interval (Stopwatch)", "beatIntervalLabel": "Beat step", "linkAll": "🔗 Equal sides", "linkSep": "🔓 Custom sides", "boxInhale": "Inhale", "boxHoldIn": "Hold (in)", "boxExhale": "Exhale", "boxHoldOutTri": "Pause (out)", "boxHoldOutSq": "Pause (out)", "secUnit": "s", "minUnit": "min", "sessionDur": "Session duration (1–60 min):", "vibeTitle": "Haptic cues (eyes-closed practice):", "vibeHint": "1 pulse — inhale, 2 — exhale, 3 — pause", "vibeOff": "Off", "vibeLow": "📳 Soft", "vibeHigh": "📳 Strong", "soundTitle": "Phase transition sound:", "sndBell": "Bell", "sndTap": "Click", "sndTwo": "Two Tones", "sndChime": "Harmony", "sndOff": "Silent", "volume": "Cue volume", "tickTitle": "Tonal Stopwatch (per-second tick):", "tickOff": "Off", "tickClick": "Click", "tickTone": "Tone", "tickHarm": "Harmony", "bgTitle": "Synthesized Ambient Audio (Web Audio):", "bgOff": "Off", "bgBinaural": "🎧 Binaural Beats", "bgDrone": "432 Hz Drone", "bgOcean": "Breathing Surf", "bgBrown": "Brown Noise", "bgBinauralHint": "Binaural beats require stereo headphones.", "bgVolume": "Ambient / Music volume", "musicTitle": "Your own audio from device:", "musicPick": "🎵 Choose Audio File", "musicClear": "✕ Clear", "musicNone": "No file selected (plays 100% locally)", "modalTitle": "📖 Practice Guide & Science", "tabPractice": "🧭 Practice", "tabWave": "🌊 0.1 Hz Wave", "tabPranayama": "🔺 Pranayama", "tabScience": "🔬 Articles", "tabTech": "⚙️ Tech & Pro", "proModalTitle": "✨ Breath Trainer Pro", "proModalDesc": "In the free base version, Pro controls remain visible at 40% brightness so you can explore the full toolkit. Entering an activation key instantly illuminates and unlocks every Pro button.", "proFeatureHint": "This feature unlocks in Pro:", "proKeyPlaceholder": "Enter activation key...", "proActivateBtn": "Activate Pro", "proActiveBadge": "✅ Pro is active on this device", "proWrongKey": "Invalid key. Please check spelling and try again.", "proSuccess": "Pro unlocked! All soundscapes, sensors, and languages are now active.", "proDeactivateBtn": "Switch back to Base preview", "proListHtml": "<ul><li><b>Strong Haptics</b> — deeper tactile cue for eyes-closed sessions;</li><li><b>Binaural Beats (headphones):</b> fixed presets (Delta 2.5 Hz, Theta 5 Hz, Schumann 7.83 Hz, Alpha 10 Hz, Focus 15 Hz + fine slider) and 3 smooth frequency ramps scaled to your session;</li><li><b>Ambient Generators:</b> 432 Hz Drone, Breathing Surf, and Brown Noise;</li><li><b>Tonal Stopwatch</b> and standalone <b>Beat</b> metronome mode;</li><li><b>Personal Audio</b> directly from your phone storage;</li><li><b>Camera PPG Pulse & HRV Sensor</b> inside the 3-minute test;</li><li><b>Extended Ranges:</b> Box up to 60 s with independent sides, pauses up to 120 s.</li></ul>", "disclaimer": "<strong>Medical Disclaimer:</strong> Breath Trainer is a personal tool for relaxation, focus, and breath pacing. It is not a medical device, does not diagnose, treat, or prevent any condition, and does not replace professional medical advice. If you have cardiovascular disease, hypertension, asthma, epilepsy, or are pregnant, consult a physician before practicing breath holds. Stop immediately and breathe normally if you feel dizzy or uncomfortable.", "panePractice": "\n      <div class=\"guide-block\">\n        <h4>Setup & Phone Placement</h4>\n        <ul>\n          <li><b>Silence distractions:</b> mute notifications before starting so sudden alerts do not trigger an adrenaline spike.</li>\n          <li><b>Keep your hands free:</b> holding the phone creates subtle tension in the forearms, shoulders, and diaphragm.</li>\n          <li><b>Eyes open:</b> prop your phone at chest or eye level so your neck stays neutral.</li>\n          <li><b>Eyes closed:</b> rest the phone on your lower belly or thigh to feel haptic cues, or tap <b>🌙 Night Screen</b> to black out the display while keeping vibration and audio running.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Posture & \"Invisible Breathing\"</h4>\n        <ul>\n          <li><b>Tall spine, soft belly:</b> sit near the edge of a chair with feet grounded. Let your belly expand effortlessly on the inhale and soften back on the exhale.</li>\n          <li><b>Unclench your jaw:</b> relax your face and rest the tip of your tongue lightly behind your upper front teeth to release tension in the throat and diaphragm.</li>\n          <li><b>Nasal & light:</b> breathe solely through your nose. Avoid taking oversized gulps of air — keep the volume quiet and 10–15% lighter than usual, stretched smoothly across the timer.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Body Cues & Finishing</h4>\n        <ul>\n          <li><b>Signs of relaxation:</b> within 3–5 minutes, gentle warmth in your fingertips or mild yawning signals peripheral vasodilation and vagal activation.</li>\n          <li><b>If you feel lightheaded:</b> you are over-breathing and blowing off CO₂. Make each inhale quieter and shallower.</li>\n          <li><b>Smooth transition:</b> after a 15–20 minute session, sit calmly with eyes open for 20–30 seconds before standing up.</li>\n        </ul>\n      </div>\n    ", "paneWave": "\n      <div class=\"guide-block\">\n        <h4>0.1 Hz Resonance Breathing</h4>\n        <p>The baseline rhythm (<b>5.0 s inhale + 5.0 s exhale = 6 breaths/min</b>) synchronizes breathing with natural blood-pressure waves. There are no breath holds — inhale flows seamlessly into exhale like a pendulum.</p>\n        <ul>\n          <li><b>Base range:</b> 4.5 – 6.5 s (covers the resonance point of most adults). <b>Pro</b> unlocks 3.0 – 15.0 s custom pacing.</li>\n          <li><b>Sweet spot:</b> 15–20 minutes daily for deep autonomic recovery and calm focus.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>3-Minute Resonance Test</h4>\n        <p>Because height and vascular elasticity vary, personal resonance falls between 4.5 and 6.5 seconds per phase:</p>\n        <ol>\n          <li>Pick a step (default 5.0 s), press Start, and breathe effortlessly for the first 2 minutes.</li>\n          <li>During minute 3, notice hand warmth and ease — or launch the built-in <b>Camera Pulse Sensor (Pro)</b> by gently resting your fingertip on the rear camera and flash.</li>\n          <li>The pace that produces the widest heart-rate swing (Δ BPM) with zero air hunger is your personal resonance frequency. Tap <b>Apply to Resonance</b>.</li>\n        </ol>\n      </div>\n    ", "panePranayama": "\n      <div class=\"guide-block\">\n        <h4>Triangle (Inhale → Exhale → Pause)</h4>\n        <p>A three-part cycle with a calm pause after exhalation. Base supports pauses up to 30 s; <b>Pro</b> extends up to 120 s.</p>\n        <ul>\n          <li><b>Pacing rule:</b> train at 40–50% of your maximum comfortable breath-hold time.</li>\n          <li><b>Quality check:</b> the inhale following the pause must remain silent and controlled. If you feel compelled to gasp, shorten the pause.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Box Breathing (Inhale → Hold → Exhale → Pause)</h4>\n        <p>Four-phase rhythmic breathing (<i>Samavritti</i>) used to stabilize focus under pressure. Base offers equal sides from 2 to 5 s; <b>Pro</b> unlocks up to 60 s and <b>independent side lengths</b>.</p>\n        <p>Keep your throat open and relaxed during holds rather than clamping the glottis shut.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Standalone Beat & Tonal Stopwatch (Pro)</h4>\n        <p><b>Beat mode (Pro)</b> works as a clean acoustic metronome (0.5 – 2.0 s interval) without breathing phases. The <b>Tonal Stopwatch (Pro)</b> setting adds a gentle second-by-second tick inside long breathing phases.</p>\n      </div>\n    ", "paneScience": "\n      <div class=\"article-card\">\n        <h4>1. Breath: The Only Manual Remote for Your Nervous System</h4>\n        <p>Heart rate, cortisol release, and blood-vessel tone run automatically under the autonomic nervous system — balancing sympathetic mobilization with parasympathetic restoration.</p>\n        <p>Breathing is the sole autonomic function with a manual override. Slowing your cadence engages arterial baroreceptors and mechanically stimulates the vagus nerve, sending an immediate physiological safety signal straight to the brainstem.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>2. Space Cardiology & 0.1 Hz Autonomic Resonance</h4>\n        <p>Pioneering aerospace cardiologist <b>Roman Baevsky</b> discovered while monitoring cosmonauts that a rigidly metronomic pulse signals exhaustion, whereas a resilient heart constantly speeds up on inhale and slows on exhale — known as <b>Heart Rate Variability (HRV)</b>.</p>\n        <p>Later, physiologists <b>Evgeny Vaschillo</b> and <b>Paul Lehrer</b> demonstrated that breathing near 6 cycles/min (0.1 Hz) phase-locks respiratory sinus arrhythmia with natural 10-second blood-pressure oscillations (<b>Mayer waves</b>), amplifying baroreflex recovery.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>3. The Bohr Effect & Why CO₂ Matters</h4>\n        <p>Contrary to popular myth, heavy over-breathing actually reduces oxygen delivery to tissues. In 1904, Danish physiologist <b>Christian Bohr</b> showed that hemoglobin requires adequate carbon dioxide (CO₂) in the blood to release bound oxygen to brain and muscle cells. Blowing off too much CO₂ constricts arterioles and locks oxygen onto hemoglobin.</p>\n        <p>In the 1950s, physician <b>Konstantin Buteyko</b> systematized light nasal breathing and gentle post-exhale pauses to restore healthy CO₂ tolerance and microcirculation.</p>\n      </div>\n      <div class=\"article-card\">\n        <h4>4. Vascular Echo (~7 Hz) & the Gateway Project</h4>\n        <p>In 1977, biomedical inventor <b>Itzhak Bentov</b> (<i>Stalking the Wild Pendulum</i>) modeled rhythmic ~7 Hz micromotions of the body driven by left-ventricular ejection and pulse waves reflecting off the aortic bifurcation. His mechanical model later appeared in the declassified 1983 <b>Gateway Process</b> report.</p>\n        <p>Modern physiology clearly distinguishes the clinically proven <b>0.1 Hz baroreflex resonance</b> from Bentov's theoretical <b>~7 Hz standing-wave model</b>, which remains an illuminating biomechanical illustration of heart-breath harmony.</p>\n      </div>\n    ", "paneTech": "\n      <div class=\"autonomy-card\">\n        <h4>🛡️ 100% Offline & Zero Data Collection</h4>\n        <ul>\n          <li><b>No accounts, no email:</b> never asks for your email address, name, phone number, or login.</li>\n          <li><b>Truly autonomous offline app:</b> runs completely on your device — in airplane mode, on flights, or off the grid. Every tone and visual is generated locally.</li>\n          <li><b>Zero tracking or ads:</b> no telemetry, no analytics SDKs, no cloud uploads. Your settings, local audio files, and pulse readings never leave your phone.</li>\n          <li><b>No subscriptions:</b> the base toolkit stays free forever; Pro is a single one-time unlock.</li>\n        </ul>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Base Preview & Pro Unlock</h4>\n        <p>In Base mode, all <b>(Pro)</b> controls stay visible at 40% brightness so nothing is hidden. <b>The moment Pro is activated, every dimmed button illuminates to full brightness and becomes interactive</b> — no reinstall required.</p>\n      </div>\n      <div class=\"guide-block\">\n        <h4>Audio Engine, Haptics & Optical Sensor</h4>\n        <ul>\n          <li><b>Zero-file Web Audio synthesis:</b> cues, Binaural Beats <b>(Pro)</b>, 432 Hz Drone <b>(Pro)</b>, Breathing Surf <b>(Pro)</b>, and Brown Noise <b>(Pro)</b> are synthesized live in code.</li>\n          <li><b>Binaural Beats & Ramps (Pro):</b> sends two close frequencies (216 Hz carrier) to left and right channels — fixed 2.0–18.0 Hz or smooth dynamic ramps auto-scaled to session length. Requires <b>stereo headphones</b>.</li>\n          <li><b>Optical PPG Sensor (Pro):</b> analyzes subtle fingertip brightness changes via camera RAM only (never recorded or uploaded). Measures pulse & HRV swing, <b>not blood pressure</b>.</li>\n          <li><b>Android Haptics:</b> if vibration feels silent, disable Battery Saver and verify Touch Vibration / Haptic Feedback is enabled in system settings.</li>\n        </ul>\n      </div>\n    ", "binModeLabel": "Binaural Beat Mode:", "binFixedTab": "Fixed Frequency", "binRampTab": "Dynamic Ramp", "binPresetDelta": "Delta 2.5 Hz", "binPresetTheta": "Theta 5.0 Hz", "binPresetSchumann": "Schumann 7.83 Hz", "binPresetAlpha": "Alpha 10 Hz", "binPresetFocus": "Focus 15 Hz", "binSliderLabel": "Beat frequency (Δ):", "binRampReset": "U-Profile: Daytime Reset", "binRampResetDesc": "Smooth descent 14 → 7.83 Hz (20%), steady plateau (65%), gentle return to 12 Hz (15%).", "binRampSleep": "Evening Sleep Descent", "binRampSleepDesc": "Continuous glide from 10 Hz down to 2.5 Hz (delta) with a soft fade-out at the end.", "binRampMorning": "Morning Clarity Lift", "binRampMorningDesc": "Gentle rise from 8 Hz (alpha) to 15 Hz (SMR) for calm alertness without overstimulation.", "binCurrentFreq": "Current beat Δ:", "binAutoStretch": "Auto-scaled to session duration"}};
+  const LANGS = ['ru', 'en'];
   const VALID_TEST_KEYS = new Set(['PRO2026', 'TEST-PRO', 'TESTPRO', 'TEST783', 'BREATHPRO']);
-  const STORAGE_KEY = 'breath_trainer_v6_state';
+  const STORAGE_KEY = 'breath_trainer_v61_state';
   const svgNS = 'http://www.w3.org/2000/svg';
 
   const $ = id => document.getElementById(id);
@@ -1278,7 +1408,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   let customAudioUrl = null;
   let customAudioFileName = '';
 
-  // Фоновые аудиоузлы Web Audio
   let bgNodes = null;
   let bgPreviewTimer = null;
 
@@ -1288,7 +1417,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     branch: 'wave',
     waveMode: 'resonance',
     pranaMode: 'triangle',
-    mode: 'resonance', // test | resonance | triangle | square | beat
+    mode: 'resonance',
     inhale: 5.0,
     exhale: 5.0,
     holdIn: 4.0,
@@ -1298,12 +1427,15 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     testStep: 5.0,
     beatStep: 1.0,
     limitMin: 20,
-    sound: 'bell',      // bell | tap | two | chime | off
+    sound: 'bell',
     volume: 0.70,
-    vibeLevel: 'low',   // off | low | high
-    tickMode: 'off',    // off | click | tone | harm
-    bgSound: 'off',     // off | binaural | drone | ocean | brown
+    vibeLevel: 'low',
+    tickMode: 'off',
+    bgSound: 'off',
     bgVolume: 0.45,
+    binMode: 'fixed',      // fixed | ramp
+    binFixedHz: 7.83,      // 2.0 .. 18.0
+    binRampType: 'reset',  // reset | sleep | morning
     running: false,
     paused: false,
     phase: 'in',
@@ -1313,6 +1445,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     pausedAt: 0,
     elapsedTotal: 0,
     lastSecondTicked: -1,
+    lastBinUiUpdate: 0,
     beatCount: 0,
     raf: null
   };
@@ -1320,6 +1453,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   const t = key => (I18N[state.lang] && I18N[state.lang][key]) || I18N.ru[key] || key;
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
   const fmtSec = v => (v >= 10 && Math.abs(v - Math.round(v)) < 0.01) ? String(Math.round(v)) : v.toFixed(1);
+  const fmtHz = v => (Math.abs(v - 7.83) < 0.02) ? '7.83' : v.toFixed(1);
   const fmtTime = ms => {
     const s = Math.floor(ms / 1000);
     const m = Math.floor(s / 60);
@@ -1363,23 +1497,19 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     }
   });
 
-  function detectDefaultLang(isPro) {
+  function detectDefaultLang() {
     const nav = (navigator.language || 'ru').toLowerCase().slice(0, 2);
-    if (BASE_LANGS.includes(nav)) return nav;
-    if (isPro && ALL_LANGS.includes(nav)) return nav;
-    return 'en';
+    return (nav === 'ru') ? 'ru' : 'en';
   }
 
   function loadSettings() {
+    state.lang = detectDefaultLang();
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const d = JSON.parse(raw);
         if (typeof d.isPro === 'boolean') state.isPro = d.isPro;
-        state.lang = detectDefaultLang(state.isPro);
-        if (d.lang && I18N[d.lang] && (state.isPro || BASE_LANGS.includes(d.lang))) {
-          state.lang = d.lang;
-        }
+        if (d.lang && LANGS.includes(d.lang)) state.lang = d.lang;
         if (d.branch) state.branch = d.branch;
         if (d.waveMode) state.waveMode = d.waveMode;
         if (d.pranaMode) state.pranaMode = d.pranaMode;
@@ -1399,18 +1529,16 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
         if (d.tickMode) state.tickMode = d.tickMode;
         if (d.bgSound) state.bgSound = d.bgSound;
         if (typeof d.bgVolume === 'number') state.bgVolume = d.bgVolume;
-      } else {
-        state.lang = detectDefaultLang(false);
+        if (d.binMode) state.binMode = d.binMode;
+        if (typeof d.binFixedHz === 'number') state.binFixedHz = clamp(d.binFixedHz, 2.0, 18.0);
+        if (d.binRampType) state.binRampType = d.binRampType;
       }
-    } catch (e) {
-      state.lang = detectDefaultLang(false);
-    }
+    } catch (e) {}
     enforceBaseLimitsIfNeeded();
   }
 
   function enforceBaseLimitsIfNeeded() {
     if (state.isPro) return;
-    if (!BASE_LANGS.includes(state.lang)) state.lang = 'en';
     if (state.mode === 'beat') { state.mode = 'triangle'; state.pranaMode = 'triangle'; }
     if (state.vibeLevel === 'high') state.vibeLevel = 'low';
     if (state.sound === 'two' || state.sound === 'chime') state.sound = 'bell';
@@ -1453,9 +1581,45 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
         vibeLevel: state.vibeLevel,
         tickMode: state.tickMode,
         bgSound: state.bgSound,
-        bgVolume: state.bgVolume
+        bgVolume: state.bgVolume,
+        binMode: state.binMode,
+        binFixedHz: state.binFixedHz,
+        binRampType: state.binRampType
       }));
     } catch (e) {}
+  }
+
+  // ===== BINAURAL RAMP CALCULATOR =====
+  function getTargetBinauralHz(progressRatio) {
+    if (state.binMode === 'fixed') return state.binFixedHz;
+    const p = clamp(progressRatio, 0, 1);
+
+    if (state.binRampType === 'reset') {
+      // 0..20%: 14 -> 7.83 Hz | 20..85%: plateau 7.83 Hz | 85..100%: 7.83 -> 12 Hz
+      if (p < 0.20) {
+        const k = p / 0.20;
+        return 14.0 + (7.83 - 14.0) * k;
+      } else if (p <= 0.85) {
+        return 7.83;
+      } else {
+        const k = (p - 0.85) / 0.15;
+        return 7.83 + (12.0 - 7.83) * k;
+      }
+    } else if (state.binRampType === 'sleep') {
+      // 0..80%: 10.0 -> 2.5 Hz | 80..100%: hold 2.5 Hz
+      if (p < 0.80) {
+        const k = p / 0.80;
+        return 10.0 + (2.5 - 10.0) * k;
+      }
+      return 2.5;
+    } else {
+      // morning: 0..75%: 8.0 -> 15.0 Hz | 75..100%: hold 15.0 Hz
+      if (p < 0.75) {
+        const k = p / 0.75;
+        return 8.0 + (15.0 - 8.0) * k;
+      }
+      return 15.0;
+    }
   }
 
   // ===== PRO MODAL =====
@@ -1494,24 +1658,18 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     updateUI();
   }
 
-  // ===== LANGUAGE DROPDOWN =====
+  // ===== LANGUAGE DROPDOWN (RU / EN) =====
   function buildLangDropdown() {
     const dd = $('langDropdown');
     dd.innerHTML = '';
-    ALL_LANGS.forEach(code => {
-      const isProLang = !BASE_LANGS.includes(code);
+    LANGS.forEach(code => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'lang-item' + (code === state.lang ? ' active' : '') + (isProLang ? ' pro-feature' : '');
-      const proPill = (isProLang && !state.isPro) ? '<span class="pro-tag">PRO</span>' : '';
-      btn.innerHTML = `<span>${I18N[code].langName}${proPill}</span><span class="lang-code">${code.toUpperCase()}</span>`;
+      btn.className = 'lang-item' + (code === state.lang ? ' active' : '');
+      btn.innerHTML = `<span>${I18N[code].langName}</span><span class="lang-code">${code.toUpperCase()}</span>`;
       btn.onclick = (e) => {
         e.stopPropagation();
         dd.classList.remove('open');
-        if (isProLang && !state.isPro) {
-          openProModal(I18N[code].langName);
-          return;
-        }
         state.lang = code;
         saveSettings();
         applyLanguage();
@@ -1595,6 +1753,23 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     $('binauralNote').textContent = t('bgBinauralHint');
     $('lblBgVolume').textContent = t('bgVolume');
 
+    // Binaural drawer labels
+    $('btnBinModeFixed').textContent = t('binFixedTab');
+    $('btnBinModeRamp').textContent = t('binRampTab');
+    $('binPrDelta').textContent = t('binPresetDelta');
+    $('binPrTheta').textContent = t('binPresetTheta');
+    $('binPrSchumann').textContent = t('binPresetSchumann');
+    $('binPrAlpha').textContent = t('binPresetAlpha');
+    $('binPrFocus').textContent = t('binPresetFocus');
+    $('lblBinSlider').textContent = t('binSliderLabel');
+    $('lblRampReset').textContent = t('binRampReset');
+    $('descRampReset').textContent = t('binRampResetDesc');
+    $('lblRampSleep').textContent = t('binRampSleep');
+    $('descRampSleep').textContent = t('binRampSleepDesc');
+    $('lblRampMorning').textContent = t('binRampMorning');
+    $('descRampMorning').textContent = t('binRampMorningDesc');
+    $('lblBinAutoStretch').textContent = t('binAutoStretch');
+
     $('lblMusicTitle').textContent = t('musicTitle');
     $('btnMusicPick').textContent = t('musicPick');
     $('btnMusicClear').textContent = t('musicClear');
@@ -1633,10 +1808,31 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 
     buildLangDropdown();
 
+    // Update live phase text even if session is running
     if (!state.running) {
       $('phaseIndicator').textContent = t('kickerReady');
       $('phaseName').textContent = (state.mode === 'beat') ? t('phaseBeat') : t('phaseIn');
       $('statusMessage').textContent = t('statusIdle');
+    } else {
+      $('statusMessage').textContent = state.paused
+        ? t('statusPaused')
+        : ((state.mode === 'beat') ? t('statusRunningBeat') : t('statusRunning'));
+      if (state.mode === 'beat') {
+        $('phaseIndicator').textContent = t('kickerBeat');
+        $('phaseName').textContent = t('phaseBeat');
+      } else if (state.phase === 'in') {
+        $('phaseIndicator').textContent = t('kickerIn');
+        $('phaseName').textContent = t('phaseIn');
+      } else if (state.phase === 'out') {
+        $('phaseIndicator').textContent = t('kickerOut');
+        $('phaseName').textContent = t('phaseOut');
+      } else if (state.phase === 'hold_in') {
+        $('phaseIndicator').textContent = t('kickerHoldIn');
+        $('phaseName').textContent = t('phaseHoldIn');
+      } else if (state.phase === 'hold_out') {
+        $('phaseIndicator').textContent = t('kickerHoldOut');
+        $('phaseName').textContent = t('phaseHoldOut');
+      }
     }
     updateUI();
   }
@@ -1741,7 +1937,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     overtone.stop(startTime + duration + 0.04);
   }
 
-  // Тональный секундомер (такт каждой секунды / режим Такт)
   function playTickSound(style, isPrimaryBeat = false) {
     if (style === 'off' || state.volume === 0) return;
     try {
@@ -1759,7 +1954,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     } catch (e) {}
   }
 
-  // Тактильный виброотклик (Мягко = Base, Сильно = Pro)
   function triggerVibrate(phaseType) {
     if (state.vibeLevel === 'off' || !('vibrate' in navigator)) return;
     const isHigh = (state.vibeLevel === 'high' && state.isPro);
@@ -1869,31 +2063,34 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       const sources = [];
       let oceanFilter = null;
       let oceanModGain = null;
+      let binOscL = null;
+      let binOscR = null;
 
       if (type === 'binaural') {
-        const oscL = ctx.createOscillator();
-        const oscR = ctx.createOscillator();
-        oscL.type = 'sine';
-        oscR.type = 'sine';
-        oscL.frequency.setValueAtTime(216.0, now);
-        oscR.frequency.setValueAtTime(223.83, now);
+        const initDelta = getTargetBinauralHz(0);
+        binOscL = ctx.createOscillator();
+        binOscR = ctx.createOscillator();
+        binOscL.type = 'sine';
+        binOscR.type = 'sine';
+        binOscL.frequency.setValueAtTime(216.0, now);
+        binOscR.frequency.setValueAtTime(216.0 + initDelta, now);
 
         if (ctx.createStereoPanner) {
           const panL = ctx.createStereoPanner();
           const panR = ctx.createStereoPanner();
           panL.pan.setValueAtTime(-1, now);
           panR.pan.setValueAtTime(1, now);
-          oscL.connect(panL); panL.connect(masterGain);
-          oscR.connect(panR); panR.connect(masterGain);
+          binOscL.connect(panL); panL.connect(masterGain);
+          binOscR.connect(panR); panR.connect(masterGain);
         } else {
           const merger = ctx.createChannelMerger(2);
-          oscL.connect(merger, 0, 0);
-          oscR.connect(merger, 0, 1);
+          binOscL.connect(merger, 0, 0);
+          binOscR.connect(merger, 0, 1);
           merger.connect(masterGain);
         }
-        oscL.start(now);
-        oscR.start(now);
-        sources.push(oscL, oscR);
+        binOscL.start(now);
+        binOscR.start(now);
+        sources.push(binOscL, binOscR);
       } else if (type === 'drone') {
         const filter = ctx.createBiquadFilter();
         filter.type = 'lowpass';
@@ -1945,8 +2142,23 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
         sources.push(src);
       }
 
-      bgNodes = { type, masterGain, sources, oceanFilter, oceanModGain };
+      bgNodes = { type, masterGain, sources, oceanFilter, oceanModGain, binOscL, binOscR };
     } catch (e) {}
+  }
+
+  function updateBinauralDynamic(sessionProgress, remainMs) {
+    const hz = getTargetBinauralHz(sessionProgress);
+    if (bgNodes && bgNodes.type === 'binaural' && bgNodes.binOscR && audioCtx) {
+      const now = audioCtx.currentTime;
+      bgNodes.binOscR.frequency.setTargetAtTime(216.0 + hz, now, 0.25);
+
+      // Gentle 30s fade-out at end of sleep ramp
+      if (state.binMode === 'ramp' && state.binRampType === 'sleep' && remainMs < 30000) {
+        const fade = clamp(remainMs / 30000, 0.02, 1.0);
+        bgNodes.masterGain.gain.setTargetAtTime(state.bgVolume * 0.38 * fade, now, 0.2);
+      }
+    }
+    return hz;
   }
 
   function updateOceanModulation(progress, phase) {
@@ -1982,7 +2194,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   let ppgRaf = null;
   let ppgSafetyTimer = null;
   let ppgSamples = [];
-  let ppgPeaks = [];
   let ppgBpms = [];
   let ppgIbis = [];
 
@@ -2044,7 +2255,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     }
 
     ppgSamples = [];
-    ppgPeaks = [];
     ppgBpms = [];
     ppgIbis = [];
     $('valPpgBpm').textContent = '--';
@@ -2074,7 +2284,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       $('btnPpgToggle').classList.add('running');
       $('btnPpgToggle').textContent = t('ppgStop');
 
-      // Защита от нагрева светодиода вспышки (60 с)
       ppgSafetyTimer = setTimeout(() => {
         if (ppgActive) stopPpgSensor(t('ppgAutoOff'));
       }, 60000);
@@ -2097,7 +2306,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
           if (ppgSamples.length > 150) ppgSamples.shift();
 
           if (ppgSamples.length >= 16) {
-            // Детрендинг (скользящее среднее 12 кадров)
             const filtered = [];
             for (let i = 0; i < ppgSamples.length; i++) {
               let sum = 0, cnt = 0;
@@ -2251,6 +2459,16 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     const limitMs = (state.mode === 'test') ? (3 * 60 * 1000) : (state.limitMin * 60 * 1000);
     $('timeElapsed').textContent = fmtTime(currentTotalElapsed);
 
+    // Update dynamic binaural frequency if active
+    if (state.isPro && state.bgSound === 'binaural') {
+      const sesRatio = clamp(currentTotalElapsed / limitMs, 0, 1);
+      const curHz = updateBinauralDynamic(sesRatio, Math.max(0, limitMs - currentTotalElapsed));
+      if (now - state.lastBinUiUpdate > 500) {
+        state.lastBinUiUpdate = now;
+        $('binLiveBadge').textContent = `Δ ${fmtHz(curHz)} Hz`;
+      }
+    }
+
     if (currentTotalElapsed >= limitMs) {
       if (state.mode === 'test') {
         stopTraining(t('statusTestDone'));
@@ -2262,7 +2480,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       return;
     }
 
-    // Режим «Такт» (чистый тональный секундомер без фаз дыхания)
     if (state.mode === 'beat') {
       const intervalMs = state.beatStep * 1000;
       const expectedBeats = Math.floor(currentTotalElapsed / intervalMs) + 1;
@@ -2281,7 +2498,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       passedInPhase = overflow;
     }
 
-    // Тональный секундомер внутри фазы (Pro)
     if (state.isPro && state.tickMode !== 'off') {
       const wholeSec = Math.floor(passedInPhase / 1000);
       if (wholeSec > state.lastSecondTicked && wholeSec > 0 && (wholeSec * 1000) < (state.phaseLen - 180)) {
@@ -2334,6 +2550,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     state.paused = false;
     state.elapsedTotal = 0;
     state.beatCount = 0;
+    state.lastBinUiUpdate = 0;
     state.startedAt = performance.now();
 
     $('timeElapsed').textContent = '00:00';
@@ -2498,7 +2715,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     if (!lock) {
       if (isSquare) {
         const sqMin = state.isPro ? 1.0 : 2.0;
-        const sqMax = 60.0; // в Базе клик выше 5.0 открывает Pro-окно
+        const sqMax = 60.0;
         $('inMinus').disabled = state.inhale <= sqMin;
         $('inPlus').disabled = state.inhale >= sqMax;
         $('outMinus').disabled = state.exhale <= sqMin;
@@ -2531,7 +2748,29 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     document.querySelectorAll('#bgPills button').forEach(b => {
       b.classList.toggle('active', b.dataset.bg === state.bgSound);
     });
-    $('binauralNote').classList.toggle('show', state.isPro && state.bgSound === 'binaural');
+
+    // Binaural drawer UI
+    const showBinDrawer = state.isPro && state.bgSound === 'binaural';
+    $('binauralDrawer').classList.toggle('show', showBinDrawer);
+    if (showBinDrawer) {
+      $('btnBinModeFixed').classList.toggle('active', state.binMode === 'fixed');
+      $('btnBinModeRamp').classList.toggle('active', state.binMode === 'ramp');
+      $('binFixedPane').style.display = (state.binMode === 'fixed') ? 'block' : 'none';
+      $('binRampPane').style.display = (state.binMode === 'ramp') ? 'block' : 'none';
+
+      $('binFreqSlider').value = String(state.binFixedHz);
+      $('binFreqLabel').textContent = fmtHz(state.binFixedHz) + ' Hz';
+      document.querySelectorAll('#binPresets .bin-preset-btn').forEach(b => {
+        b.classList.toggle('active', Math.abs(Number(b.dataset.hz) - state.binFixedHz) < 0.05);
+      });
+      document.querySelectorAll('#binRampList .bin-ramp-card').forEach(c => {
+        c.classList.toggle('active', c.dataset.ramp === state.binRampType);
+      });
+
+      const previewHz = getTargetBinauralHz(0);
+      $('binLiveBadge').textContent = `Δ ${fmtHz(previewHz)} Hz`;
+    }
+
     $('btnMusicClear').style.display = customAudioUrl ? 'inline-block' : 'none';
   }
 
@@ -2700,7 +2939,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     };
   });
 
-  // Вибрация
   document.querySelectorAll('#vibePills button').forEach(btn => {
     btn.onclick = () => {
       if (state.running) return;
@@ -2716,7 +2954,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     };
   });
 
-  // Звуки смены фаз
   document.querySelectorAll('#soundPills button').forEach(btn => {
     btn.onclick = () => {
       if (state.running) return;
@@ -2732,7 +2969,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     };
   });
 
-  // Тональный секундомер (Pro)
   document.querySelectorAll('#tickPills button').forEach(btn => {
     btn.onclick = () => {
       const mode = btn.dataset.tick;
@@ -2747,7 +2983,20 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     };
   });
 
-  // Фоновый синтез звука (Pro)
+  function previewBgIfIdle(bg) {
+    if (bg === 'off') {
+      stopBgSound();
+      return;
+    }
+    startBgSound(bg);
+    if (!state.running) {
+      clearTimeout(bgPreviewTimer);
+      bgPreviewTimer = setTimeout(() => {
+        if (!state.running) stopBgSound();
+      }, 3600);
+    }
+  }
+
   document.querySelectorAll('#bgPills button').forEach(btn => {
     btn.onclick = () => {
       const bg = btn.dataset.bg;
@@ -2758,21 +3007,51 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
       state.bgSound = bg;
       saveSettings();
       updateUI();
-      if (bg === 'off') {
-        stopBgSound();
-      } else {
-        startBgSound(bg);
-        if (!state.running) {
-          clearTimeout(bgPreviewTimer);
-          bgPreviewTimer = setTimeout(() => {
-            if (!state.running) stopBgSound();
-          }, 3600);
-        }
-      }
+      previewBgIfIdle(bg);
     };
   });
 
-  // Своя музыка (Pro)
+  // Binaural sub-controls
+  document.querySelectorAll('.bin-tab-btn').forEach(btn => {
+    btn.onclick = () => {
+      state.binMode = btn.dataset.binmode;
+      saveSettings();
+      updateUI();
+      if (state.bgSound === 'binaural') previewBgIfIdle('binaural');
+    };
+  });
+
+  document.querySelectorAll('#binPresets .bin-preset-btn').forEach(btn => {
+    btn.onclick = () => {
+      state.binFixedHz = Number(btn.dataset.hz);
+      saveSettings();
+      updateUI();
+      if (state.bgSound === 'binaural') previewBgIfIdle('binaural');
+    };
+  });
+
+  $('binFreqSlider').oninput = e => {
+    state.binFixedHz = Number(e.target.value);
+    $('binFreqLabel').textContent = fmtHz(state.binFixedHz) + ' Hz';
+    $('binLiveBadge').textContent = `Δ ${fmtHz(state.binFixedHz)} Hz`;
+    document.querySelectorAll('#binPresets .bin-preset-btn').forEach(b => {
+      b.classList.toggle('active', Math.abs(Number(b.dataset.hz) - state.binFixedHz) < 0.05);
+    });
+    if (bgNodes && bgNodes.type === 'binaural' && bgNodes.binOscR && audioCtx) {
+      bgNodes.binOscR.frequency.setTargetAtTime(216.0 + state.binFixedHz, audioCtx.currentTime, 0.05);
+    }
+    saveSettings();
+  };
+
+  document.querySelectorAll('#binRampList .bin-ramp-card').forEach(card => {
+    card.onclick = () => {
+      state.binRampType = card.dataset.ramp;
+      saveSettings();
+      updateUI();
+      if (state.bgSound === 'binaural') previewBgIfIdle('binaural');
+    };
+  });
+
   $('btnMusicPick').onclick = () => {
     if (!state.isPro) {
       openProModal(t('musicTitle'));
@@ -2817,27 +3096,19 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     saveSettings();
   };
 
-  // Ночной экран
-  $('btnNightScreen').onclick = () => {
-    $('nightOverlay').classList.add('open');
-  };
-  $('nightOverlay').onclick = () => {
-    $('nightOverlay').classList.remove('open');
-  };
+  $('btnNightScreen').onclick = () => $('nightOverlay').classList.add('open');
+  $('nightOverlay').onclick = () => $('nightOverlay').classList.remove('open');
 
-  // Выпадающее меню языков
   $('btnLang').onclick = e => {
     e.stopPropagation();
     $('langDropdown').classList.toggle('open');
   };
   document.addEventListener('click', () => $('langDropdown').classList.remove('open'));
 
-  // Кнопки управления
   $('btnStart').onclick = startTraining;
   $('btnPause').onclick = pauseTraining;
   $('btnStop').onclick = () => stopTraining(t('statusStopped'));
 
-  // Pro-окно
   $('btnProBadge').onclick = () => openProModal();
   $('btnClosePro').onclick = closeProModal;
   $('proModal').onclick = e => { if (e.target === $('proModal')) closeProModal(); };
@@ -2866,7 +3137,6 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
     closeProModal();
   };
 
-  // Справка
   const guideModal = $('guideModal');
   function switchGuideTab(tabId) {
     document.querySelectorAll('.modal-nav-btn').forEach(b => {

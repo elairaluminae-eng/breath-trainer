@@ -1,7 +1,7 @@
 {
   "name": "Breath Trainer",
   "short_name": "BreathTrainer",
-  "description": "Autonomous offline breathing trainer: 0.1 Hz Resonance, Pranayama & Soundscapes",
+  "description": "Autonomous offline breathing trainer: 0.1 Hz Resonance, Pranayama & Binaural Soundscapes",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0d171d",
